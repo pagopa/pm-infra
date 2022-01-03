@@ -11,11 +11,6 @@ variable "rg" {
   description = "Resource group variable."
 }
 
-variable "name" {
-  type        = string
-  description = "Location of the azure resource group."
-}
-
 variable "environment" {
   type        = string
   description = "Name of the deployment environment"
@@ -24,6 +19,12 @@ variable "environment" {
 variable "location" {
   type        = string
   description = "Location to deploy the resoruce group"
+}
+
+variable "plan_id" {
+  type        = string
+  description = "(Optional) Specifies the external app service plan id."
+  default     = null
 }
 
 variable "plan_sku" {
@@ -53,7 +54,6 @@ variable "plan_reserved" {
 ## Application Service                                                                  ##
 ##                                                                                      ##
 ##========================================================================================
-
 
 ##──── App service configuration ─────────────────────────────────────────────────────────
 
@@ -118,7 +118,11 @@ variable "network_resource" {
 }
 
 ## VNET name
-variable "vnet_name" {
+variable "vnet_outgoing_name" {
+  type = string
+}
+
+variable "vnet_inbound_name" {
   type = string
 }
 
@@ -128,7 +132,7 @@ variable "subnet_name" {
 }
 
 ## Private endpoint subnet name
-variable "endpointsubnet_name" {
+variable "inboundsubnet_name" {
   type = string
 }
 
@@ -136,42 +140,7 @@ variable "private_link_dns_zone" {
   type = string
 }
 
-##========================================================================================
-##                                                                                      ##
-## Application Gateway                                                                  ##
-##                                                                                      ##
-##========================================================================================
-
-
-##──── Application Gateway variables ─────────────────────────────────────────────────────
-
-## APPGTW Resource group
-variable "appgw_rg" {
-  type        = string
-  description = "Application gateway reource group"
-}
-## APPGTW name
-variable "appgw_name" {
-  type        = string
-  description = "Application gateway name"
-}
-
-##  Backend address pool NAME
-variable "backend_address_pool_name" {
-  type = string
-}
-## backend HTTP settings host name
-variable "backend_http_settings_host_name" {
-  type = string
-}
-
-## Subnet name
-variable "appgw_subnet_name" {
-  type = string
-}
-
-## Sku size
-variable "appgw_sku_size" {
+variable "private_link_dns_zone_rg" {
   type = string
 }
 
@@ -185,48 +154,4 @@ variable "key_vault" {
 variable "key_vault_rg" {
   type        = string
   description = "Key Vault resource group"
-}
-
-##========================================================================================
-##                                                                                      ##
-## Virual machine config vars                                                           ##
-##                                                                                      ##
-##========================================================================================
-
-##──── Virtual network vars ──────────────────────────────────────────────────────────────
-variable "vm_network_name" {
-  type        = string
-  description = "Virtual machine network name"
-}
-
-#variable "vm_network_addess_space" {
-#  type        = string
-#  description = "Virtual network address space"
-#}
-
-variable "vm_nic" {
-  type = string
-  description = "Virtual machine nic name"
-}
-
-##──── Subnet vars ───────────────────────────────────────────────────────────────────────
-#variable "vm_subnet" {
-#  type = string 
-#  description = "Virtual machine subnet name"
-#}
-
-##──── Virtual machine vars ──────────────────────────────────────────────────────────────
-variable "vmrg" {
-  type = string
-  description = "Virtual machine resource group"
-}
-
-variable "vm_name" {
-  type = string
-  description = "Virtual machine name"
-}
-
-variable "vm_size" {
-  type = string
-  description = "Virtual machine size"
 }

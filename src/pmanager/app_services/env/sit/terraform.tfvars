@@ -1,11 +1,10 @@
 ##──── Global azure object ───────────────────────────────────────────────────────────────
 rg = "PM-AppServices"
-location = "West Europe"
-
+location = "westeurope"
+environment = "sit"
 
 ##──── App service definition plan ───────────────────────────────────────────────────────
-name = "pm-appsrv"
-environment = "sit"
+#name = ["pm-appsrv-wisp", "pm-appsrv-restapi", "pm-appsrv-restapi-io", "pm-appsrv-admin-panel", "pm-appsrv-batch", "pm-appsrv-logging", "pm-appsrv-rtd"]
 plan_sku = "P1v3"
 plan_sku_tier = "PremiumV3"
 plan_kind = "Linux"
@@ -26,7 +25,7 @@ system_encoding = "C.UTF-8"
 
 
 ##──── WEBSITE HTTP LOGGING RETENTION DAYS ───────────────────────────────────────────────
-http_log_retention_days = 365
+http_log_retention_days = 45
 
 
 ##──── APP Service runtime config ────────────────────────────────────────────────────────
@@ -38,27 +37,24 @@ runtime_version = "7-java8"
 # Network resource
 network_resource = "DDS-NetworkResources"
 
-# VNET reference
-vnet_name = "DDS_SIT_APPSERVICES_VNET"
+## VNET reference
+# outgoing
+vnet_outgoing_name = "DDS_SIT_APPSERVICES_VNET"
+
+# inbound 
+vnet_inbound_name = "DDS_SIT_APPSERVICES_INBOUND_VNET"
 
 # Integration subnet
 subnet_name = "pm-subnet"
 
-# Private endpoint connection
-endpointsubnet_name = "pm-endpt-subnet"
+# Private inbound connection
+inboundsubnet_name = "inbound_subnet"
 
 # Private link dns zone
 private_link_dns_zone = "privatelink.azurewebsites.net"
 
-
-##──── Application Gateway variables ─────────────────────────────────────────────────────
-## APPGTW Resource group
-appgw_rg = "PM-ApplicationGateway"
-appgw_name = "pm-appgw"
-backend_address_pool_name = "pm-jboss"
-backend_http_settings_host_name = "ddsappservices-pm.azurewebsites.net"
-appgw_subnet_name = "pm-appgtw"
-appgw_sku_size = "WAF_v2"
+# Private link dns zone resource group
+private_link_dns_zone_rg = "dds-networkresources"
 
 
 ##──── Key vault variables ───────────────────────────────────────────────────────────────
@@ -67,19 +63,3 @@ key_vault = "KMN-PM-Pagopa-Test"
 
 ## Key vault resource group
 key_vault_rg = "KMN-VaultResources"
-
-##──── Virtual machine variables ─────────────────────────────────────────────────────────
-## Virtual machine resource group
-vmrg = "DDS-VirtualMachines"
-
-## Virtual machine name
-vm_name = "ldbpmst01"
-
-# Virtual machine size
-vm_size = "Standard_D4s_v3"
-
-## Virtual machine virtual network name
-vm_network_name = "U89_TEST_DATABASE"
-
-## Virtual machine network interface
-vm_nic = "ldbpmst01-nic"
