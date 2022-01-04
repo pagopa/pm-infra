@@ -47,27 +47,27 @@ resources:
       endpoint: 'pipeline-deploy-token-ro'
 
 stages:
-  - stage: DEV
-    dependsOn: []
-    condition: and(succeeded(), eq(${{parameters.DEV}}, true))
-    pool:
-      name: product-dev-linux
-    jobs:
-      - job: terraform_install
-        steps:
-          # 1. Install terraform and terragrunt
-          - template: templates/terraform-setup/template.yaml@terraform
-      - job: terraform_plan
-        dependsOn: terraform_install
-        timeoutInMinutes: $[variables.TIME_OUT]
-        steps:
-          - checkout: self
-          # 2. Run terragrunt plan
-          - template: templates/terraform-plan/template.yaml@terraform
-            parameters:
-              SUBSCRIPTION: DEV-PM-SERVICE-CONN
-              ENVIRONMENT: dev
-              WORKINGDIR: 'src/pmanager/network'
+  #- stage: DEV
+  #  dependsOn: []
+  #  condition: and(succeeded(), eq(${{parameters.DEV}}, true))
+  #  pool:
+  #    name: product-dev-linux
+  #  jobs:
+  #    - job: terraform_install
+  #      steps:
+  #        # 1. Install terraform and terragrunt
+  #        - template: templates/terraform-setup/template.yaml@terraform
+  #    - job: terraform_plan
+  #      dependsOn: terraform_install
+  #      timeoutInMinutes: $[variables.TIME_OUT]
+  #      steps:
+  #        - checkout: self
+  #        # 2. Run terragrunt plan
+  #        - template: templates/terraform-plan/template.yaml@terraform
+  #          parameters:
+  #            SUBSCRIPTION: DEV-PM-SERVICE-CONN
+  #            ENVIRONMENT: dev
+  #            WORKINGDIR: 'src/pmanager/network'
 
   - stage: UAT
     dependsOn: []
@@ -91,24 +91,24 @@ stages:
               ENVIRONMENT: uat
               WORKINGDIR: 'src/pmanager/network'
 
-  - stage: PROD
-    dependsOn: []
-    condition: and(succeeded(), eq(${{parameters.PROD}}, true))
-    pool:
-      name: product-prod-linux
-    jobs:
-      - job: terraform_install
-        steps:
-          # 1. Install terraform and terragrunt
-          - template: templates/terraform-setup/template.yaml@terraform
-      - job: terraform_plan
-        dependsOn: terraform_install
-        timeoutInMinutes: $[variables.TIME_OUT]
-        steps:
-          - checkout: self
-          # 2. Run terragrunt plan
-          - template: templates/terraform-plan/template.yaml@terraform
-            parameters:
-              SUBSCRIPTION: PROD-PM-SERVICE-CONN
-              ENVIRONMENT: prod
-              WORKINGDIR: 'src/pmanager/network'
+ #- stage: PROD
+ #  dependsOn: []
+ #  condition: and(succeeded(), eq(${{parameters.PROD}}, true))
+ #  pool:
+ #    name: product-prod-linux
+ #  jobs:
+ #    - job: terraform_install
+ #      steps:
+ #        # 1. Install terraform and terragrunt
+ #        - template: templates/terraform-setup/template.yaml@terraform
+ #    - job: terraform_plan
+ #      dependsOn: terraform_install
+ #      timeoutInMinutes: $[variables.TIME_OUT]
+ #      steps:
+ #        - checkout: self
+ #        # 2. Run terragrunt plan
+ #        - template: templates/terraform-plan/template.yaml@terraform
+ #          parameters:
+ #            SUBSCRIPTION: PROD-PM-SERVICE-CONN
+ #            ENVIRONMENT: prod
+ #            WORKINGDIR: 'src/pmanager/network'
