@@ -1,19 +1,80 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# only manual
+trigger: none
+pr: none
 
-trigger:
-- main
+parameters:
+  - name: 'DEV'
+    displayName: 'Run on DEV environment'
+    type: boolean
+    default: True
+    values:
+      - False
+      - True
+#  - name: 'UAT'
+#    displayName: 'Run on UAT environment'
+#    type: boolean
+#    default: True
+#    values:
+#      - False
+#      - True
+
+
+variables:
+  TIME_OUT: 5
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-20.04'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+resources:
+  repositories:
+    - repository: terraform
+      type: github
+      name: pagopa/azure-pipeline-templates
+      ref: refs/tags/v1.0.0
+      endpoint: 'io-azure-devops-github-ro'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+stages:
+  # DEV
+  - stage: plan_DEV
+    dependsOn: []
+    condition: and(succeeded(), eq(${{parameters.DEV}}, true))
+    pool:
+      name: product-dev-linux
+    jobs:
+      - job: plan
+        timeoutInMinutes: $[variables.TIME_OUT]
+        steps:
+          # 1. Install terraform
+          - template: templates/terraform-setup/template.yaml@terraform
+          # 2. Run terraform plan
+          - template: templates/terraform-plan/template.yaml@terraform
+            parameters:
+              SUBSCRIPTION: DEV-PRODUCT-SERVICE-CONN
+              ENVIRONMENT: sit
+              WORKINGDIR: 'src/pmanager'
+
+##  - stage: apply_DEV
+##    dependsOn: [plan_DEV]
+##    condition: and(succeeded(), eq(${{parameters.DEV}}, true))
+##    pool:
+##      name: product-dev-linux
+##    jobs:
+##      # - job: init
+##      #   steps:
+##      #     # 1. Install terraform
+##      #     - template: templates/terraform-setup/template.yaml@terraform
+##      - deployment: apply
+##        continueOnError: false
+##        # dependsOn: init
+##        environment: 'DEV'
+##        strategy:
+ #         runOnce:
+ #           deploy:
+ #             steps:
+ #               - checkout: self
+ #               # 3. Run terraform apply
+ #               - template: templates/terraform-apply/template.yaml@terraform
+ #                 parameters:
+ #                   SUBSCRIPTION: DEV-PRODUCT-SERVICE-CONN
+ #                   ENVIRONMENT: sit
+ #                   WORKINGDIR: 'src/pmanager'
