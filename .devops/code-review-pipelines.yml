@@ -65,15 +65,15 @@ stages:
           # 2. Run terragrunt plan
           - template: templates/terraform-plan/template.yaml@terraform
             parameters:
-              SUBSCRIPTION: DEV-PRODUCT-SERVICE-CONN
+              SUBSCRIPTION: DEV-PM-SERVICE-CONN
               ENVIRONMENT: dev
-              WORKINGDIR: 'src/core'
+              WORKINGDIR: 'src/pmanager/network'
 
   - stage: UAT
     dependsOn: []
     condition: and(succeeded(), eq(${{parameters.UAT}}, true))
     pool:
-      name: product-uat-linux
+      name: pm-agent-pool-uat
     jobs:
       - job: terraform_install
         steps:
@@ -87,9 +87,9 @@ stages:
           # 2. Run terragrunt plan
           - template: templates/terraform-plan/template.yaml@terraform
             parameters:
-              SUBSCRIPTION: UAT-PRODUCT-SERVICE-CONN
+              SUBSCRIPTION: UAT-PM-SERVICE-CONN
               ENVIRONMENT: uat
-              WORKINGDIR: 'src/core'
+              WORKINGDIR: 'src/pmanager/network'
 
   - stage: PROD
     dependsOn: []
@@ -109,6 +109,6 @@ stages:
           # 2. Run terragrunt plan
           - template: templates/terraform-plan/template.yaml@terraform
             parameters:
-              SUBSCRIPTION: PROD-PRODUCT-SERVICE-CONN
+              SUBSCRIPTION: PROD-PM-SERVICE-CONN
               ENVIRONMENT: prod
-              WORKINGDIR: 'src/core'
+              WORKINGDIR: 'src/pmanager/network'
