@@ -11,10 +11,8 @@ plan_kind = "Linux"
 plan_reserved = "true"
 app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
-
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 java_opts = "-Dfile.encoding=UTF-8 -Ddandelion.profile.active=prod -Dcom.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager=true"
-
 
 ##──── SYSTEM ENCODING ───────────────────────────────────────────────────────────────────
 system_encoding = "C.UTF-8"

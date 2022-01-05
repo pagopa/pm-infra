@@ -5,7 +5,7 @@ module "logging" {
 
   ftps_state = "AllAllowed"
 
-  plan_name     = "pm-logging-plan"
+  plan_name     = format("pm-logging-plan-pci-%s", var.environment)
   plan_type     = "internal"
   plan_sku_size = var.plan_sku
   plan_sku_tier = var.plan_sku_tier

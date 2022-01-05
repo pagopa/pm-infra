@@ -17,7 +17,7 @@ subnet_name = "pm-appgw-subnet-pci"
 inboundsubnet_name = "pm-inbound-subnet"
 
 # Private link dns zone
-private_link_dns_zone = "privatelink.uat.pci.azurewebsites.net"
+private_link_dns_zone = "privatelink.azurewebsites.net"
 
 ##──── Key vault variables ───────────────────────────────────────────────────────────────
 ## Key vault name
@@ -31,7 +31,7 @@ key_vault_rg = "U87-KMN-VaultResources-uat-pci"
 vmrg = "U87-VirtualMachines-pci-uat"
 
 ## Virtual machine name
-vm_name = "ldbpmst"
+vm_name = "ldbpmsa"
 
 ## Virtual machine count
 vm_count = "1"
@@ -43,4 +43,4 @@ vm_size = "Standard_D4s_v3"
 vm_network_name = "U87_UAT_DATABASE_VNET_PCI"
 
 ## Virtual machine network interface
-vm_nic = "ldbpmst01-nic"
+vm_nic = "ldbpmsa01-nic"
