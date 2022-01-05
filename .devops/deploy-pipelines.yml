@@ -161,82 +161,82 @@ stages:
     pool:
       name: pm-agent-pool-uat
     jobs:
-      - job: apply_network
-        steps:
+      # - job: apply_network
+      #   steps:
       #     # 1. Install terraform
       #     - template: templates/terraform-setup/template.yaml@terraform
-        - deployment: apply
-          continueOnError: false
-          # dependsOn: init
-          environment: 'UAT'
-          strategy:
-            runOnce:
-              deploy:
-                steps:
-                  - checkout: self
-                  # 3. Run terraform apply
-                  - template: templates/terraform-apply/template.yaml@terraform
-                    parameters:
-                      SUBSCRIPTION: UAT-PM-SERVICE-CONN
-                      ENVIRONMENT: uat
-                      WORKINGDIR: 'src/pmanager/network'
-      - job: apply_appservices
-        steps:
+      - deployment: apply
+        continueOnError: false
+        # dependsOn: init
+        environment: 'UAT'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                # 3. Run terraform apply
+                - template: templates/terraform-apply/template.yaml@terraform
+                  parameters:
+                    SUBSCRIPTION: UAT-PM-SERVICE-CONN
+                    ENVIRONMENT: uat
+                    WORKINGDIR: 'src/pmanager/network'
+        #- job: apply_appservices
+        #  steps:
+        #     # 1. Install terraform
+        #     - template: templates/terraform-setup/template.yaml@terraform
+      - deployment: apply
+        continueOnError: false
+        # dependsOn: init
+        environment: 'UAT'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                # 3. Run terraform apply
+                - template: templates/terraform-apply/template.yaml@terraform
+                  parameters:
+                    SUBSCRIPTION: UAT-PM-SERVICE-CONN
+                    ENVIRONMENT: uat
+                    WORKINGDIR: 'src/pmanager/app_services'      
+        #- job: apply_appgateway
+        #  steps:
+        #     # 1. Install terraform
+        #     - template: templates/terraform-setup/template.yaml@terraform
+      - deployment: apply
+        continueOnError: false
+        # dependsOn: init
+        environment: 'UAT'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                # 3. Run terraform apply
+                - template: templates/terraform-apply/template.yaml@terraform
+                  parameters:
+                    SUBSCRIPTION: UAT-PM-SERVICE-CONN
+                    ENVIRONMENT: uat
+                    WORKINGDIR: 'src/pmanager/appgw'    
+      #- job: apply_vm-database
+      #  steps:
       #     # 1. Install terraform
       #     - template: templates/terraform-setup/template.yaml@terraform
-        - deployment: apply
-          continueOnError: false
-          # dependsOn: init
-          environment: 'UAT'
-          strategy:
-            runOnce:
-              deploy:
-                steps:
-                  - checkout: self
-                  # 3. Run terraform apply
-                  - template: templates/terraform-apply/template.yaml@terraform
-                    parameters:
-                      SUBSCRIPTION: UAT-PM-SERVICE-CONN
-                      ENVIRONMENT: uat
-                      WORKINGDIR: 'src/pmanager/app_services'      
-      - job: apply_appgateway
-        steps:
-      #     # 1. Install terraform
-      #     - template: templates/terraform-setup/template.yaml@terraform
-        - deployment: apply
-          continueOnError: false
-          # dependsOn: init
-          environment: 'UAT'
-          strategy:
-            runOnce:
-              deploy:
-                steps:
-                  - checkout: self
-                  # 3. Run terraform apply
-                  - template: templates/terraform-apply/template.yaml@terraform
-                    parameters:
-                      SUBSCRIPTION: UAT-PM-SERVICE-CONN
-                      ENVIRONMENT: uat
-                      WORKINGDIR: 'src/pmanager/appgw'    
-      - job: apply_vm-database
-        steps:
-      #     # 1. Install terraform
-      #     - template: templates/terraform-setup/template.yaml@terraform
-        - deployment: apply
-          continueOnError: false
-          # dependsOn: init
-          environment: 'UAT'
-          strategy:
-            runOnce:
-              deploy:
-                steps:
-                  - checkout: self
-                  # 3. Run terraform apply
-                  - template: templates/terraform-apply/template.yaml@terraform
-                    parameters:
-                      SUBSCRIPTION: UAT-PM-SERVICE-CONN
-                      ENVIRONMENT: uat
-                      WORKINGDIR: 'src/pmanager/vm-database'                                                             
+      - deployment: apply
+        continueOnError: false
+        # dependsOn: init
+        environment: 'UAT'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                # 3. Run terraform apply
+                - template: templates/terraform-apply/template.yaml@terraform
+                  parameters:
+                    SUBSCRIPTION: UAT-PM-SERVICE-CONN
+                    ENVIRONMENT: uat
+                    WORKINGDIR: 'src/pmanager/vm-database'                                                             
 
   # PROD
 #  - stage: plan_PROD
