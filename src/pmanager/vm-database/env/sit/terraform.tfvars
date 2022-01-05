@@ -44,3 +44,9 @@ vm_network_name = "U89_TEST_DATABASE"
 
 ## Virtual machine network interface
 vm_nic = "ldbpmst01-nic"
+
+##──── Virtual machine data disk ─────────────────────────────────────────────────────────
+disk_oracle_vgdb_size = "200" 
+disk_oracle_data_size = "100"
+disk_oracle_reco_size = "30"
+disk_oracle_has_size = "20"

@@ -113,3 +113,24 @@ variable "vm_size" {
   type = string
   description = "Virtual machine size"
 }
+
+##──── Virtual machine data disk ─────────────────────────────────────────────────────────
+variable "disk_oracle_vgdb_size" {
+  type = string
+  description = "Oracle vgdb disk size"
+}
+
+variable "disk_oracle_data_size" {
+  type = string
+  description = "Oracle data disk size"
+}
+
+variable "disk_oracle_reco_size" {
+  type = string
+  description = "Oracle reco disk size"
+}
+
+variable "disk_oracle_has_size" {
+  type = string
+  description = "Oracle has disk size"
+}
