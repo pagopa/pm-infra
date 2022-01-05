@@ -1,16 +1,14 @@
 ##──── Global azure object ───────────────────────────────────────────────────────────────
-rg = "PM-AppServices"
+rg = "U87-PM-AppServices-pci-uat"
 location = "westeurope"
-environment = "sit"
+environment = "uat"
 
 ##──── App service definition plan ───────────────────────────────────────────────────────
-#name = ["pm-appsrv-wisp", "pm-appsrv-restapi", "pm-appsrv-restapi-io", "pm-appsrv-admin-panel", "pm-appsrv-batch", "pm-appsrv-logging", "pm-appsrv-rtd"]
 plan_sku = "P1v3"
 plan_sku_tier = "PremiumV3"
 plan_kind = "Linux"
 plan_reserved = "true"
 app_command_line = "/home/site/deployments/tools/startup_script.sh"
-
 
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 java_opts = "-Dfile.encoding=UTF-8 -Ddandelion.profile.active=prod -Dcom.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager=true"
@@ -31,31 +29,31 @@ runtime_version = "7-java8"
 
 ##──── Network configuration variables ───────────────────────────────────────────────────
 # Network resource
-network_resource = "DDS-NetworkResources"
+network_resource = "U87-NetworkResources-pci-uat"
 
 ## VNET reference
 # outgoing
-vnet_outgoing_name = "DDS_SIT_APPSERVICES_VNET"
+vnet_outgoing_name = "U87_UAT_APPSERVICES_VNET_PCI"
 
 # inbound 
-vnet_inbound_name = "DDS_SIT_APPSERVICES_INBOUND_VNET"
+vnet_inbound_name = "U87_UAT_APPSERVICES_INBOUND_VNET_PCI"
 
 # Integration subnet
 subnet_name = "pm-subnet"
 
 # Private inbound connection
-inboundsubnet_name = "inbound_subnet"
+inboundsubnet_name = "default"
 
 # Private link dns zone
-private_link_dns_zone = "privatelink.azurewebsites.net"
+private_link_dns_zone = "privatelink.uat.pci.azurewebsites.net"
 
 # Private link dns zone resource group
-private_link_dns_zone_rg = "dds-networkresources"
+private_link_dns_zone_rg = "U87-NetworkResources-pci-uat"
 
 
 ##──── Key vault variables ───────────────────────────────────────────────────────────────
 ## Key vault name
-key_vault = "KMN-PM-Pagopa-Test"
+key_vault = "U87-KMN-PM-uat-pci"
 
 ## Key vault resource group
-key_vault_rg = "KMN-VaultResources"
+key_vault_rg = "U87-KMN-VaultResources-uat-pci"

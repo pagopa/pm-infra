@@ -57,12 +57,6 @@ variable "plan_reserved" {
 
 ##──── App service configuration ─────────────────────────────────────────────────────────
 
-## Location of SPRING configuration file
-variable "spring_config_location" {
-  type        = string
-  description = "Spring config location"
-}
-
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 
 ## Java options

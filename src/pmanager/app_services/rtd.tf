@@ -19,19 +19,25 @@ module "rtd" {
   linux_fx_version = "${var.runtime_name}|${var.runtime_version}"
 
   app_settings = {
-    JAVA_OPTS                          = var.java_opts
-    LANG                               = var.system_encoding
-    ORACLE_CONNECTION_URL              = data.azurerm_key_vault_secret.oracle-connection-url.value
-    ORACLE_SERVER_ADMIN_FULL_NAME      = data.azurerm_key_vault_secret.oracle-server-agid-user.value
-    ORACLE_SERVER_ADMIN_PASSWORD       = data.azurerm_key_vault_secret.oracle-server-agid-user-password.value
-    WEBSITE_HTTPLOGGING_RETENTION_DAYS = var.http_log_retention_days
-    "spring.config.location"           = var.spring_config_location    
+    JAVA_OPTS                            = var.java_opts
+    LANG                                 = var.system_encoding
+    ORACLE_CONNECTION_URL                = data.azurerm_key_vault_secret.oracle-connection-url.value
+    RTD_ORACLE_SERVER_ADMIN_FULL_NAME    = "RTD_USER"
+    RTD_ORACLE_SERVER_ADMIN_PASSWORD     = "RTD_USER"
+    WEBSITE_HTTPLOGGING_RETENTION_DAYS   = var.http_log_retention_days
+    "saml.idp.spidRegistry.metadata.url" = "/home/site/appconfig/spid-entities-idps_local.xml"
+    "saml.keystore.location"             = "file:/home/site/appconfig/saml_spid_sit.jks"
+    "saml.metadata.sp.filepath"          = "/home/site/appconfig/sp_metadata.xml"
+    SAML_SP_METADATA                     = "/home/site/appconfig/sp_metadata.xml"
+    "spring.profiles.active"             = var.environment
   }
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
   tags = {
-    environment = var.environment
+    kind        = "app service",
+    environment = var.environment,
+    standard    = "pci"
   }
 }
 
@@ -74,7 +80,9 @@ resource "azurerm_private_endpoint" "rtd" {
     subresource_names              = ["sites"]
   }
   tags = {
-    environment = var.environment
+    kind        = "network",
+    environment = var.environment,
+    standard    = "pci"
   }
 }
 
