@@ -137,7 +137,7 @@ stages:
               SUBSCRIPTION: UAT-PM-SERVICE-CONN
               ENVIRONMENT: uat
               WORKINGDIR: 'src/pmanager/appgw'
-  - stage: plan_vm-database_UAT
+  - stage: plan_vm_database_UAT
     dependsOn: []
     condition: and(succeeded(), eq(${{parameters.UAT}}, true))
     pool:
@@ -155,8 +155,8 @@ stages:
               ENVIRONMENT: uat
               WORKINGDIR: 'src/pmanager/vm-database'                                          
 
-  - stage: apply_UAT
-    dependsOn: [plan_network_UAT,plan_appservice_UAT,plan_appgateway_UAT,plan_vm-database_UAT]
+  - stage: apply_network_UAT
+    dependsOn: [plan_network_UAT]
     condition: and(succeeded(), eq(${{parameters.UAT}}, true))
     pool:
       name: pm-agent-pool-uat
@@ -180,6 +180,13 @@ stages:
                     SUBSCRIPTION: UAT-PM-SERVICE-CONN
                     ENVIRONMENT: uat
                     WORKINGDIR: 'src/pmanager/network'
+
+  - stage: apply_appservice_UAT
+    dependsOn: [plan_appservice_UAT]
+    condition: and(succeeded(), eq(${{parameters.UAT}}, true))
+    pool:
+      name: pm-agent-pool-uat
+    jobs:
         #- job: apply_appservices
         #  steps:
         #     # 1. Install terraform
@@ -199,6 +206,12 @@ stages:
                     SUBSCRIPTION: UAT-PM-SERVICE-CONN
                     ENVIRONMENT: uat
                     WORKINGDIR: 'src/pmanager/app_services'      
+  - stage: apply_appgateway_UAT
+    dependsOn: [plan_appgateway_UAT]
+    condition: and(succeeded(), eq(${{parameters.UAT}}, true))
+    pool:
+      name: pm-agent-pool-uat
+    jobs:                    
         #- job: apply_appgateway
         #  steps:
         #     # 1. Install terraform
@@ -218,6 +231,12 @@ stages:
                     SUBSCRIPTION: UAT-PM-SERVICE-CONN
                     ENVIRONMENT: uat
                     WORKINGDIR: 'src/pmanager/appgw'    
+  - stage: apply_vm_database_UAT
+    dependsOn: [plan_vm_database_UAT]
+    condition: and(succeeded(), eq(${{parameters.UAT}}, true))
+    pool:
+      name: pm-agent-pool-uat
+    jobs:                      
       #- job: apply_vm-database
       #  steps:
       #     # 1. Install terraform
