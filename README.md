@@ -2,6 +2,8 @@
 
 Terraform template repository for infrastructures projects
 
+[![Build status](https://dev.azure.com/sia-dds/PaymentManager/_apis/build/status/pmanager-terraform-deploy-pipeline)](https://dev.azure.com/sia-dds/PaymentManager/_build/latest?definitionId=59)
+
 ## Requirements
 
 ### 1. terraform
