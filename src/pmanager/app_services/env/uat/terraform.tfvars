@@ -45,7 +45,7 @@ subnet_name = "pm-subnet"
 inboundsubnet_name = "default"
 
 # Private link dns zone
-private_link_dns_zone = "privatelink.uat.pci.azurewebsites.net"
+private_link_dns_zone = "privatelink.azurewebsites.net"
 
 # Private link dns zone resource group
 private_link_dns_zone_rg = "U87-NetworkResources-pci-uat"

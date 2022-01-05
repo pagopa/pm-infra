@@ -17,7 +17,7 @@ subnet_name = "pm-appgw-subnet-pci"
 inboundsubnet_name = "pm-inbound-subnet"
 
 # Private link dns zone
-private_link_dns_zone = "privatelink.uat.pci.azurewebsites.net"
+private_link_dns_zone = "privatelink.azurewebsites.net"
 
 
 ##──── Application Gateway variables ─────────────────────────────────────────────────────
