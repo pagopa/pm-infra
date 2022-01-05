@@ -55,10 +55,10 @@ resource "azurerm_linux_virtual_machine" "vm" {
   }
 }
 
-resource "azurerm_managed_disk" "oracle_vgdb_sit" {
-  depends_on         = [azurerm_linux_virtual_machine.vm]
+resource "azurerm_managed_disk" "oracle_vgdb" {
+  depends_on           = [azurerm_linux_virtual_machine.vm]
   count                = var.vm_count
-  name                 = "oracle_vgdb_sit"
+  name                 = format("oracle-vgdb-%s-%s", azurerm_linux_virtual_machine.vm[count.index].name, var.environment)
   location             = data.azurerm_resource_group.vmrg.location
   resource_group_name  = data.azurerm_resource_group.vmrg.name
   storage_account_type = "Premium_LRS"
@@ -69,16 +69,16 @@ resource "azurerm_managed_disk" "oracle_vgdb_sit" {
 resource "azurerm_virtual_machine_data_disk_attachment" "disk1" {
   depends_on         = [azurerm_linux_virtual_machine.vm]
   count              = var.vm_count
-  managed_disk_id    = azurerm_managed_disk.oracle_vgdb_sit[count.index].id
+  managed_disk_id    = azurerm_managed_disk.oracle_vgdb[count.index].id
   virtual_machine_id = azurerm_linux_virtual_machine.vm[count.index].id
   lun                = "0"
   caching            = "ReadWrite"
 }
 
-resource "azurerm_managed_disk" "oracle_data_sit" {
+resource "azurerm_managed_disk" "oracle_data" {
   depends_on         = [azurerm_linux_virtual_machine.vm]
   count                = var.vm_count
-  name                 = "oracle_data_sit"
+  name                 = format("oracle-data-%s-%s", azurerm_linux_virtual_machine.vm[count.index].name, var.environment)
   location             = data.azurerm_resource_group.vmrg.location
   resource_group_name  = data.azurerm_resource_group.vmrg.name
   storage_account_type = "Premium_LRS"
@@ -89,16 +89,16 @@ resource "azurerm_managed_disk" "oracle_data_sit" {
 resource "azurerm_virtual_machine_data_disk_attachment" "disk2" {
   depends_on         = [azurerm_linux_virtual_machine.vm]
   count              = var.vm_count
-  managed_disk_id    = azurerm_managed_disk.oracle_data_sit[count.index].id
+  managed_disk_id    = azurerm_managed_disk.oracle_data[count.index].id
   virtual_machine_id = azurerm_linux_virtual_machine.vm[count.index].id
   lun                = "1"
   caching            = "ReadWrite"
 }
 
-resource "azurerm_managed_disk" "oracle_reco_sit" {
+resource "azurerm_managed_disk" "oracle_reco" {
   depends_on         = [azurerm_linux_virtual_machine.vm]
   count                = var.vm_count
-  name                 = "oracle_reco_sit"
+  name                 = format("oracle-reco-%s-%s", azurerm_linux_virtual_machine.vm[count.index].name, var.environment)
   location             = data.azurerm_resource_group.vmrg.location
   resource_group_name  = data.azurerm_resource_group.vmrg.name
   storage_account_type = "Premium_LRS"
@@ -109,16 +109,16 @@ resource "azurerm_managed_disk" "oracle_reco_sit" {
 resource "azurerm_virtual_machine_data_disk_attachment" "disk3" {
   depends_on         = [azurerm_linux_virtual_machine.vm]
   count              = var.vm_count
-  managed_disk_id    = azurerm_managed_disk.oracle_reco_sit[count.index].id
+  managed_disk_id    = azurerm_managed_disk.oracle_reco[count.index].id
   virtual_machine_id = azurerm_linux_virtual_machine.vm[count.index].id
   lun                = "2"
   caching            = "ReadWrite"
 }
 
-resource "azurerm_managed_disk" "oracle_has_sit" {
+resource "azurerm_managed_disk" "oracle_has" {
   depends_on         = [azurerm_linux_virtual_machine.vm]
   count                = var.vm_count
-  name                 = "oracle_has_sit"
+  name                 = format("oracle-has-%s-%s", azurerm_linux_virtual_machine.vm[count.index].name, var.environment)
   location             = data.azurerm_resource_group.vmrg.location
   resource_group_name  = data.azurerm_resource_group.vmrg.name
   storage_account_type = "Premium_LRS"
@@ -129,7 +129,7 @@ resource "azurerm_managed_disk" "oracle_has_sit" {
 resource "azurerm_virtual_machine_data_disk_attachment" "disk4" {
   depends_on         = [azurerm_linux_virtual_machine.vm]
   count              = var.vm_count
-  managed_disk_id    = azurerm_managed_disk.oracle_has_sit[count.index].id
+  managed_disk_id    = azurerm_managed_disk.oracle_has[count.index].id
   virtual_machine_id = azurerm_linux_virtual_machine.vm[count.index].id
   lun                = "3"
   caching            = "ReadWrite"

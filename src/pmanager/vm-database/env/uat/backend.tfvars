@@ -1,4 +1,4 @@
-resource_group_name  = "DDS-tf-infra-rg"
-storage_account_name = "pminfrastterraformuat"
+resource_group_name  = "U87-tf-infra-rg-pci-uat"
+storage_account_name = "pminfrastterraformuatpci"
 container_name       = "azurestate"
-key                  = "terraform.tfstate"
+key                  = "vmdb.tfstate"

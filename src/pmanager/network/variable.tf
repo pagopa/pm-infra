@@ -23,15 +23,15 @@ variable "network_resource" {
 
 ## VNET name
 variable "vnet_outgoing_name" {
-    type = string
+  type = string
 }
 
 variable "vnet_inbound_name" {
-    type = string
+  type = string
 }
 
 variable "vnet_database_name" {
-    type = string
+  type = string
 }
 
 ## Address space

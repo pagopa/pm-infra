@@ -30,7 +30,9 @@ resource "azurerm_application_gateway" "appgw" {
   resource_group_name = azurerm_resource_group.appgw_rg.name
 
   tags = {
-    environment = var.environment
+    kind        = "application gateway",
+    environment = var.environment,
+    standard    = "pci"
   }
 
   backend_address_pool {
