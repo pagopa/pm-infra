@@ -2,7 +2,7 @@
 
 Terraform template repository for infrastructures projects
 
-[![Build status](https://dev.azure.com/sia-dds/PaymentManager/_apis/build/status/pmanager-terraform-deploy-pipeline)](https://dev.azure.com/sia-dds/PaymentManager/_build/latest?definitionId=59)
+[![Build Status](https://dev.azure.com/sia-dds/pm-iac-projects/_apis/build/status/pm-infra/pm-infra.deploy?repoName=pagopa%2Fpm-infra&branchName=pipeline-uat)](https://dev.azure.com/sia-dds/pm-iac-projects/_build/latest?definitionId=61&repoName=pagopa%2Fpm-infra&branchName=pipeline-uat)
 
 ## Requirements
 
