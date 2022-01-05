@@ -44,3 +44,9 @@ vm_network_name = "U87_UAT_DATABASE_VNET_PCI"
 
 ## Virtual machine network interface
 vm_nic = "ldbpmsa01-nic"
+
+##──── Virtual machine data disk ─────────────────────────────────────────────────────────
+disk_oracle_vgdb_size = "500" 
+disk_oracle_data_size = "100"
+disk_oracle_reco_size = "10"
+disk_oracle_has_size = "150"

@@ -44,7 +44,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
   os_disk {
     caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
+    storage_account_type = "Premium_LRS"
   }
 
   source_image_reference {
@@ -63,7 +63,7 @@ resource "azurerm_managed_disk" "oracle_vgdb" {
   resource_group_name  = data.azurerm_resource_group.vmrg.name
   storage_account_type = "Premium_LRS"
   create_option        = "Empty"
-  disk_size_gb         = 200
+  disk_size_gb         = var.disk_oracle_vgdb_size
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "disk1" {
@@ -83,7 +83,7 @@ resource "azurerm_managed_disk" "oracle_data" {
   resource_group_name  = data.azurerm_resource_group.vmrg.name
   storage_account_type = "Premium_LRS"
   create_option        = "Empty"
-  disk_size_gb         = 100
+  disk_size_gb         = var.disk_oracle_data_size
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "disk2" {
@@ -103,7 +103,7 @@ resource "azurerm_managed_disk" "oracle_reco" {
   resource_group_name  = data.azurerm_resource_group.vmrg.name
   storage_account_type = "Premium_LRS"
   create_option        = "Empty"
-  disk_size_gb         = 30
+  disk_size_gb         = var.disk_oracle_reco_size
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "disk3" {
@@ -123,7 +123,7 @@ resource "azurerm_managed_disk" "oracle_has" {
   resource_group_name  = data.azurerm_resource_group.vmrg.name
   storage_account_type = "Premium_LRS"
   create_option        = "Empty"
-  disk_size_gb         = 20
+  disk_size_gb         = var.disk_oracle_has_size
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "disk4" {
