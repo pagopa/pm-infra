@@ -182,7 +182,7 @@ stages:
                     WORKINGDIR: 'src/pmanager/network'
 
   - stage: apply_appservice_UAT
-    dependsOn: [plan_appservice_UAT]
+    dependsOn: [apply_network_UAT,plan_appservice_UAT]
     condition: and(succeeded(), eq(${{parameters.UAT}}, true))
     pool:
       name: pm-agent-pool-uat
@@ -207,7 +207,7 @@ stages:
                     ENVIRONMENT: uat
                     WORKINGDIR: 'src/pmanager/app_services'      
   - stage: apply_appgateway_UAT
-    dependsOn: [plan_appgateway_UAT]
+    dependsOn: [apply_network_UAT,plan_appgateway_UAT]
     condition: and(succeeded(), eq(${{parameters.UAT}}, true))
     pool:
       name: pm-agent-pool-uat
@@ -232,7 +232,7 @@ stages:
                     ENVIRONMENT: uat
                     WORKINGDIR: 'src/pmanager/appgw'    
   - stage: apply_vm_database_UAT
-    dependsOn: [plan_vm_database_UAT]
+    dependsOn: [apply_network_UAT,plan_vm_database_UAT]
     condition: and(succeeded(), eq(${{parameters.UAT}}, true))
     pool:
       name: pm-agent-pool-uat
