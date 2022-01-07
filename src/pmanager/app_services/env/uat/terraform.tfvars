@@ -57,3 +57,9 @@ key_vault = "U87-KMN-PM-uat-pci"
 
 ## Key vault resource group
 key_vault_rg = "U87-KMN-VaultResources-uat-pci"
+
+
+##──── Application Insight Variable ──────────────────────────────────────────────────────
+appinsight_name = "U87-PagoPa-pci-uat-insight"
+
+appinsight_rg = "U87-Monitoring"

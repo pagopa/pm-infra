@@ -29,3 +29,9 @@ data "azurerm_private_dns_zone" "zone" {
   name                = var.private_link_dns_zone
   resource_group_name = var.private_link_dns_zone_rg
 }
+
+# Application Insight data
+data "azurerm_application_insights" "appinsight" {
+  name                = var.appinsight_name
+  resource_group_name = var.appinsight_rg
+}
