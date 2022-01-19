@@ -191,3 +191,20 @@ variable "key_vault_rg" {
   type        = string
   description = "Key Vault resource group"
 }
+
+##========================================================================================
+##                                                                                      ##
+##                                  Application Insight                                 ##
+##                                                                                      ##
+##========================================================================================
+
+##──── Application Insight Variable ──────────────────────────────────────────────────────
+variable "appinsight_name" {
+  type        = string
+  description = "Application insight name"
+}
+
+variable "appinsight_rg" {
+  type        = string
+  description = "Application insight resource group"
+}
