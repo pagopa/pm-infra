@@ -2,6 +2,7 @@
 rg = "PM-AppServices"
 location = "westeurope"
 environment = "sit"
+standard = "no-pci"
 
 ##──── App service definition plan ───────────────────────────────────────────────────────
 #name = ["pm-appsrv-wisp", "pm-appsrv-restapi", "pm-appsrv-restapi-io", "pm-appsrv-admin-panel", "pm-appsrv-batch", "pm-appsrv-logging", "pm-appsrv-rtd"]
@@ -11,16 +12,23 @@ plan_kind = "Linux"
 plan_reserved = "true"
 app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
+# Apps services plan name
+admin_panel_plan = "pm-admin-panel-plan"
+batch_plan = "pm-batch-plan"
+logging_plan = "pm-logging-plan"
+restapi_io_plan = "pm-restapi-io-plan"
+restapi_plan = "pm-restapi-plan"
+rtd_plan = "pm-rtd-plan"
+wisp_plan = "pm-wisp-plan"
+
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 java_opts = "-Dfile.encoding=UTF-8 -Ddandelion.profile.active=prod -Dcom.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager=true"
 
 ##──── SYSTEM ENCODING ───────────────────────────────────────────────────────────────────
 system_encoding = "C.UTF-8"
 
-
 ##──── WEBSITE HTTP LOGGING RETENTION DAYS ───────────────────────────────────────────────
 http_log_retention_days = 7
-
 
 ##──── APP Service runtime config ────────────────────────────────────────────────────────
 runtime_name = "jbosseap"

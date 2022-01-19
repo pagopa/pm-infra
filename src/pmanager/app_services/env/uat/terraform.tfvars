@@ -2,6 +2,7 @@
 rg = "U87-PM-AppServices-pci-uat"
 location = "westeurope"
 environment = "uat"
+standard = "pci"
 
 ##──── App service definition plan ───────────────────────────────────────────────────────
 plan_sku = "P1v3"
@@ -10,22 +11,27 @@ plan_kind = "Linux"
 plan_reserved = "true"
 app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
+# Apps services plan name
+admin_panel_plan = "pm-admin-panel-plan-pci"
+batch_plan = "pm-batch-plan-pci"
+logging_plan = "pm-logging-plan-pci"
+restapi_io_plan = "pm-restapi-io-plan-pci"
+restapi_plan = "pm-restapi-plan-pci"
+rtd_plan = "pm-rtd-plan-pci"
+wisp_plan = "pm-wisp-plan-pci"
+
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 java_opts = "-Dfile.encoding=UTF-8 -Ddandelion.profile.active=prod -Dcom.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager=true"
-
 
 ##──── SYSTEM ENCODING ───────────────────────────────────────────────────────────────────
 system_encoding = "C.UTF-8"
 
-
 ##──── WEBSITE HTTP LOGGING RETENTION DAYS ───────────────────────────────────────────────
 http_log_retention_days = 7
-
 
 ##──── APP Service runtime config ────────────────────────────────────────────────────────
 runtime_name = "jbosseap"
 runtime_version = "7-java8"
-
 
 ##──── Network configuration variables ───────────────────────────────────────────────────
 # Network resource

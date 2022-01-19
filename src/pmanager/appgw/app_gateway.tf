@@ -32,7 +32,7 @@ resource "azurerm_application_gateway" "appgw" {
   tags = {
     kind        = "application gateway",
     environment = var.environment,
-    standard    = "pci"
+    standard    = var.standard
   }
 
   backend_address_pool {

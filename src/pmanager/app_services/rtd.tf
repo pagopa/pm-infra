@@ -5,7 +5,7 @@ module "rtd" {
 
   ftps_state = "AllAllowed"
 
-  plan_name     = format("pm-rtd-plan-pci-%s", var.environment)
+  plan_name     = format("%s-%s", var.rtd_plan, var.environment)
   plan_type     = "internal"
   plan_sku_size = var.plan_sku
   plan_sku_tier = var.plan_sku_tier
@@ -37,7 +37,7 @@ module "rtd" {
   tags = {
     kind        = "app service",
     environment = var.environment,
-    standard    = "pci"
+    standard    = var.standard
   }
 }
 
@@ -82,7 +82,7 @@ resource "azurerm_private_endpoint" "rtd" {
   tags = {
     kind        = "network",
     environment = var.environment,
-    standard    = "pci"
+    standard    = var.standard
   }
 }
 

@@ -16,6 +16,11 @@ variable "environment" {
   description = "Name of the deployment environment"
 }
 
+variable "standard" {
+  type = string
+  description = "Standard pci/no-pci tags"
+}  
+
 variable "location" {
   type        = string
   description = "Location to deploy the resoruce group"
@@ -54,6 +59,43 @@ variable "plan_reserved" {
 ## Application Service                                                                  ##
 ##                                                                                      ##
 ##========================================================================================
+
+##──── App Service Plan ──────────────────────────────────────────────────────────────────
+
+variable "admin_panel_plan" {
+  type = string
+  description = "Admin Panel app service plan"
+}
+
+variable "batch_plan" {
+  type = string
+  description = "Batch app service plan"
+}
+
+variable "logging_plan" {
+  type = string
+  description = "Logging app service plan"
+}
+
+variable "restapi_io_plan" {
+  type = string
+  description = "Admin Panel app service plan"
+}
+
+variable "restapi_plan" {
+  type = string
+  description = "Admin Panel app service plan"
+}
+
+variable "rtd_plan" {
+  type = string
+  description = "Rtd app service plan"
+}
+
+variable "wisp_plan" {
+  type = string
+  description = "wisp app service plan"
+}
 
 ##──── App service configuration ─────────────────────────────────────────────────────────
 
