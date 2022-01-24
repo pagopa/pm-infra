@@ -11,14 +11,17 @@ plan_kind = "Linux"
 plan_reserved = "true"
 app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
-# Apps services plan name
-admin_panel_plan = "pm-admin-panel-plan-pci"
-batch_plan = "pm-batch-plan-pci"
-logging_plan = "pm-logging-plan-pci"
-restapi_io_plan = "pm-restapi-io-plan-pci"
-restapi_plan = "pm-restapi-plan-pci"
-rtd_plan = "pm-rtd-plan-pci"
-wisp_plan = "pm-wisp-plan-pci"
+# Apps services name
+admin_panel_name = "pm-appsrv-admin-panel"
+batch_name = "pm-appsrv-batch"
+logging_name = "pm-appsrv-logging"
+restapi_io_name = "pm-appsrv-restapi-io"
+restapi_name = "pm-appsrv-restapi"
+rtd_name = "pm-appsrv-rtd"
+wisp_name = "pm-appsrv-wisp"
+
+# App service plan
+plan_name = "plan-pci"
 
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 java_opts = "-Dfile.encoding=UTF-8 -Ddandelion.profile.active=prod -Dcom.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager=true"
@@ -32,6 +35,21 @@ http_log_retention_days = 7
 ##──── APP Service runtime config ────────────────────────────────────────────────────────
 runtime_name = "jbosseap"
 runtime_version = "7-java8"
+
+hostname = ""
+hostname_rtd = ""
+static_hostname = ""
+nodo_spc_hostname = ""
+cittadinanza_hostname = ""
+jiffy_hostname = ""
+logging_white_list = ""
+bancomat_keystore_location = ""
+cors_allowed_origins = ""
+
+##──── Application Insight Variable ──────────────────────────────────────────────────────
+appinsight_name = "U87-PagoPa-pci-uat-insight"
+
+appinsight_rg = "U87-Monitoring"
 
 ##──── Network configuration variables ───────────────────────────────────────────────────
 # Network resource
@@ -63,9 +81,3 @@ key_vault = "U87-KMN-PM-uat-pci"
 
 ## Key vault resource group
 key_vault_rg = "U87-KMN-VaultResources-uat-pci"
-
-
-##──── Application Insight Variable ──────────────────────────────────────────────────────
-appinsight_name = "U87-PagoPa-pci-uat-insight"
-
-appinsight_rg = "U87-Monitoring"

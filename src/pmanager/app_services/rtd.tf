@@ -1,11 +1,11 @@
 module "rtd" {
   source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=v2.0.19"
 
-  name = format("pm-appsrv-rtd-%s", var.environment)
+  name = format("%s-%s", var.rtd_name, var.environment)
 
   ftps_state = "AllAllowed"
 
-  plan_name     = format("%s-%s", var.rtd_plan, var.environment)
+  plan_name     = format("%s-%s-%s", var.rtd_name, var.plan_name, var.environment)
   plan_type     = "internal"
   plan_sku_size = var.plan_sku
   plan_sku_tier = var.plan_sku_tier
@@ -19,22 +19,24 @@ module "rtd" {
   linux_fx_version = "${var.runtime_name}|${var.runtime_version}"
 
   app_settings = {
-    JAVA_OPTS                                       = var.java_opts
-    LANG                                            = var.system_encoding
-    ORACLE_CONNECTION_URL                           = data.azurerm_key_vault_secret.oracle-connection-url.value
-    RTD_ORACLE_SERVER_ADMIN_FULL_NAME               = "RTD_USER"
-    RTD_ORACLE_SERVER_ADMIN_PASSWORD                = "RTD_USER"
-    WEBSITE_HTTPLOGGING_RETENTION_DAYS              = var.http_log_retention_days
+    APPCONFIG_PATH                    = format("/storage/appconfig/%s", var.rtd_name)
+    TOOLS_PATH                        = format("/storage/tools/%s", var.rtd_name)
+    JAVA_OPTS                         = var.java_opts
+    LANG                              = var.system_encoding
+    ORACLE_CONNECTION_URL             = data.azurerm_key_vault_secret.oracle-connection-url.value
+    RTD_ORACLE_SERVER_ADMIN_FULL_NAME = "RTD_USER"
+    RTD_ORACLE_SERVER_ADMIN_PASSWORD  = "RTD_USER"
+    #WEBSITE_HTTPLOGGING_RETENTION_DAYS              = var.http_log_retention_days
     "saml.idp.spidRegistry.metadata.url"            = "/home/site/appconfig/spid-entities-idps_local.xml"
     "saml.keystore.location"                        = "file:/home/site/appconfig/saml_spid_sit.jks"
     "saml.metadata.sp.filepath"                     = "/home/site/appconfig/sp_metadata.xml"
     SAML_SP_METADATA                                = "/home/site/appconfig/sp_metadata.xml"
     "spring.profiles.active"                        = var.environment
-    APPINSIGHTS_INSTRUMENTATIONKEY                  = data.azurerm_application_insights.appinsight.instrumentation_key
+    APPINSIGHTS_INSTRUMENTATIONKEY                  = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : ""
     APPINSIGHTS_PROFILERFEATURE_VERSION             = "1.0.0"
     APPINSIGHTS_SNAPSHOTFEATURE_VERSION             = "1.0.0"
     APPLICATIONINSIGHTS_CONFIGURATION_CONTENT       = ""
-    APPLICATIONINSIGHTS_CONNECTION_STRING           = data.azurerm_application_insights.appinsight.connection_string
+    APPLICATIONINSIGHTS_CONNECTION_STRING           = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].connection_string : ""
     ApplicationInsightsAgent_EXTENSION_VERSION      = "~3"
     DiagnosticServices_EXTENSION_VERSION            = "~3"
     InstrumentationEngine_EXTENSION_VERSION         = "disabled"
@@ -42,6 +44,15 @@ module "rtd" {
     XDT_MicrosoftApplicationInsights_BaseExtensions = "disabled"
     XDT_MicrosoftApplicationInsights_Mode           = "recommended"
     XDT_MicrosoftApplicationInsights_PreemptSdk     = "disabled"
+    HOSTNAME                                        = var.hostname
+    HOSTNAME_RTD                                    = var.hostname_rtd
+    STATIC_HOSTNAME                                 = var.static_hostname
+    NODO_SPC_HOSTNAME                               = var.nodo_spc_hostname
+    CITTADINANZA_HOSTNAME                           = var.cittadinanza_hostname
+    JIFFY_HOSTNAME                                  = var.jiffy_hostname
+    LOGGING_WHITE_LIST                              = var.logging_white_list
+    "bancomat.keystore.location"                    = var.bancomat_keystore_location
+    CORS_ALLOWED_ORIGINS                            = var.cors_allowed_origins
   }
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"

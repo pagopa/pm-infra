@@ -32,6 +32,7 @@ data "azurerm_private_dns_zone" "zone" {
 
 # Application Insight data
 data "azurerm_application_insights" "appinsight" {
+  count               = var.appinsight_name != "" ? 1 : 0
   name                = var.appinsight_name
   resource_group_name = var.appinsight_rg
 }

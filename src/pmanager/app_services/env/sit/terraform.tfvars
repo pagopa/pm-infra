@@ -34,6 +34,23 @@ http_log_retention_days = 7
 runtime_name = "jbosseap"
 runtime_version = "7-java8"
 
+##──── Hostname resolution variables ─────────────────────────────────────────────────────
+hostname = "https://api.dev.platform.pagopa.it/"
+hostname_rtd = "https://api.dev.platform.pagopa.it/"
+static_hostname = "https://api.dev.platform.pagopa.it/"
+nodo_spc_hostname = "https://nodo-dei-pagamenti-sit-npa-nodopagamenti.tst-npc.sia.eu"
+
+##──── Other variables ───────────────────────────────────────────────────────────────────
+cittadinanza_hostname = "https://portal.test.pagopa.gov.it/pmmockserviceapi/"
+jiffy_hostname = "https://app-te.vaservices.eu/p2penginectx/F1/services/ConsultazioneCrossServices"
+logging_white_list = "10.49.42.72"
+bancomat_keystore_location = "/home/site/appconfig/Bancomat/certificati/keyBancomat.jks"
+cors_allowed_origins = "https://checkout.pagopa.gov.it"
+
+##──── Application Insight Variable ──────────────────────────────────────────────────────
+appinsight_name = ""
+
+appinsight_rg = "U87-Monitoring"
 
 ##──── Network configuration variables ───────────────────────────────────────────────────
 # Network resource
