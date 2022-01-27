@@ -55,7 +55,7 @@ module "restapi-io" {
     CORS_ALLOWED_ORIGINS                            = var.cors_allowed_origins
   }
 
-  app_command_line = "/home/site/deployments/tools/startup_script.sh"
+  app_command_line = format("/storage/tools/%s/startup_script.sh", var.restapi_io_name)
 
   storage_mounts = [{
     name         = "appconfig"

@@ -55,7 +55,7 @@ module "wisp" {
     CORS_ALLOWED_ORIGINS                            = var.cors_allowed_origins
   }
 
-  app_command_line = "/home/site/deployments/tools/startup_script.sh"
+  app_command_line = format("/storage/tools/%s/startup_script.sh", var.wisp_name)
 
   storage_mounts = [{
     name         = "appconfig"

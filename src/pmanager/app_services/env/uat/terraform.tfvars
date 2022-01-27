@@ -9,7 +9,6 @@ plan_sku = "P1v3"
 plan_sku_tier = "PremiumV3"
 plan_kind = "Linux"
 plan_reserved = "true"
-app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
 # Apps services name
 admin_panel_name = "pm-appsrv-admin-panel"
