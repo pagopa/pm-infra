@@ -12,14 +12,17 @@ plan_kind = "Linux"
 plan_reserved = "true"
 app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
-# Apps services plan name
-admin_panel_plan = "pm-admin-panel-plan"
-batch_plan = "pm-batch-plan"
-logging_plan = "pm-logging-plan"
-restapi_io_plan = "pm-restapi-io-plan"
-restapi_plan = "pm-restapi-plan"
-rtd_plan = "pm-rtd-plan"
-wisp_plan = "pm-wisp-plan"
+# Apps services name
+admin_panel_name = "pm-appsrv-admin-panel"
+batch_name = "pm-appsrv-batch"
+logging_name = "pm-appsrv-logging"
+restapi_io_name = "pm-appsrv-restapi-io"
+restapi_name = "pm-appsrv-restapi"
+rtd_name = "pm-appsrv-rtd"
+wisp_name = "pm-appsrv-wisp"
+
+# App service plan
+plan_name = "plan"
 
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 java_opts = "-Dfile.encoding=UTF-8 -Ddandelion.profile.active=prod -Dcom.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager=true"

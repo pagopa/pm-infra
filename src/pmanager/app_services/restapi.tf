@@ -1,5 +1,5 @@
 module "restapi" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=v2.0.19"
+  source = "git::https://github.com/fabio-felici-sia/azurerm.git//app_service?ref=app-service-storage-account"
 
   name = format("%s-%s", var.restapi_name, var.environment)
 
@@ -56,6 +56,24 @@ module "restapi" {
   }
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
+
+  storage_mounts = [{
+    name         = "appconfig"
+    type         = "AzureFiles"
+    account_name = azurerm_storage_account.storage.name
+    share_name   = "pm-appconfig"
+    access_key   = azurerm_storage_account.storage.primary_access_key
+    mount_path   = "/storage/appconfig"
+    },
+    {
+      name         = "tools"
+      type         = "AzureFiles"
+      account_name = azurerm_storage_account.storage.name
+      share_name   = "pm-tools"
+      access_key   = azurerm_storage_account.storage.primary_access_key
+      mount_path   = "/storage/tools"
+    }
+  ]
 
   tags = {
     kind        = "app service",
