@@ -43,11 +43,11 @@ resource "azurerm_storage_share_directory" "appconfig-logging" {
   storage_account_name = azurerm_storage_account.storage.name
 }
 
-# resource "azurerm_storage_share_directory" "appconfig-restapi-io" {
-#   name                 = var.restapi_io_name
-#   share_name           = azurerm_storage_share.storage-appconfig.name
-#   storage_account_name = azurerm_storage_account.storage.name
-# }
+resource "azurerm_storage_share_directory" "appconfig-restapi-io" {
+  name                 = var.restapi_io_name
+  share_name           = azurerm_storage_share.storage-appconfig.name
+  storage_account_name = azurerm_storage_account.storage.name
+}
 
 resource "azurerm_storage_share_directory" "appconfig-restapi" {
   name                 = var.restapi_name
@@ -86,11 +86,11 @@ resource "azurerm_storage_share_directory" "tools-logging" {
   storage_account_name = azurerm_storage_account.storage.name
 }
 
-# resource "azurerm_storage_share_directory" "tools-restapi-io" {
-#   name                 = var.restapi_io_name
-#   share_name           = azurerm_storage_share.storage-tools.name
-#   storage_account_name = azurerm_storage_account.storage.name
-# }
+resource "azurerm_storage_share_directory" "tools-restapi-io" {
+  name                 = var.restapi_io_name
+  share_name           = azurerm_storage_share.storage-tools.name
+  storage_account_name = azurerm_storage_account.storage.name
+}
 
 resource "azurerm_storage_share_directory" "tools-restapi" {
   name                 = var.restapi_name

@@ -1,5 +1,5 @@
 module "rtd" {
-  source = "git::https://github.com/fabio-felici-sia/azurerm.git//app_service?ref=app-service-storage-account"
+  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=app-service-storage-mounts"
 
   name = format("%s-%s", var.rtd_name, var.environment)
 
@@ -44,8 +44,8 @@ module "rtd" {
     XDT_MicrosoftApplicationInsights_BaseExtensions = "disabled"
     XDT_MicrosoftApplicationInsights_Mode           = "recommended"
     XDT_MicrosoftApplicationInsights_PreemptSdk     = "disabled"
-    HOSTNAME                                        = var.hostname
-    HOSTNAME_RTD                                    = var.hostname_rtd
+    # HOSTNAME                                        = var.hostname
+    # HOSTNAME_RTD                                    = var.hostname_rtd
     STATIC_HOSTNAME                                 = var.static_hostname
     NODO_SPC_HOSTNAME                               = var.nodo_spc_hostname
     CITTADINANZA_HOSTNAME                           = var.cittadinanza_hostname
