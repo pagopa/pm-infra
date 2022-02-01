@@ -123,49 +123,49 @@ resource "azurerm_storage_share_directory" "tools-wisp" {
 ##========================================================================================
 ##──── App service appconfig release ─────────────────────────────────────────────────────
 resource "azurerm_storage_share_directory" "appconfig-admin-panel-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.admin_panel_name)
   share_name           = azurerm_storage_share.storage-appconfig.name
   storage_account_name = azurerm_storage_account.storage.name
 }
 
 resource "azurerm_storage_share_directory" "appconfig-batch-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.batch_name)
   share_name           = azurerm_storage_share.storage-appconfig.name
   storage_account_name = azurerm_storage_account.storage.name
 }
 
 resource "azurerm_storage_share_directory" "appconfig-logging-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.logging_name)
   share_name           = azurerm_storage_share.storage-appconfig.name
   storage_account_name = azurerm_storage_account.storage.name
 }
 
 resource "azurerm_storage_share_directory" "appconfig-restapi-io-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.restapi_io_name)
   share_name           = azurerm_storage_share.storage-appconfig.name
   storage_account_name = azurerm_storage_account.storage.name
 }
 
 resource "azurerm_storage_share_directory" "appconfig-restapi-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.restapi_name)
   share_name           = azurerm_storage_share.storage-appconfig.name
   storage_account_name = azurerm_storage_account.storage.name
 }
 
 resource "azurerm_storage_share_directory" "appconfig-rtd-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.rtd_name)
   share_name           = azurerm_storage_share.storage-appconfig.name
   storage_account_name = azurerm_storage_account.storage.name
 }
 
 resource "azurerm_storage_share_directory" "appconfig-wisp-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.wisp_name)
   share_name           = azurerm_storage_share.storage-appconfig.name
   storage_account_name = azurerm_storage_account.storage.name
@@ -174,49 +174,49 @@ resource "azurerm_storage_share_directory" "appconfig-wisp-release" {
 ##──── App service tools release ─────────────────────────────────────────────────────────
 
 resource "azurerm_storage_share_directory" "tools-admin-panel-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.admin_panel_name)
   share_name           = azurerm_storage_share.storage-tools.name
   storage_account_name = azurerm_storage_account.storage.name
 }
 
 resource "azurerm_storage_share_directory" "tools-batch-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.batch_name)
   share_name           = azurerm_storage_share.storage-tools.name
   storage_account_name = azurerm_storage_account.storage.name
 }
 
 resource "azurerm_storage_share_directory" "tools-logging-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.logging_name)
   share_name           = azurerm_storage_share.storage-tools.name
   storage_account_name = azurerm_storage_account.storage.name
 }
 
 resource "azurerm_storage_share_directory" "tools-restapi-io-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.restapi_io_name)
   share_name           = azurerm_storage_share.storage-tools.name
   storage_account_name = azurerm_storage_account.storage.name
 }
 
 resource "azurerm_storage_share_directory" "tools-restapi-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.restapi_name)
   share_name           = azurerm_storage_share.storage-tools.name
   storage_account_name = azurerm_storage_account.storage.name
 }
 
 resource "azurerm_storage_share_directory" "tools-rtd-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.rtd_name)
   share_name           = azurerm_storage_share.storage-tools.name
   storage_account_name = azurerm_storage_account.storage.name
 }
 
 resource "azurerm_storage_share_directory" "tools-wisp-release" {
-  count = var.environment != "sit" ? 1 : 0
+  count                = var.environment != "sit" ? 1 : 0
   name                 = format("%s-release", var.wisp_name)
   share_name           = azurerm_storage_share.storage-tools.name
   storage_account_name = azurerm_storage_account.storage.name

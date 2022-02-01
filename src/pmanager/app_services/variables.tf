@@ -243,11 +243,11 @@ variable "appinsight_rg" {
 }
 
 variable "appinsight_instrumentation_key" {
-  type = string
+  type        = string
   description = "Instrumentation key var for manual connection"
 }
 
 variable "appinsight_connection_string" {
-  type = string
+  type        = string
   description = "Connection string var for manual connection"
 }
