@@ -54,6 +54,11 @@ appinsight_name = ""
 
 appinsight_rg = "U87-Monitoring"
 
+# Appinsight instrumentation key manual connection
+# set this two var for set manual connection
+appinsight_instrumentation_key = "d1142808-3ef5-484e-83fa-2d8b2fef0f87"
+appinsight_connection_string = "InstrumentationKey=d1142808-3ef5-484e-83fa-2d8b2fef0f87;IngestionEndpoint=https://westeurope-3.in.applicationinsights.azure.com/"
+
 ##──── Network configuration variables ───────────────────────────────────────────────────
 # Network resource
 network_resource = "DDS-NetworkResources"

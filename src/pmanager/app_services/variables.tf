@@ -241,3 +241,13 @@ variable "appinsight_rg" {
   type        = string
   description = "Application insight resource group"
 }
+
+variable "appinsight_instrumentation_key" {
+  type = string
+  description = "Instrumentation key var for manual connection"
+}
+
+variable "appinsight_connection_string" {
+  type = string
+  description = "Connection string var for manual connection"
+}

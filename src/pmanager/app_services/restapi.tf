@@ -32,11 +32,11 @@ module "restapi" {
     "saml.metadata.sp.filepath"                     = "/home/site/appconfig/sp_metadata.xml"
     SAML_SP_METADATA                                = "/home/site/appconfig/sp_metadata.xml"
     "spring.profiles.active"                        = var.environment
-    APPINSIGHTS_INSTRUMENTATIONKEY                  = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : ""
+    APPINSIGHTS_INSTRUMENTATIONKEY                  = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : var.appinsight_instrumentation_key
     APPINSIGHTS_PROFILERFEATURE_VERSION             = "1.0.0"
     APPINSIGHTS_SNAPSHOTFEATURE_VERSION             = "1.0.0"
     APPLICATIONINSIGHTS_CONFIGURATION_CONTENT       = ""
-    APPLICATIONINSIGHTS_CONNECTION_STRING           = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].connection_string : ""
+    APPLICATIONINSIGHTS_CONNECTION_STRING           = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : var.appinsight_connection_string
     ApplicationInsightsAgent_EXTENSION_VERSION      = "~3"
     DiagnosticServices_EXTENSION_VERSION            = "~3"
     InstrumentationEngine_EXTENSION_VERSION         = "disabled"
@@ -177,11 +177,11 @@ site_config {
     "saml.metadata.sp.filepath"                       = "/home/site/appconfig/sp_metadata.xml"
     "SAML_SP_METADATA"                                = "/home/site/appconfig/sp_metadata.xml"
     "spring.profiles.active"                          = var.environment
-    "APPINSIGHTS_INSTRUMENTATIONKEY"                  = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : ""
+    "APPINSIGHTS_INSTRUMENTATIONKEY"                  = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : var.appinsight_instrumentation_key
     "APPINSIGHTS_PROFILERFEATURE_VERSION"             = "1.0.0"
     "APPINSIGHTS_SNAPSHOTFEATURE_VERSION"             = "1.0.0"
     "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT"       = ""
-    "APPLICATIONINSIGHTS_CONNECTION_STRING"           = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].connection_string : ""
+    "APPLICATIONINSIGHTS_CONNECTION_STRING"           = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : var.appinsight_connection_string
     "ApplicationInsightsAgent_EXTENSION_VERSION"      = "~3"
     "DiagnosticServices_EXTENSION_VERSION"            = "~3"
     "InstrumentationEngine_EXTENSION_VERSION"         = "disabled"
