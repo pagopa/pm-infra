@@ -50,6 +50,11 @@ appinsight_name = "U87-PagoPa-pci-uat-insight"
 
 appinsight_rg = "U87-Monitoring"
 
+# Appinsight instrumentation key manual connection
+# set this two var for set manual connection
+appinsight_instrumentation_key = ""
+appinsight_connection_string = ""
+
 ##──── Network configuration variables ───────────────────────────────────────────────────
 # Network resource
 network_resource = "U87-NetworkResources-pci-uat"
