@@ -44,8 +44,8 @@ module "restapi" {
     XDT_MicrosoftApplicationInsights_BaseExtensions = "disabled"
     XDT_MicrosoftApplicationInsights_Mode           = "recommended"
     XDT_MicrosoftApplicationInsights_PreemptSdk     = "disabled"
-    # HOSTNAME                                        = var.hostname
-    # HOSTNAME_RTD                                    = var.hostname_rtd
+    HOSTNAME_PM                                      = var.hostname
+    HOSTNAME_RTD                                    = var.hostname_rtd
     STATIC_HOSTNAME                                 = var.static_hostname
     NODO_SPC_HOSTNAME                               = var.nodo_spc_hostname
     CITTADINANZA_HOSTNAME                           = var.cittadinanza_hostname
@@ -189,8 +189,8 @@ site_config {
     "XDT_MicrosoftApplicationInsights_BaseExtensions" = "disabled"
     "XDT_MicrosoftApplicationInsights_Mode"           = "recommended"
     "XDT_MicrosoftApplicationInsights_PreemptSdk"     = "disabled"
-    #" HOSTNAME                                        = var.hostname
-    #" HOSTNAME_RTD                                    = var.hostname_rtd
+    "HOSTNAME_PM"                                      = var.hostname
+    "HOSTNAME_RTD"                                    = var.hostname_rtd
     "STATIC_HOSTNAME"                                 = var.static_hostname
     "NODO_SPC_HOSTNAME"                               = var.nodo_spc_hostname
     "CITTADINANZA_HOSTNAME"                           = var.cittadinanza_hostname

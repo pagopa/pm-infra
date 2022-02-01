@@ -2,6 +2,7 @@
 #########################################################
 environment = "uat"
 location = "West Europe"
+standard = "pci"
 
 
 ## Network configuration variables
