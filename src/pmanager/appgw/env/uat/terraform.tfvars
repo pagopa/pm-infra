@@ -2,6 +2,7 @@
 rg = "U87-PM-AppServices-pci-uat"
 location = "westeurope"
 environment = "uat"
+standard = "pci"
 
 ##──── Network configuration variables ───────────────────────────────────────────────────
 # Network resource
