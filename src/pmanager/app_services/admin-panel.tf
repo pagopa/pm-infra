@@ -161,7 +161,7 @@ resource "azurerm_app_service_slot" "admin-panel-release" {
   app_service_plan_id = module.admin-panel.plan_id
 
   site_config {
-    app_command_line = format("/storage/tools/%s-release/startup_script.sh", var.admin_panel_name)
+    app_command_line = format("if ! /home/site/deployments/tools/startup_script.sh; then /storage/tools/%s-release/startup_script.sh; fi", var.admin_panel_name)
     always_on        = "true"
     linux_fx_version = "jbosseap|7-java8"
   }
