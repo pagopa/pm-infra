@@ -213,6 +213,50 @@ variable "private_link_dns_zone_rg" {
   type = string
 }
 
+##========================================================================================
+##                                                                                      ##
+## Application Gateway                                                                  ##
+##                                                                                      ##
+##========================================================================================
+
+
+##──── Application Gateway variables ─────────────────────────────────────────────────────
+
+## APPGTW Resource group
+variable "appgw_rg" {
+  type        = string
+  description = "Application gateway reource group"
+}
+## APPGTW name
+variable "appgw_name" {
+  type        = string
+  description = "Application gateway name"
+}
+
+##  Backend address pool NAME
+variable "backend_address_pool_name" {
+  type = string
+}
+## backend HTTP settings host name
+variable "backend_http_settings_host_name" {
+  type = string
+}
+
+## Subnet name
+variable "appgw_subnet_name" {
+  type = string
+}
+
+## Sku size
+variable "appgw_sku_size" {
+  type = string
+}
+
+## Sku capacity
+variable "appgw_sku_capacity" {
+  type = string
+}
+
 ##──── Key Vault ─────────────────────────────────────────────────────────────────────────
 
 variable "key_vault" {

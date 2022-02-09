@@ -37,9 +37,9 @@ runtime_name = "jbosseap"
 runtime_version = "7-java8"
 
 ##──── Hostname resolution variables ─────────────────────────────────────────────────────
-hostname = "https://api.dev.platform.pagopa.it/"
-hostname_rtd = "https://api.dev.platform.pagopa.it/"
-static_hostname = "https://api.dev.platform.pagopa.it/"
+hostname = "https://api.dev.platform.pagopa.it/payment-manager"
+hostname_rtd = "https://api.dev.platform.pagopa.it/payment-manager"
+static_hostname = "https://api.dev.platform.pagopa.it/payment-manager"
 nodo_spc_hostname = "https://nodo-dei-pagamenti-sit-npa-nodopagamenti.tst-npc.sia.eu"
 
 ##──── Other variables ───────────────────────────────────────────────────────────────────
@@ -81,6 +81,16 @@ private_link_dns_zone = "privatelink.azurewebsites.net"
 
 # Private link dns zone resource group
 private_link_dns_zone_rg = "dds-networkresources"
+
+##──── Application Gateway variables ─────────────────────────────────────────────────────
+## APPGTW Resource group
+appgw_rg = "PM-ApplicationGateway"
+appgw_name = "pm-appgw"
+backend_address_pool_name = "pm-jboss"
+backend_http_settings_host_name = "ddsappservices-pm.azurewebsites.net"
+appgw_subnet_name = "pm-appgtw"
+appgw_sku_size = "WAF_v2"
+appgw_sku_capacity = "1"
 
 
 ##──── Key vault variables ───────────────────────────────────────────────────────────────
