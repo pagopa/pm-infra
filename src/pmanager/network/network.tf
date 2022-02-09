@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "vnet" {
   tags = {
     kind        = "network",
     environment = var.environment,
-    standard    = "pci"
+    standard    = var.standard
   }
 }
 
@@ -18,7 +18,7 @@ resource "azurerm_virtual_network" "vnet-inbound" {
   tags = {
     kind        = "network",
     environment = var.environment,
-    standard    = "pci"
+    standard    = var.standard
   }
 }
 
@@ -39,7 +39,7 @@ resource "azurerm_virtual_network" "vnet-outgoing" {
   tags = {
     kind        = "network",
     environment = var.environment,
-    standard    = "pci"
+    standard    = var.standard
   }
 }
 
@@ -52,6 +52,6 @@ resource "azurerm_virtual_network" "vnet-database" {
   tags = {
     kind        = "network",
     environment = var.environment,
-    standard    = "pci"
+    standard    = var.standard
   }
 }

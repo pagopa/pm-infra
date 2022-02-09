@@ -2,30 +2,58 @@
 rg = "U87-PM-AppServices-pci-uat"
 location = "westeurope"
 environment = "uat"
+standard = "pci"
 
 ##──── App service definition plan ───────────────────────────────────────────────────────
 plan_sku = "P1v3"
 plan_sku_tier = "PremiumV3"
 plan_kind = "Linux"
 plan_reserved = "true"
-app_command_line = "/home/site/deployments/tools/startup_script.sh"
+
+# Apps services name
+admin_panel_name = "pm-appsrv-admin-panel"
+batch_name = "pm-appsrv-batch"
+logging_name = "pm-appsrv-logging"
+restapi_io_name = "pm-appsrv-restapi-io"
+restapi_name = "pm-appsrv-restapi"
+rtd_name = "pm-appsrv-rtd"
+wisp_name = "pm-appsrv-wisp"
+
+# App service plan
+plan_name = "plan-pci"
 
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 java_opts = "-Dfile.encoding=UTF-8 -Ddandelion.profile.active=prod -Dcom.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager=true"
 
-
 ##──── SYSTEM ENCODING ───────────────────────────────────────────────────────────────────
 system_encoding = "C.UTF-8"
 
-
 ##──── WEBSITE HTTP LOGGING RETENTION DAYS ───────────────────────────────────────────────
 http_log_retention_days = 7
-
 
 ##──── APP Service runtime config ────────────────────────────────────────────────────────
 runtime_name = "jbosseap"
 runtime_version = "7-java8"
 
+hostname = ""
+hostname_rtd = ""
+static_hostname = ""
+nodo_spc_hostname = ""
+cittadinanza_hostname = ""
+jiffy_hostname = ""
+logging_white_list = ""
+bancomat_keystore_location = ""
+cors_allowed_origins = ""
+
+##──── Application Insight Variable ──────────────────────────────────────────────────────
+appinsight_name = "U87-PagoPa-pci-uat-insight"
+
+appinsight_rg = "U87-Monitoring"
+
+# Appinsight instrumentation key manual connection
+# set this two var for set manual connection
+appinsight_instrumentation_key = ""
+appinsight_connection_string = ""
 
 ##──── Network configuration variables ───────────────────────────────────────────────────
 # Network resource

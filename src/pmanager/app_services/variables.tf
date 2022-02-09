@@ -16,6 +16,11 @@ variable "environment" {
   description = "Name of the deployment environment"
 }
 
+variable "standard" {
+  type        = string
+  description = "Standard pci/no-pci tags"
+}
+
 variable "location" {
   type        = string
   description = "Location to deploy the resoruce group"
@@ -55,6 +60,48 @@ variable "plan_reserved" {
 ##                                                                                      ##
 ##========================================================================================
 
+##──── App Service Plan ──────────────────────────────────────────────────────────────────
+
+variable "admin_panel_name" {
+  type        = string
+  description = "Admin Panel app service name"
+}
+
+variable "batch_name" {
+  type        = string
+  description = "Batch app service name"
+}
+
+variable "logging_name" {
+  type        = string
+  description = "Logging app service name"
+}
+
+variable "restapi_io_name" {
+  type        = string
+  description = "Admin Panel app service name"
+}
+
+variable "restapi_name" {
+  type        = string
+  description = "Admin Panel app service name"
+}
+
+variable "rtd_name" {
+  type        = string
+  description = "Rtd app service name"
+}
+
+variable "wisp_name" {
+  type        = string
+  description = "wisp app service name"
+}
+
+variable "plan_name" {
+  type        = string
+  description = "wisp app service name"
+}
+
 ##──── App service configuration ─────────────────────────────────────────────────────────
 
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
@@ -77,6 +124,34 @@ variable "system_encoding" {
 ##──── WEBSITE HTTP LOGGING RETENTION DAYS ───────────────────────────────────────────────
 
 variable "http_log_retention_days" {
+  type = string
+}
+
+variable "hostname" {
+  type = string
+}
+variable "hostname_rtd" {
+  type = string
+}
+variable "static_hostname" {
+  type = string
+}
+variable "nodo_spc_hostname" {
+  type = string
+}
+variable "cittadinanza_hostname" {
+  type = string
+}
+variable "jiffy_hostname" {
+  type = string
+}
+variable "logging_white_list" {
+  type = string
+}
+variable "bancomat_keystore_location" {
+  type = string
+}
+variable "cors_allowed_origins" {
   type = string
 }
 
@@ -148,4 +223,31 @@ variable "key_vault" {
 variable "key_vault_rg" {
   type        = string
   description = "Key Vault resource group"
+}
+
+##========================================================================================
+##                                                                                      ##
+##                                  Application Insight                                 ##
+##                                                                                      ##
+##========================================================================================
+
+##──── Application Insight Variable ──────────────────────────────────────────────────────
+variable "appinsight_name" {
+  type        = string
+  description = "Application insight name"
+}
+
+variable "appinsight_rg" {
+  type        = string
+  description = "Application insight resource group"
+}
+
+variable "appinsight_instrumentation_key" {
+  type        = string
+  description = "Instrumentation key var for manual connection"
+}
+
+variable "appinsight_connection_string" {
+  type        = string
+  description = "Connection string var for manual connection"
 }
