@@ -13,6 +13,10 @@ variable "location" {
   description = "Location to deploy the resoruce group"
 }
 
+variable "standard" {
+  type        = string
+  description = "Standard pci/no-pci tags"
+}
 
 ## Network configuration variables
 #########################################################

@@ -2,6 +2,7 @@
 rg = "PM-AppServices"
 location = "westeurope"
 environment = "sit"
+standard = "no-pci"
 
 ##──── Network configuration variables ───────────────────────────────────────────────────
 # Network resource
