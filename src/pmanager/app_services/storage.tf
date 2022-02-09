@@ -24,6 +24,30 @@ resource "azurerm_storage_share" "storage-tools" {
   quota                = 50
 }
 
+##──── Private endpoint connection ───────────────────────────────────────────────────────
+resource "azurerm_private_endpoint" "storage-endpt" {
+  name                = format("pm-storage-account-%s-%s-endpt", azurerm_storage_account.storage.name, var.environment)
+  location            = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  subnet_id           = data.azurerm_subnet.inboundsubnet.id
+
+  private_service_connection {
+    name                           = "pm-storage-privateserviceconnection"
+    private_connection_resource_id = azurerm_storage_account.storage.id
+    is_manual_connection           = false
+    subresource_names              = ["file"]
+  }
+}
+
+# A dns entry
+resource "azurerm_private_dns_a_record" "storage" {
+  name                = format("%s", azurerm_storage_account.storage.name)
+  zone_name           = data.azurerm_private_dns_zone.zone.name
+  resource_group_name = data.azurerm_resource_group.rg_zone.name
+  ttl                 = 300
+  records             = [azurerm_private_endpoint.storage-endpt.private_service_connection.0.private_ip_address]
+}
+
 ##========================================================================================
 ##                                                                                      ##
 ## APP SERVICE                                                                          ##

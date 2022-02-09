@@ -57,7 +57,7 @@ module "admin-panel" {
     CORS_ALLOWED_ORIGINS                            = var.cors_allowed_origins
   }
 
-  app_command_line = format("/storage/tools/%s/startup_script.sh", var.admin_panel_name)
+  app_command_line = format("if ! /home/site/deployments/tools/startup_script.sh; then /storage/tools/%s/startup_script.sh; fi", var.admin_panel_name)
 
   storage_mounts = [{
     name         = "appconfig"
