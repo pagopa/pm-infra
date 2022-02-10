@@ -44,6 +44,7 @@ jiffy_hostname = ""
 logging_white_list = ""
 bancomat_keystore_location = ""
 cors_allowed_origins = ""
+spring_profile = ""
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
 appinsight_name = "U87-PagoPa-pci-uat-insight"

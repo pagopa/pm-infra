@@ -11,7 +11,7 @@ locals {
   saml_keystore_location             = "file:/home/site/appconfig/saml_spid_sit.jks"
   saml_metadata_sp_filepath          = "/home/site/appconfig/sp_metadata.xml"
   saml_sp_metadata                   = "/home/site/appconfig/sp_metadata.xml"
-  spring_profiles_active             = var.environment
+  spring_profiles_active             = var.spring_profile
   hostname_pm                        = var.hostname
   hostname_rtd                       = var.hostname_rtd
   static_hostname                    = var.static_hostname

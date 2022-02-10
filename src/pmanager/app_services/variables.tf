@@ -127,6 +127,11 @@ variable "http_log_retention_days" {
   type = string
 }
 
+variable "spring_profile" {
+  type = string
+  description = "Select active spring profile"
+}
+
 variable "hostname" {
   type = string
 }
