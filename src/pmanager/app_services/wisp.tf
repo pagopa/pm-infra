@@ -57,7 +57,7 @@ module "wisp" {
     CORS_ALLOWED_ORIGINS                            = local.cors_allowed_origins
   }
 
-  app_command_line = format("if ! /home/site/deployments/tools/startup_script.sh; then /storage/tools/%s/startup_script.sh; fi", var.wisp_name)
+  app_command_line = format("/storage/tools/%s/startup_script.sh", var.wisp_name)
 
   storage_mounts = [{
     name         = "appconfig"
@@ -161,7 +161,7 @@ resource "azurerm_app_service_slot" "wisp-release" {
   app_service_plan_id = module.wisp.plan_id
 
   site_config {
-    app_command_line = format("if ! /home/site/deployments/tools/startup_script.sh; then /storage/tools/%s-release/startup_script.sh; fi", var.wisp_name)
+    app_command_line = format("/storage/tools/%s-release/startup_script.sh", var.wisp_name)
     always_on        = "true"
     linux_fx_version = "jbosseap|7-java8"
   }
