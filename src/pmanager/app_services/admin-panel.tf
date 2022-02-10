@@ -33,7 +33,7 @@ module "admin-panel" {
     "saml.keystore.location"                        = local.saml_keystore_location
     "saml.metadata.sp.filepath"                     = local.saml_metadata_sp_filepath
     SAML_SP_METADATA                                = local.saml_sp_metadata
-    "spring.profiles.active"                        = var.spring_profile
+    "spring.profiles.active"                        = local.spring_profiles_active
     APPINSIGHTS_INSTRUMENTATIONKEY                  = local.appinsights_instrumentationkey
     APPINSIGHTS_PROFILERFEATURE_VERSION             = local.appinsights_profilerfeature_version
     APPINSIGHTS_SNAPSHOTFEATURE_VERSION             = local.appinsights_snapshotfeature_version
@@ -169,37 +169,37 @@ resource "azurerm_app_service_slot" "admin-panel-release" {
   app_settings = {
     "APPCONFIG_PATH"                                  = format("/storage/appconfig/%s-release", var.admin_panel_name)
     "TOOLS_PATH"                                      = format("/storage/tools/%s-release", var.admin_panel_name)
-    "JAVA_OPTS"                                       = var.java_opts
-    "LANG"                                            = var.system_encoding
-    "ORACLE_CONNECTION_URL"                           = data.azurerm_key_vault_secret.oracle-connection-url.value
-    "ORACLE_SERVER_ADMIN_FULL_NAME"                   = data.azurerm_key_vault_secret.oracle-server-agid-user.value
-    "ORACLE_SERVER_ADMIN_PASSWORD"                    = data.azurerm_key_vault_secret.oracle-server-agid-user-password.value
-    "saml.idp.spidRegistry.metadata.url"              = "/home/site/appconfig/spid-entities-idps_local.xml"
-    "saml.keystore.location"                          = "file:/home/site/appconfig/saml_spid_sit.jks"
-    "saml.metadata.sp.filepath"                       = "/home/site/appconfig/sp_metadata.xml"
-    "SAML_SP_METADATA"                                = "/home/site/appconfig/sp_metadata.xml"
-    "spring.profiles.active"                          = var.environment
-    "APPINSIGHTS_INSTRUMENTATIONKEY"                  = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : var.appinsight_instrumentation_key
-    "APPINSIGHTS_PROFILERFEATURE_VERSION"             = "1.0.0"
-    "APPINSIGHTS_SNAPSHOTFEATURE_VERSION"             = "1.0.0"
-    "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT"       = ""
-    "APPLICATIONINSIGHTS_CONNECTION_STRING"           = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : var.appinsight_connection_string
-    "ApplicationInsightsAgent_EXTENSION_VERSION"      = "~3"
-    "DiagnosticServices_EXTENSION_VERSION"            = "~3"
-    "InstrumentationEngine_EXTENSION_VERSION"         = "disabled"
-    "SnapshotDebugger_EXTENSION_VERSION"              = "disabled"
-    "XDT_MicrosoftApplicationInsights_BaseExtensions" = "disabled"
-    "XDT_MicrosoftApplicationInsights_Mode"           = "recommended"
-    "XDT_MicrosoftApplicationInsights_PreemptSdk"     = "disabled"
-    "HOSTNAME_PM"                                     = var.hostname
-    "HOSTNAME_RTD"                                    = var.hostname_rtd
-    "STATIC_HOSTNAME"                                 = var.static_hostname
-    "NODO_SPC_HOSTNAME"                               = var.nodo_spc_hostname
-    "CITTADINANZA_HOSTNAME"                           = var.cittadinanza_hostname
-    "JIFFY_HOSTNAME"                                  = var.jiffy_hostname
-    "LOGGING_WHITE_LIST"                              = var.logging_white_list
-    "bancomat.keystore.location"                      = var.bancomat_keystore_location
-    "CORS_ALLOWED_ORIGINS"                            = var.cors_allowed_origins
+    "JAVA_OPTS"                                       = local.java_opts
+    "LANG"                                            = local.lang
+    "ORACLE_CONNECTION_URL"                           = local.pp_oracle_connection_url
+    "ORACLE_SERVER_ADMIN_FULL_NAME"                   = local.pp_oracle_server_admin_full_name
+    "ORACLE_SERVER_ADMIN_PASSWORD"                    = local.pp_oracle_server_admin_password
+    "saml.idp.spidRegistry.metadata.url"              = local.saml_idp_spidregistry_metadata_url
+    "saml.keystore.location"                          = local.saml_keystore_location
+    "saml.metadata.sp.filepath"                       = local.saml_metadata_sp_filepath
+    "SAML_SP_METADATA"                                = local.saml_sp_metadata
+    "spring.profiles.active"                          = local.spring_profiles_active
+    "APPINSIGHTS_INSTRUMENTATIONKEY"                  = local.appinsights_instrumentationkey
+    "APPINSIGHTS_PROFILERFEATURE_VERSION"             = local.appinsights_profilerfeature_version
+    "APPINSIGHTS_SNAPSHOTFEATURE_VERSION"             = local.appinsights_snapshotfeature_version
+    "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT"       = local.applicationinsights_configuration_content
+    "APPLICATIONINSIGHTS_CONNECTION_STRING"           = local.applicationinsights_connection_string
+    "ApplicationInsightsAgent_EXTENSION_VERSION"      = local.applicationinsightsagent_extension_version
+    "DiagnosticServices_EXTENSION_VERSION"            = local.diagnosticservices_extension_version
+    "InstrumentationEngine_EXTENSION_VERSION"         = local.instrumentationengine_extension_version
+    "SnapshotDebugger_EXTENSION_VERSION"              = local.snapshotdebugger_extension_version
+    "XDT_MicrosoftApplicationInsights_BaseExtensions" = local.xdt_microsoftapplicationinsights_baseextensions
+    "XDT_MicrosoftApplicationInsights_Mode"           = local.xdt_microsoftapplicationinsights_mode
+    "XDT_MicrosoftApplicationInsights_PreemptSdk"     = local.xdt_microsoftapplicationinsights_preemptsdk
+    "HOSTNAME_PM"                                     = local.hostname_pm
+    "HOSTNAME_RTD"                                    = local.hostname_rtd
+    "STATIC_HOSTNAME"                                 = local.static_hostname
+    "NODO_SPC_HOSTNAME"                               = local.nodo_spc_hostname
+    "CITTADINANZA_HOSTNAME"                           = local.cittadinanza_hostname
+    "JIFFY_HOSTNAME"                                  = local.jiffy_hostname
+    "LOGGING_WHITE_LIST"                              = local.logging_white_list
+    "bancomat.keystore.location"                      = local.bancomat_keystore_location
+    "CORS_ALLOWED_ORIGINS"                            = local.cors_allowed_origins
   }
 
   storage_account {
