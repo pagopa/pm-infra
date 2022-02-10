@@ -48,6 +48,7 @@ jiffy_hostname = "https://app-te.vaservices.eu/p2penginectx/F1/services/Consulta
 logging_white_list = "10.49.42.72"
 bancomat_keystore_location = "/home/site/appconfig/Bancomat/certificati/keyBancomat.jks"
 cors_allowed_origins = "https://checkout.pagopa.gov.it"
+spring_profile = "sit-azure"
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
 appinsight_name = ""
