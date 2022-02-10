@@ -170,9 +170,9 @@ resource "azurerm_app_service_slot" "logging-release" {
     "TOOLS_PATH"                                      = format("/storage/tools/%s-release", var.logging_name)
     "JAVA_OPTS"                                       = local.java_opts
     "LANG"                                            = local.lang
-    "ORACLE_CONNECTION_URL"                           = local.pp_oracle_connection_url
-    "ORACLE_SERVER_ADMIN_FULL_NAME"                   = local.pp_oracle_server_admin_full_name
-    "ORACLE_SERVER_ADMIN_PASSWORD"                    = local.pp_oracle_server_admin_password
+    "ORACLE_CONNECTION_URL"                           = local.event_reg_oracle_connection_url
+    "EVENT_REG_ORACLE_SERVER_ADMIN_FULL_NAME"         = local.event_reg_oracle_server_admin_full_name
+    "EVENT_REG_ORACLE_SERVER_ADMIN_PASSWORD"          = local.event_reg_oracle_server_admin_password
     "saml.idp.spidRegistry.metadata.url"              = local.saml_idp_spidregistry_metadata_url
     "saml.keystore.location"                          = local.saml_keystore_location
     "saml.metadata.sp.filepath"                       = local.saml_metadata_sp_filepath
