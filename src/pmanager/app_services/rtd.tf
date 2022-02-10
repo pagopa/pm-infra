@@ -26,9 +26,9 @@ module "rtd" {
     TOOLS_PATH                                      = format("/storage/tools/%s", var.rtd_name)
     JAVA_OPTS                                       = var.java_opts
     LANG                                            = var.system_encoding
-    ORACLE_CONNECTION_URL                           = data.azurerm_key_vault_secret.oracle-connection-url.value
-    RTD_ORACLE_SERVER_ADMIN_FULL_NAME               = "RTD_USER"
-    RTD_ORACLE_SERVER_ADMIN_PASSWORD                = "RTD_USER"
+    ORACLE_CONNECTION_URL                           = local.rtd_oracle_connection_url
+    RTD_ORACLE_SERVER_ADMIN_FULL_NAME               = local.rtd_oracle_server_admin_full_name
+    RTD_ORACLE_SERVER_ADMIN_PASSWORD                = local.rtd_oracle_server_admin_password
     "saml.idp.spidRegistry.metadata.url"            = "/home/site/appconfig/spid-entities-idps_local.xml"
     "saml.keystore.location"                        = "file:/home/site/appconfig/saml_spid_sit.jks"
     "saml.metadata.sp.filepath"                     = "/home/site/appconfig/sp_metadata.xml"

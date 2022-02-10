@@ -10,6 +10,7 @@ data "azurerm_key_vault_secret" "oracle-connection-url" {
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
+# PP credential
 data "azurerm_key_vault_secret" "oracle-server-agid-user" {
   name         = format("%s-%s", "oracle-server-agid-user", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
@@ -17,6 +18,28 @@ data "azurerm_key_vault_secret" "oracle-server-agid-user" {
 
 data "azurerm_key_vault_secret" "oracle-server-agid-user-password" {
   name         = format("%s-%s", "oracle-server-agid-user-password", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+# RTD credential
+data "azurerm_key_vault_secret" "oracle-server-rtd-user" {
+  name         = format("%s-%s", "oracle-server-rtd-user", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+data "azurerm_key_vault_secret" "oracle-server-rtd-user-password" {
+  name         = format("%s-%s", "oracle-server-rtd-user-password", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+# EVENT REGISTRY credential
+data "azurerm_key_vault_secret" "oracle-server-event-reg-user" {
+  name         = format("%s-%s", "oracle-server-event-reg-user", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+data "azurerm_key_vault_secret" "oracle-server-event-reg-user-password" {
+  name         = format("%s-%s", "oracle-server-event-reg-user-password", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 

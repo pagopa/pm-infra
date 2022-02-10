@@ -26,9 +26,9 @@ module "batch" {
     TOOLS_PATH                                      = format("/storage/tools/%s", var.batch_name)
     JAVA_OPTS                                       = var.java_opts
     LANG                                            = var.system_encoding
-    ORACLE_CONNECTION_URL                           = data.azurerm_key_vault_secret.oracle-connection-url.value
-    ORACLE_SERVER_ADMIN_FULL_NAME                   = data.azurerm_key_vault_secret.oracle-server-agid-user.value
-    ORACLE_SERVER_ADMIN_PASSWORD                    = data.azurerm_key_vault_secret.oracle-server-agid-user-password.value
+    ORACLE_CONNECTION_URL                           = local.pp_oracle_connection_url
+    ORACLE_SERVER_ADMIN_FULL_NAME                   = local.pp_oracle_server_admin_full_name
+    ORACLE_SERVER_ADMIN_PASSWORD                    = local.pp_oracle_server_admin_password
     "saml.idp.spidRegistry.metadata.url"            = "/home/site/appconfig/spid-entities-idps_local.xml"
     "saml.keystore.location"                        = "file:/home/site/appconfig/saml_spid_sit.jks"
     "saml.metadata.sp.filepath"                     = "/home/site/appconfig/sp_metadata.xml"
