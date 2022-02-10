@@ -57,7 +57,7 @@ module "batch" {
     CORS_ALLOWED_ORIGINS                            = local.cors_allowed_origins
   }
 
-  app_command_line = format("if ! /home/site/deployments/tools/startup_script.sh; then /storage/tools/%s/startup_script.sh; fi", var.batch_name)
+  app_command_line = format("/storage/tools/%s/startup_script.sh", var.batch_name)
   storage_mounts = [{
     name         = "appconfig"
     type         = "AzureFiles"
@@ -160,7 +160,7 @@ resource "azurerm_app_service_slot" "batch-release" {
   app_service_plan_id = module.batch.plan_id
 
   site_config {
-    app_command_line = format("if ! /home/site/deployments/tools/startup_script.sh; then /storage/tools/%s-release/startup_script.sh; fi", var.batch_name)
+    app_command_line = format("/storage/tools/%s-release/startup_script.sh", var.batch_name)
     always_on        = "true"
     linux_fx_version = "jbosseap|7-java8"
   }
