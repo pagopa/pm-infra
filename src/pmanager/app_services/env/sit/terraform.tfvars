@@ -49,9 +49,9 @@ logging_white_list = "127.0.0.1"
 bancomat_keystore_location = "/home/site/appconfig/Bancomat/certificati/keyBancomat.jks"
 cors_allowed_origins = "https://checkout.pagopa.gov.it"
 spring_profile = "sit-azure"
-secret_key_store_path = "/ope/jboss-as/jboss/pagopa/userData/userKeys/"
-crypto_private_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/privateKey.pem"
-crypto_public_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/publicKey.pem"
+secret_key_store_path = "/home/site/appconfig/userKeys/"
+crypto_private_server_key_path = "/home/site/appconfig/userKeys/privateKey.pem"
+crypto_public_server_key_path = "/home/site/appconfig/userKeys/publicKey.pem"
 jvm_route = "sit-agid01"
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
