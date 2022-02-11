@@ -45,10 +45,13 @@ nodo_spc_hostname = "https://api.dev.platform.pagopa.it/nodo/nodo-per-pm/v1"
 ##──── Other variables ───────────────────────────────────────────────────────────────────
 cittadinanza_hostname = "https://portal.test.pagopa.gov.it/pmmockserviceapi/"
 jiffy_hostname = "https://app-te.vaservices.eu/p2penginectx/F1/services/ConsultazioneCrossServices"
-logging_white_list = "10.49.42.72"
+logging_white_list = "127.0.0.1"
 bancomat_keystore_location = "/home/site/appconfig/Bancomat/certificati/keyBancomat.jks"
 cors_allowed_origins = "https://checkout.pagopa.gov.it"
 spring_profile = "sit-azure"
+secret_key_store_path = "/ope/jboss-as/jboss/pagopa/userData/userKeys/"
+crypto_private_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/privateKey.pem"
+crypto_public_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/publicKey.pem"
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
 appinsight_name = ""

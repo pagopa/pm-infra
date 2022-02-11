@@ -20,7 +20,39 @@ locals {
   jiffy_hostname                     = var.jiffy_hostname
   logging_white_list                 = var.logging_white_list
   bancomat_keystore_location         = var.bancomat_keystore_location
+  bancomat_keystore_password         = data.azurerm_key_vault_secret.bancomat-keystore-password.value
   cors_allowed_origins               = var.cors_allowed_origins
+  hsm_activation_flag                = true
+  log_interceptor_pattern            = data.azurerm_key_vault_secret.log-interceptor-pattern.value
+  secret_key_store_path              = var.secret_key_store_path
+  crypto_private_server_key_path     = var.crypto_private_server_key_path
+  crypto_public_server_key_path      = var.crypto_public_server_key_path
+  com_sun_mamangement_jmxremote_ssl  = false
+}
+
+##──── connection parameters ─────────────────────────────────────────────────────────────
+locals {
+  http_timeout                      = 15000
+  max_connection                    = 400
+  request_timeout                   = 20000
+  max_per_route                     = 50
+  max_connection_cd                 = 1024
+  request_timeout_cd                = 2000
+  max_per_route_cd                  = 1024
+  vpos_timeout                      = 10000
+  bancomat_timeout                  = 10000
+  max_connection_bancomat           = 1000
+  max_per_route_bancomat            = 1000
+  cobadge_timeout                   = 10000
+  max_connection_cobadge            = 1000
+  max_per_route_cobadge             = 1000
+  coyote_default_connection_timeout = 30000
+  coyote_default_keep_alive_timeout = 6000
+}
+
+##──── PM api key ────────────────────────────────────────────────────────────────────────
+locals {
+  pm_api_key = data.azurerm_key_vault_secret.pm-api-key.value
 }
 
 ##──── *** ───────────────────────────────────────────────────────────────────────────────
