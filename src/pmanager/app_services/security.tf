@@ -43,6 +43,24 @@ data "azurerm_key_vault_secret" "oracle-server-event-reg-user-password" {
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
+##──── PM api key ────────────────────────────────────────────────────────────────────────
+data "azurerm_key_vault_secret" "pm-api-key" {
+  name         = format("%s-%s", "pm-api-key", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+##──── logging interception ──────────────────────────────────────────────────────────────
+data "azurerm_key_vault_secret" "log-interceptor-pattern" {
+  name         = format("%s-%s", "log-interceptor-pattern", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+##──── bancomat keystore password ────────────────────────────────────────────────────────
+data "azurerm_key_vault_secret" "bancomat-keystore-password" {
+  name         = format("%s-%s", "bancomat-keystore-password", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
 
 ##──── App service keys ──────────────────────────────────────────────────────────────────
 

@@ -128,7 +128,7 @@ variable "http_log_retention_days" {
 }
 
 variable "spring_profile" {
-  type = string
+  type        = string
   description = "Select active spring profile"
 }
 
@@ -159,6 +159,19 @@ variable "bancomat_keystore_location" {
 variable "cors_allowed_origins" {
   type = string
 }
+
+variable "secret_key_store_path" {
+  type = string
+}
+
+variable "crypto_private_server_key_path" {
+  type = string
+}
+
+variable "crypto_public_server_key_path" {
+  type = string
+}
+
 
 ##──── APP Service runtime config ────────────────────────────────────────────────────────
 
