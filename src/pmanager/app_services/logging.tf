@@ -80,6 +80,7 @@ module "logging" {
     HSM_ACTIVATION_FLAG                                     = local.hsm_activation_flag
     "com.sun.mamangement.jmxremote.ssl"                     = local.com_sun_mamangement_jmxremote_ssl
     LOG_INTERCEPTOR_PATTERN                                 = local.log_interceptor_pattern
+    JVM_ROUTE                                               = local.jvm_route
   }
 
   app_command_line = format("/storage/tools/%s/startup_script.sh", var.logging_name)

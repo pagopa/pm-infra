@@ -45,6 +45,7 @@ logging_white_list = ""
 bancomat_keystore_location = ""
 cors_allowed_origins = ""
 spring_profile = ""
+jvm_route = "uat-agid01"
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
 appinsight_name = "U87-PagoPa-pci-uat-insight"
