@@ -45,6 +45,9 @@ logging_white_list = ""
 bancomat_keystore_location = ""
 cors_allowed_origins = ""
 spring_profile = ""
+secret_key_store_path = "/ope/jboss-as/jboss/pagopa/userData/userKeys/"
+crypto_private_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/privateKey.pem"
+crypto_public_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/publicKey.pem"
 jvm_route = "uat-agid01"
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
