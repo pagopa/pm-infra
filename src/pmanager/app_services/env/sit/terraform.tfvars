@@ -39,7 +39,7 @@ runtime_version = "7-java8"
 ##──── Hostname resolution variables ─────────────────────────────────────────────────────
 hostname = "https://api.dev.platform.pagopa.it/payment-manager"
 hostname_rtd = "https://api.dev.platform.pagopa.it/payment-manager"
-static_hostname = "https://api.dev.platform.pagopa.it/payment-manager"
+static_hostname = "https://api.dev.platform.pagopa.it/payment-manager/"
 nodo_spc_hostname = "https://api.dev.platform.pagopa.it/nodo/nodo-per-pm/v1"
 
 ##──── Other variables ───────────────────────────────────────────────────────────────────
@@ -52,6 +52,7 @@ spring_profile = "sit-azure"
 secret_key_store_path = "/ope/jboss-as/jboss/pagopa/userData/userKeys/"
 crypto_private_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/privateKey.pem"
 crypto_public_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/publicKey.pem"
+jvm_route = "sit-agid01"
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
 appinsight_name = ""

@@ -28,6 +28,7 @@ locals {
   crypto_private_server_key_path     = var.crypto_private_server_key_path
   crypto_public_server_key_path      = var.crypto_public_server_key_path
   com_sun_mamangement_jmxremote_ssl  = false
+  jvm_route                          = var.jvm_route
 }
 
 ##──── connection parameters ─────────────────────────────────────────────────────────────

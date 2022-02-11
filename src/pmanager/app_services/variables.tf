@@ -172,6 +172,9 @@ variable "crypto_public_server_key_path" {
   type = string
 }
 
+variable "jvm_route" {
+  type = string
+}
 
 ##──── APP Service runtime config ────────────────────────────────────────────────────────
 
