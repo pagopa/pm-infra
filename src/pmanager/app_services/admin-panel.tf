@@ -82,25 +82,25 @@ module "admin-panel" {
     JVM_ROUTE                                               = local.jvm_route
   }
 
-  app_command_line = format("/storage/tools/%s/startup_script.sh", var.admin_panel_name)
+  app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
-  storage_mounts = [{
-    name         = "appconfig"
-    type         = "AzureFiles"
-    account_name = azurerm_storage_account.storage.name
-    share_name   = "pm-appconfig"
-    access_key   = azurerm_storage_account.storage.primary_access_key
-    mount_path   = "/storage/appconfig"
-    },
-    {
-      name         = "tools"
-      type         = "AzureFiles"
-      account_name = azurerm_storage_account.storage.name
-      share_name   = "pm-tools"
-      access_key   = azurerm_storage_account.storage.primary_access_key
-      mount_path   = "/storage/tools"
-    }
-  ]
+  # storage_mounts = [{
+  #   name         = "appconfig"
+  #   type         = "AzureFiles"
+  #   account_name = azurerm_storage_account.storage.name
+  #   share_name   = "pm-appconfig"
+  #   access_key   = azurerm_storage_account.storage.primary_access_key
+  #   mount_path   = "/storage/appconfig"
+  #   },
+  #   {
+  #     name         = "tools"
+  #     type         = "AzureFiles"
+  #     account_name = azurerm_storage_account.storage.name
+  #     share_name   = "pm-tools"
+  #     access_key   = azurerm_storage_account.storage.primary_access_key
+  #     mount_path   = "/storage/tools"
+  #   }
+  # ]
 
   tags = {
     kind        = "app service",
@@ -199,11 +199,6 @@ resource "azurerm_app_service_slot" "admin-panel-release" {
     "ORACLE_CONNECTION_URL"                                 = local.pp_oracle_connection_url
     "ORACLE_SERVER_ADMIN_FULL_NAME"                         = local.pp_oracle_server_admin_full_name
     "ORACLE_SERVER_ADMIN_PASSWORD"                          = local.pp_oracle_server_admin_password
-    "saml.idp.spidRegistry.metadata.url"                    = local.saml_idp_spidregistry_metadata_url
-    "saml.keystore.location"                                = local.saml_keystore_location
-    "saml.metadata.sp.filepath"                             = local.saml_metadata_sp_filepath
-    "SAML_SP_METADATA"                                      = local.saml_sp_metadata
-    "spring.profiles.active"                                = local.spring_profiles_active
     "APPINSIGHTS_INSTRUMENTATIONKEY"                        = local.appinsights_instrumentationkey
     "APPINSIGHTS_PROFILERFEATURE_VERSION"                   = local.appinsights_profilerfeature_version
     "APPINSIGHTS_SNAPSHOTFEATURE_VERSION"                   = local.appinsights_snapshotfeature_version
@@ -216,6 +211,19 @@ resource "azurerm_app_service_slot" "admin-panel-release" {
     "XDT_MicrosoftApplicationInsights_BaseExtensions"       = local.xdt_microsoftapplicationinsights_baseextensions
     "XDT_MicrosoftApplicationInsights_Mode"                 = local.xdt_microsoftapplicationinsights_mode
     "XDT_MicrosoftApplicationInsights_PreemptSdk"           = local.xdt_microsoftapplicationinsights_preemptsdk
+    "SAML_SP_METADATA"                                      = local.saml_sp_metadata
+    "saml_idp_spidRegistry_metadata_url"                    = local.saml_idp_spidregistry_metadata_url
+    "saml_keystore_location"                                = local.saml_keystore_location
+    "saml_metadata_sp_filepath"                             = local.saml_metadata_sp_filepath
+    "spring_profiles_active"                                = local.spring_profiles_active
+    "bancomat_keystore_location"                            = local.bancomat_keystore_location
+    "bancomat_keystore_password"                            = local.bancomat_keystore_password
+    "org_apache_coyote_http11_DEFAULT_CONNECTION_TIMEOUT"   = local.coyote_default_connection_timeout
+    "org_apache_coyote_http11_DEFAULT_KEEP_ALIVE_TIMEOUT"   = local.coyote_default_keep_alive_timeout
+    "com_sia_ppt_pcp_SecretKeyStore_SECRET_KEY_STORE_PATH"  = local.secret_key_store_path
+    "com_sia_ppt_crypto_KeyManager_PRIVATE_SERVER_KEY_PATH" = local.crypto_private_server_key_path
+    "com_sia_ppt_crypto_KeyManager_PUBLIC_SERVER_KEY_PATH"  = local.crypto_public_server_key_path
+    "com_sun_mamangement_jmxremote_ssl"                     = local.com_sun_mamangement_jmxremote_ssl
     "HOSTNAME_PM"                                           = local.hostname_pm
     "HOSTNAME_RTD"                                          = local.hostname_rtd
     "STATIC_HOSTNAME"                                       = local.static_hostname
@@ -223,7 +231,6 @@ resource "azurerm_app_service_slot" "admin-panel-release" {
     "CITTADINANZA_HOSTNAME"                                 = local.cittadinanza_hostname
     "JIFFY_HOSTNAME"                                        = local.jiffy_hostname
     "LOGGING_WHITE_LIST"                                    = local.logging_white_list
-    "bancomat.keystore.location"                            = local.bancomat_keystore_location
     "CORS_ALLOWED_ORIGINS"                                  = local.cors_allowed_origins
     "HTTP_TIMEOUT"                                          = local.http_timeout
     "MAX_CONNECTION"                                        = local.max_connection
@@ -240,14 +247,9 @@ resource "azurerm_app_service_slot" "admin-panel-release" {
     "MAX_CONNECTION_COBADGE"                                = local.max_connection_cobadge
     "MAX_PER_ROUTE_COBADGE"                                 = local.max_per_route_cobadge
     "PM_API_KEY"                                            = local.pm_api_key
-    "org.apache.coyote.http11.DEFAULT_CONNECTION_TIMEOUT"   = local.coyote_default_connection_timeout
-    "org.apache.coyote.http11.DEFAULT_KEEP_ALIVE_TIMEOUT"   = local.coyote_default_keep_alive_timeout
-    "com.sia.ppt.pcp.SecretKeyStore.SECRET_KEY_STORE_PATH"  = local.secret_key_store_path
-    "com.sia.ppt.crypto.KeyManager.PRIVATE_SERVER_KEY_PATH" = local.crypto_private_server_key_path
-    "com.sia.ppt.crypto.KeyManager.PUBLIC_SERVER_KEY_PATH"  = local.crypto_public_server_key_path
     "HSM_ACTIVATION_FLAG"                                   = local.hsm_activation_flag
-    "com.sun.mamangement.jmxremote.ssl"                     = local.com_sun_mamangement_jmxremote_ssl
     "LOG_INTERCEPTOR_PATTERN"                               = local.log_interceptor_pattern
+    "JVM_ROUTE"                                             = local.jvm_route
   }
 
   storage_account {
