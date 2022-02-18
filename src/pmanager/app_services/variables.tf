@@ -21,6 +21,12 @@ variable "standard" {
   description = "Standard pci/no-pci tags"
 }
 
+variable "tsi" {
+  type = string
+  description = "Tecnical service."
+  default = ""
+}
+
 variable "location" {
   type        = string
   description = "Location to deploy the resoruce group"

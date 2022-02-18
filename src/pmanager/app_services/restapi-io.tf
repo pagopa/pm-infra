@@ -90,7 +90,9 @@ module "restapi-io" {
   tags = {
     kind        = "app service",
     environment = var.environment,
-    standard    = var.standard
+    standard    = var.standard,
+    TS_Code    = var.tsi,
+    CreatedBy = "Terraform"
   }
 }
 
@@ -134,7 +136,9 @@ resource "azurerm_private_endpoint" "restapi-io" {
   tags = {
     kind        = "network",
     environment = var.environment,
-    standard    = var.standard
+    standard    = var.standard,
+    TS_Code    = var.tsi,
+    CreatedBy = "Terraform"
   }
 }
 
@@ -280,7 +284,9 @@ resource "azurerm_private_endpoint" "restapi-io-release" {
   tags = {
     kind        = "network",
     environment = var.environment,
-    standard    = var.standard
+    standard    = var.standard,
+    TS_Code    = var.tsi,
+    CreatedBy = "Terraform"
   }
 }
 

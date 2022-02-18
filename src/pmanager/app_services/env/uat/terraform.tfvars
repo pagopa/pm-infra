@@ -3,6 +3,7 @@ rg = "U87-PM-AppServices-pci-uat"
 location = "westeurope"
 environment = "uat"
 standard = "pci"
+tsi = "TS00555"
 
 ##──── App service definition plan ───────────────────────────────────────────────────────
 plan_sku = "P1v3"
@@ -45,6 +46,9 @@ logging_white_list = ""
 bancomat_keystore_location = ""
 cors_allowed_origins = ""
 spring_profile = ""
+secret_key_store_path = "/ope/jboss-as/jboss/pagopa/userData/userKeys/"
+crypto_private_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/privateKey.pem"
+crypto_public_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/publicKey.pem"
 jvm_route = "uat-agid01"
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────

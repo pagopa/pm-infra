@@ -90,7 +90,9 @@ module "logging" {
   tags = {
     kind        = "app service",
     environment = var.environment,
-    standard    = var.standard
+    standard    = var.standard,
+    TS_Code    = var.tsi,
+    CreatedBy = "Terraform"
   }
 }
 
@@ -134,7 +136,9 @@ resource "azurerm_private_endpoint" "logging" {
   tags = {
     kind        = "network",
     environment = var.environment,
-    standard    = var.standard
+    standard    = var.standard,
+    TS_Code    = var.tsi,
+    CreatedBy = "Terraform"
   }
 }
 
@@ -282,7 +286,9 @@ resource "azurerm_private_endpoint" "logging-release" {
   tags = {
     kind        = "network",
     environment = var.environment,
-    standard    = var.standard
+    standard    = var.standard,
+    TS_Code    = var.tsi,
+    CreatedBy = "Terraform"
   }
 }
 
