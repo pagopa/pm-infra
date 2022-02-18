@@ -1,13 +1,13 @@
-module "transaction-gateway" {
+module "payment-gateway" {
   source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=app-service-storage-mounts"
 
   count               = var.environment == "sit" ? 1 : 0
 
-  name = format("%s-%s", var.transaction_gateway_name, var.environment)
+  name = format("%s-%s", var.payment_gateway_name, var.environment)
 
   ftps_state = "AllAllowed"
 
-  plan_name     = format("%s-%s-%s", var.transaction_gateway_name, var.plan_name, var.environment)
+  plan_name     = format("%s-%s-%s", var.payment_gateway_name, var.plan_name, var.environment)
   plan_type     = "internal"
   plan_sku_size = var.plan_sku
   plan_sku_tier = var.plan_sku_tier
@@ -36,12 +36,12 @@ module "transaction-gateway" {
   }
 }
 
-resource "azurerm_subnet" "transaction-gateway" {
+resource "azurerm_subnet" "payment-gateway" {
   count               = var.environment == "sit" ? 1 : 0
-  name                 = format("pm-transaction-gateway-subnet-%s", var.environment)
+  name                 = format("pm-payment-gateway-subnet-%s", var.environment)
   resource_group_name  = data.azurerm_resource_group.rg_vnet.name
   virtual_network_name = data.azurerm_virtual_network.vnet_outgoing.name
-  address_prefixes     = [data.azurerm_key_vault_secret.transaction-gateway-outgoing-subnet-address-space.value]
+  address_prefixes     = [data.azurerm_key_vault_secret.payment-gateway-outgoing-subnet-address-space.value]
   delegation {
     name = "Microsoft.Web.serverFarms"
 
@@ -54,25 +54,25 @@ resource "azurerm_subnet" "transaction-gateway" {
   }
 }
 
-resource "azurerm_app_service_virtual_network_swift_connection" "transaction-gateway" {
+resource "azurerm_app_service_virtual_network_swift_connection" "payment-gateway" {
   count               = var.environment == "sit" ? 1 : 0
-  depends_on     = [module.transaction-gateway, azurerm_subnet.transaction-gateway]
-  app_service_id = module.transaction-gateway[count.index].id
-  subnet_id      = azurerm_subnet.transaction-gateway[count.index].id
+  depends_on     = [module.payment-gateway, azurerm_subnet.payment-gateway]
+  app_service_id = module.payment-gateway[count.index].id
+  subnet_id      = azurerm_subnet.payment-gateway[count.index].id
 }
 
-resource "azurerm_private_endpoint" "transaction-gateway" {
+resource "azurerm_private_endpoint" "payment-gateway" {
   count               = var.environment == "sit" ? 1 : 0
-  depends_on          = [module.transaction-gateway]
-  name                = format("%s-inbound-endpt", module.transaction-gateway[count.index].name)
+  depends_on          = [module.payment-gateway]
+  name                = format("%s-inbound-endpt", module.payment-gateway[count.index].name)
   location            = data.azurerm_resource_group.rg_vnet.location
   resource_group_name = data.azurerm_resource_group.rg_vnet.name
   subnet_id           = data.azurerm_subnet.inboundsubnet.id
 
 
   private_service_connection {
-    name                           = "pm-transaction-gateway-privateserviceconnection"
-    private_connection_resource_id = module.transaction-gateway[count.index].id
+    name                           = "pm-payment-gateway-privateserviceconnection"
+    private_connection_resource_id = module.payment-gateway[count.index].id
     is_manual_connection           = false
     subresource_names              = ["sites"]
   }
@@ -85,22 +85,22 @@ resource "azurerm_private_endpoint" "transaction-gateway" {
   }
 }
 
-resource "azurerm_private_dns_a_record" "transaction-gateway" {
+resource "azurerm_private_dns_a_record" "payment-gateway" {
   count               = var.environment == "sit" ? 1 : 0
-  name                = format("pm-appsrv-transaction-gateway-%s", var.environment)
+  name                = format("pm-appsrv-payment-gateway-%s", var.environment)
   zone_name           = data.azurerm_private_dns_zone.zone.name
   resource_group_name = data.azurerm_resource_group.rg_zone.name
   ttl                 = 300
-  records             = [azurerm_private_endpoint.transaction-gateway[count.index].private_service_connection.0.private_ip_address]
+  records             = [azurerm_private_endpoint.payment-gateway[count.index].private_service_connection.0.private_ip_address]
 }
 
-resource "azurerm_private_dns_a_record" "transaction-gateway-scm" {
+resource "azurerm_private_dns_a_record" "payment-gateway-scm" {
   count               = var.environment == "sit" ? 1 : 0
-  name                = format("pm-appsrv-transaction-gateway-%s.scm", var.environment)
+  name                = format("pm-appsrv-payment-gateway-%s.scm", var.environment)
   zone_name           = data.azurerm_private_dns_zone.zone.name
   resource_group_name = data.azurerm_resource_group.rg_zone.name
   ttl                 = 300
-  records             = [azurerm_private_endpoint.transaction-gateway[count.index].private_service_connection.0.private_ip_address]
+  records             = [azurerm_private_endpoint.payment-gateway[count.index].private_service_connection.0.private_ip_address]
 }
 
 ##========================================================================================
@@ -110,16 +110,16 @@ resource "azurerm_private_dns_a_record" "transaction-gateway-scm" {
 ##========================================================================================
 
 # App service slot resource
-resource "azurerm_app_service_slot" "transaction-gateway-release" {
+resource "azurerm_app_service_slot" "payment-gateway-release" {
   count               = var.environment != "sit" ? 1 : 0
   name                = "release"
   location            = data.azurerm_resource_group.rg.location
   resource_group_name = data.azurerm_resource_group.rg.name
-  app_service_name    = module.transaction-gateway[count.index].name
-  app_service_plan_id = module.transaction-gateway[count.index].plan_id
+  app_service_name    = module.payment-gateway[count.index].name
+  app_service_plan_id = module.payment-gateway[count.index].plan_id
 
   site_config {
-    app_command_line = format("/storage/tools/%s-release/startup_script.sh", var.transaction_gateway_name)
+    app_command_line = format("/storage/tools/%s-release/startup_script.sh", var.payment_gateway_name)
     always_on        = "true"
     linux_fx_version = "jbosseap|7-java8"
   }
@@ -146,27 +146,27 @@ resource "azurerm_app_service_slot" "transaction-gateway-release" {
 
 }
 
-resource "azurerm_app_service_slot_virtual_network_swift_connection" "transaction-gateway-release" {
+resource "azurerm_app_service_slot_virtual_network_swift_connection" "payment-gateway-release" {
   count          = var.environment != "sit" ? 1 : 0
-  slot_name      = azurerm_app_service_slot.transaction-gateway-release[0].name
-  app_service_id = module.transaction-gateway[count.index].id
-  subnet_id      = azurerm_subnet.transaction-gateway[count.index].id
+  slot_name      = azurerm_app_service_slot.payment-gateway-release[0].name
+  app_service_id = module.payment-gateway[count.index].id
+  subnet_id      = azurerm_subnet.payment-gateway[count.index].id
 }
 
-resource "azurerm_private_endpoint" "transaction-gateway-release" {
-  depends_on          = [azurerm_app_service_slot.transaction-gateway-release[0]]
+resource "azurerm_private_endpoint" "payment-gateway-release" {
+  depends_on          = [azurerm_app_service_slot.payment-gateway-release[0]]
   count               = var.environment != "sit" ? 1 : 0
-  name                = format("%s-inbound-release-endpt", module.transaction-gateway[count.index].name)
+  name                = format("%s-inbound-release-endpt", module.payment-gateway[count.index].name)
   location            = data.azurerm_resource_group.rg_vnet.location
   resource_group_name = data.azurerm_resource_group.rg_vnet.name
   subnet_id           = data.azurerm_subnet.inboundsubnet.id
 
 
   private_service_connection {
-    name                           = "pm-release-transaction-gateway-privateserviceconnection"
-    private_connection_resource_id = module.transaction-gateway[count.index].id
+    name                           = "pm-release-payment-gateway-privateserviceconnection"
+    private_connection_resource_id = module.payment-gateway[count.index].id
     is_manual_connection           = false
-    subresource_names              = [format("sites-%s", azurerm_app_service_slot.transaction-gateway-release[0].name)]
+    subresource_names              = [format("sites-%s", azurerm_app_service_slot.payment-gateway-release[0].name)]
   }
   tags = {
     kind        = "network",
@@ -177,20 +177,20 @@ resource "azurerm_private_endpoint" "transaction-gateway-release" {
   }
 }
 
-resource "azurerm_private_dns_a_record" "transaction-gateway-release" {
+resource "azurerm_private_dns_a_record" "payment-gateway-release" {
   count               = var.environment != "sit" ? 1 : 0
-  name                = format("pm-appsrv-transaction-gateway-%s-release", var.environment)
+  name                = format("pm-appsrv-payment-gateway-%s-release", var.environment)
   zone_name           = data.azurerm_private_dns_zone.zone.name
   resource_group_name = data.azurerm_resource_group.rg_zone.name
   ttl                 = 300
-  records             = [azurerm_private_endpoint.transaction-gateway-release[0].private_service_connection.0.private_ip_address]
+  records             = [azurerm_private_endpoint.payment-gateway-release[0].private_service_connection.0.private_ip_address]
 }
 
-resource "azurerm_private_dns_a_record" "transaction-gateway-scm-release" {
+resource "azurerm_private_dns_a_record" "payment-gateway-scm-release" {
   count               = var.environment != "sit" ? 1 : 0
-  name                = format("pm-appsrv-transaction-gateway-%s-release.scm", var.environment)
+  name                = format("pm-appsrv-payment-gateway-%s-release.scm", var.environment)
   zone_name           = data.azurerm_private_dns_zone.zone.name
   resource_group_name = data.azurerm_resource_group.rg_zone.name
   ttl                 = 300
-  records             = [azurerm_private_endpoint.transaction-gateway-release[0].private_service_connection.0.private_ip_address]
+  records             = [azurerm_private_endpoint.payment-gateway-release[0].private_service_connection.0.private_ip_address]
 }

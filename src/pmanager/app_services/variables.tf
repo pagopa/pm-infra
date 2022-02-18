@@ -109,9 +109,9 @@ variable "plan_name" {
 }
 
 
-variable "transaction_gateway_name" {
+variable "payment_gateway_name" {
   type        = string
-  description = "transaction gatewa app service name"
+  description = "payment gatewa app service name"
 }
 
 ##──── App service configuration ─────────────────────────────────────────────────────────
