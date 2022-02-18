@@ -3,6 +3,7 @@ rg = "U87-PM-AppServices-pci-uat"
 location = "westeurope"
 environment = "uat"
 standard = "pci"
+tsi = "TS00555"
 
 ##──── App service definition plan ───────────────────────────────────────────────────────
 plan_sku = "P1v3"
