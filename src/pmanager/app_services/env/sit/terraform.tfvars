@@ -20,6 +20,7 @@ restapi_io_name = "pm-appsrv-restapi-io"
 restapi_name = "pm-appsrv-restapi"
 rtd_name = "pm-appsrv-rtd"
 wisp_name = "pm-appsrv-wisp"
+transaction_gateway_name = "pm-appsrv-transaction-gateway"
 
 # App service plan
 plan_name = "plan"
