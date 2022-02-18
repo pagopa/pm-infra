@@ -105,7 +105,13 @@ variable "wisp_name" {
 
 variable "plan_name" {
   type        = string
-  description = "wisp app service name"
+  description = "app service plan name"
+}
+
+
+variable "transaction_gateway_name" {
+  type        = string
+  description = "transaction gatewa app service name"
 }
 
 ##──── App service configuration ─────────────────────────────────────────────────────────
