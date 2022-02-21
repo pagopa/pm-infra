@@ -21,66 +21,16 @@ module "restapi" {
   # Disable enforcing https connection
   https_only = false
 
-  app_settings = {
-    APPCONFIG_PATH                                  = format("/storage/appconfig/%s", var.restapi_name)
-    TOOLS_PATH                                      = format("/storage/tools/%s", var.restapi_name)
-    JAVA_OPTS                                       = var.java_opts
-    LANG                                            = var.system_encoding
-    ORACLE_CONNECTION_URL                           = data.azurerm_key_vault_secret.oracle-connection-url.value
-    ORACLE_SERVER_ADMIN_FULL_NAME                   = data.azurerm_key_vault_secret.oracle-server-agid-user.value
-    ORACLE_SERVER_ADMIN_PASSWORD                    = data.azurerm_key_vault_secret.oracle-server-agid-user-password.value
-    "saml.idp.spidRegistry.metadata.url"            = "/home/site/appconfig/spid-entities-idps_local.xml"
-    "saml.keystore.location"                        = "file:/home/site/appconfig/saml_spid_sit.jks"
-    "saml.metadata.sp.filepath"                     = "/home/site/appconfig/sp_metadata.xml"
-    SAML_SP_METADATA                                = "/home/site/appconfig/sp_metadata.xml"
-    "spring.profiles.active"                        = var.environment
-    APPINSIGHTS_INSTRUMENTATIONKEY                  = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : var.appinsight_instrumentation_key
-    APPINSIGHTS_PROFILERFEATURE_VERSION             = "1.0.0"
-    APPINSIGHTS_SNAPSHOTFEATURE_VERSION             = "1.0.0"
-    APPLICATIONINSIGHTS_CONFIGURATION_CONTENT       = ""
-    APPLICATIONINSIGHTS_CONNECTION_STRING           = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : var.appinsight_connection_string
-    ApplicationInsightsAgent_EXTENSION_VERSION      = "~3"
-    DiagnosticServices_EXTENSION_VERSION            = "~3"
-    InstrumentationEngine_EXTENSION_VERSION         = "disabled"
-    SnapshotDebugger_EXTENSION_VERSION              = "disabled"
-    XDT_MicrosoftApplicationInsights_BaseExtensions = "disabled"
-    XDT_MicrosoftApplicationInsights_Mode           = "recommended"
-    XDT_MicrosoftApplicationInsights_PreemptSdk     = "disabled"
-    HOSTNAME_PM                                     = var.hostname
-    HOSTNAME_RTD                                    = var.hostname_rtd
-    STATIC_HOSTNAME                                 = var.static_hostname
-    NODO_SPC_HOSTNAME                               = var.nodo_spc_hostname
-    CITTADINANZA_HOSTNAME                           = var.cittadinanza_hostname
-    JIFFY_HOSTNAME                                  = var.jiffy_hostname
-    LOGGING_WHITE_LIST                              = var.logging_white_list
-    "bancomat.keystore.location"                    = var.bancomat_keystore_location
-    CORS_ALLOWED_ORIGINS                            = var.cors_allowed_origins
-  }
+  app_settings = local.app_settings
 
-  app_command_line = format("/storage/tools/%s/startup_script.sh", var.restapi_name)
-
-  storage_mounts = [{
-    name         = "appconfig"
-    type         = "AzureFiles"
-    account_name = azurerm_storage_account.storage.name
-    share_name   = "pm-appconfig"
-    access_key   = azurerm_storage_account.storage.primary_access_key
-    mount_path   = "/storage/appconfig"
-    },
-    {
-      name         = "tools"
-      type         = "AzureFiles"
-      account_name = azurerm_storage_account.storage.name
-      share_name   = "pm-tools"
-      access_key   = azurerm_storage_account.storage.primary_access_key
-      mount_path   = "/storage/tools"
-    }
-  ]
+  app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
   tags = {
     kind        = "app service",
     environment = var.environment,
-    standard    = var.standard
+    standard    = var.standard,
+    TS_Code    = var.tsi,
+    CreatedBy = "Terraform"
   }
 }
 
@@ -124,7 +74,9 @@ resource "azurerm_private_endpoint" "restapi" {
   tags = {
     kind        = "network",
     environment = var.environment,
-    standard    = var.standard
+    standard    = var.standard,
+    TS_Code    = var.tsi,
+    CreatedBy = "Terraform"
   }
 }
 
@@ -165,41 +117,7 @@ resource "azurerm_app_service_slot" "restapi-release" {
     linux_fx_version = "jbosseap|7-java8"
   }
 
-  app_settings = {
-    "APPCONFIG_PATH"                                  = format("/storage/appconfig/%s-release", var.restapi_name)
-    "TOOLS_PATH"                                      = format("/storage/tools/%s-release", var.restapi_name)
-    "JAVA_OPTS"                                       = var.java_opts
-    "LANG"                                            = var.system_encoding
-    "ORACLE_CONNECTION_URL"                           = data.azurerm_key_vault_secret.oracle-connection-url.value
-    "ORACLE_SERVER_ADMIN_FULL_NAME"                   = data.azurerm_key_vault_secret.oracle-server-agid-user.value
-    "ORACLE_SERVER_ADMIN_PASSWORD"                    = data.azurerm_key_vault_secret.oracle-server-agid-user-password.value
-    "saml.idp.spidRegistry.metadata.url"              = "/home/site/appconfig/spid-entities-idps_local.xml"
-    "saml.keystore.location"                          = "file:/home/site/appconfig/saml_spid_sit.jks"
-    "saml.metadata.sp.filepath"                       = "/home/site/appconfig/sp_metadata.xml"
-    "SAML_SP_METADATA"                                = "/home/site/appconfig/sp_metadata.xml"
-    "spring.profiles.active"                          = var.environment
-    "APPINSIGHTS_INSTRUMENTATIONKEY"                  = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : var.appinsight_instrumentation_key
-    "APPINSIGHTS_PROFILERFEATURE_VERSION"             = "1.0.0"
-    "APPINSIGHTS_SNAPSHOTFEATURE_VERSION"             = "1.0.0"
-    "APPLICATIONINSIGHTS_CONFIGURATION_CONTENT"       = ""
-    "APPLICATIONINSIGHTS_CONNECTION_STRING"           = var.appinsight_name != "" ? data.azurerm_application_insights.appinsight[0].instrumentation_key : var.appinsight_connection_string
-    "ApplicationInsightsAgent_EXTENSION_VERSION"      = "~3"
-    "DiagnosticServices_EXTENSION_VERSION"            = "~3"
-    "InstrumentationEngine_EXTENSION_VERSION"         = "disabled"
-    "SnapshotDebugger_EXTENSION_VERSION"              = "disabled"
-    "XDT_MicrosoftApplicationInsights_BaseExtensions" = "disabled"
-    "XDT_MicrosoftApplicationInsights_Mode"           = "recommended"
-    "XDT_MicrosoftApplicationInsights_PreemptSdk"     = "disabled"
-    "HOSTNAME_PM"                                     = var.hostname
-    "HOSTNAME_RTD"                                    = var.hostname_rtd
-    "STATIC_HOSTNAME"                                 = var.static_hostname
-    "NODO_SPC_HOSTNAME"                               = var.nodo_spc_hostname
-    "CITTADINANZA_HOSTNAME"                           = var.cittadinanza_hostname
-    "JIFFY_HOSTNAME"                                  = var.jiffy_hostname
-    "LOGGING_WHITE_LIST"                              = var.logging_white_list
-    "bancomat.keystore.location"                      = var.bancomat_keystore_location
-    "CORS_ALLOWED_ORIGINS"                            = var.cors_allowed_origins
-  }
+  app_settings = local.app_settings
 
   storage_account {
     name         = "appconfig-release"
@@ -246,7 +164,9 @@ resource "azurerm_private_endpoint" "restapi-release" {
   tags = {
     kind        = "network",
     environment = var.environment,
-    standard    = var.standard
+    standard    = var.standard,
+    TS_Code    = var.tsi,
+    CreatedBy = "Terraform"
   }
 }
 

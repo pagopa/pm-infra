@@ -21,6 +21,12 @@ variable "standard" {
   description = "Standard pci/no-pci tags"
 }
 
+variable "tsi" {
+  type = string
+  description = "Tecnical service."
+  default = ""
+}
+
 variable "location" {
   type        = string
   description = "Location to deploy the resoruce group"
@@ -99,7 +105,13 @@ variable "wisp_name" {
 
 variable "plan_name" {
   type        = string
-  description = "wisp app service name"
+  description = "app service plan name"
+}
+
+
+variable "payment_gateway_name" {
+  type        = string
+  description = "payment gatewa app service name"
 }
 
 ##──── App service configuration ─────────────────────────────────────────────────────────
@@ -127,6 +139,11 @@ variable "http_log_retention_days" {
   type = string
 }
 
+variable "spring_profile" {
+  type        = string
+  description = "Select active spring profile"
+}
+
 variable "hostname" {
   type = string
 }
@@ -152,6 +169,22 @@ variable "bancomat_keystore_location" {
   type = string
 }
 variable "cors_allowed_origins" {
+  type = string
+}
+
+variable "secret_key_store_path" {
+  type = string
+}
+
+variable "crypto_private_server_key_path" {
+  type = string
+}
+
+variable "crypto_public_server_key_path" {
+  type = string
+}
+
+variable "jvm_route" {
   type = string
 }
 
@@ -210,6 +243,50 @@ variable "private_link_dns_zone" {
 }
 
 variable "private_link_dns_zone_rg" {
+  type = string
+}
+
+##========================================================================================
+##                                                                                      ##
+## Application Gateway                                                                  ##
+##                                                                                      ##
+##========================================================================================
+
+
+##──── Application Gateway variables ─────────────────────────────────────────────────────
+
+## APPGTW Resource group
+variable "appgw_rg" {
+  type        = string
+  description = "Application gateway reource group"
+}
+## APPGTW name
+variable "appgw_name" {
+  type        = string
+  description = "Application gateway name"
+}
+
+##  Backend address pool NAME
+variable "backend_address_pool_name" {
+  type = string
+}
+## backend HTTP settings host name
+variable "backend_http_settings_host_name" {
+  type = string
+}
+
+## Subnet name
+variable "appgw_subnet_name" {
+  type = string
+}
+
+## Sku size
+variable "appgw_sku_size" {
+  type = string
+}
+
+## Sku capacity
+variable "appgw_sku_capacity" {
   type = string
 }
 
