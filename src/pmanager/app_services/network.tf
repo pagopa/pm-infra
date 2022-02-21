@@ -7,23 +7,6 @@ data "azurerm_virtual_network" "vnet_outgoing" {
   resource_group_name = data.azurerm_resource_group.rg_vnet.name
 }
 
-#resource "azurerm_subnet" "subnet" {
-#  name                 = format("%s-%s", var.subnet_name, var.environment)
-#  resource_group_name  = data.azurerm_resource_group.rg_vnet.name
-#  virtual_network_name = data.azurerm_virtual_network.vnet_outgoing.name
-#  address_prefixes     = [data.azurerm_key_vault_secret.outgoing-subnet-address-space.value]
-#  delegation {
-#    name = "Microsoft.Web.serverFarms"
-#
-#    service_delegation {
-#      actions = [
-#        "Microsoft.Network/virtualNetworks/subnets/action",
-#      ]
-#      name = "Microsoft.Web/serverFarms"
-#    }
-#  }
-#}
-
 data "azurerm_virtual_network" "vnet_inbound" {
   name                = var.vnet_inbound_name
   resource_group_name = data.azurerm_resource_group.rg_vnet.name
