@@ -47,7 +47,7 @@ nodo_spc_hostname = "https://api.dev.platform.pagopa.it/nodo/nodo-per-pm/v1"
 ##──── Other variables ───────────────────────────────────────────────────────────────────
 cittadinanza_hostname = "https://portal.test.pagopa.gov.it/pmmockserviceapi/"
 jiffy_hostname = "https://app-te.vaservices.eu/p2penginectx/F1/services/ConsultazioneCrossServices"
-logging_white_list = ""
+logging_white_list = "permitAll"
 bancomat_keystore_location = "/home/site/appconfig/Bancomat/certificati/keyBancomat.jks"
 cors_allowed_origins = "https://checkout.pagopa.gov.it"
 spring_profile = "sit-azure"

@@ -18,6 +18,7 @@ module "payment-gateway" {
   resource_group_name = data.azurerm_resource_group.rg.name
 
   # Linux App Framework and version for the App Service.
+  # this app service required java 11
   linux_fx_version = "${var.runtime_name}|7-java11"
 
   # Disable enforcing https connection
