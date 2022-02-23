@@ -25,6 +25,9 @@ module "rtd" {
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
+  # Add health check path
+  health_check_path = "/pp-restapi-rtd/healthcheck"
+
   tags = {
     kind        = "app service",
     environment = var.environment,

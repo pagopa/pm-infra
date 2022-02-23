@@ -25,6 +25,8 @@ module "logging" {
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
+  # Add health check path
+  health_check_path = "/db-logging/healthcheck"
 
   tags = {
     kind        = "app service",
