@@ -26,6 +26,8 @@ module "batch" {
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
   
+  # Add health check path
+  health_check_path = "/pp-ejbBatch/healthcheck"
 
   tags = {
     kind        = "app service",
