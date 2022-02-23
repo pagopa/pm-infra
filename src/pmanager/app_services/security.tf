@@ -100,6 +100,7 @@ data "azurerm_key_vault_secret" "restapi-io-outgoing-subnet-address-space" {
 }
 
 data "azurerm_key_vault_secret" "payment-gateway-outgoing-subnet-address-space" {
+  count = var.environment == "sit" ? 1 : 0
   name         = format("%s-%s", "payment-gateway-outgoing-subnet-address-space", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
