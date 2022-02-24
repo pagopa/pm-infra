@@ -15,6 +15,7 @@ locals {
   hostname_pm                        = var.hostname
   hostname_rtd                       = var.hostname_rtd
   static_hostname                    = var.static_hostname
+  apim_context_root                  = var.apim_context_root
   nodo_spc_hostname                  = var.nodo_spc_hostname
   cittadinanza_hostname              = var.cittadinanza_hostname
   jiffy_hostname                     = var.jiffy_hostname
@@ -154,6 +155,7 @@ locals {
     HOSTNAME_PM                                           = local.hostname_pm
     HOSTNAME_RTD                                          = local.hostname_rtd
     STATIC_HOSTNAME                                       = local.static_hostname
+    APIM_CONTEXT_ROOT                                     = local.apim_context_root
     NODO_SPC_HOSTNAME                                     = local.nodo_spc_hostname
     CITTADINANZA_HOSTNAME                                 = local.cittadinanza_hostname
     JIFFY_HOSTNAME                                        = local.jiffy_hostname
@@ -216,6 +218,7 @@ locals {
     HOSTNAME_PM                                           = local.hostname_pm
     HOSTNAME_RTD                                          = local.hostname_rtd
     STATIC_HOSTNAME                                       = local.static_hostname
+    APIM_CONTEXT_ROOT                                     = local.apim_context_root
     NODO_SPC_HOSTNAME                                     = local.nodo_spc_hostname
     CITTADINANZA_HOSTNAME                                 = local.cittadinanza_hostname
     JIFFY_HOSTNAME                                        = local.jiffy_hostname
@@ -280,6 +283,7 @@ locals {
     HOSTNAME_PM                                           = local.hostname_pm
     HOSTNAME_RTD                                          = local.hostname_rtd
     STATIC_HOSTNAME                                       = local.static_hostname
+    APIM_CONTEXT_ROOT                                     = local.apim_context_root
     NODO_SPC_HOSTNAME                                     = local.nodo_spc_hostname
     CITTADINANZA_HOSTNAME                                 = local.cittadinanza_hostname
     JIFFY_HOSTNAME                                        = local.jiffy_hostname
@@ -305,3 +309,6 @@ locals {
     JVM_ROUTE                                             = local.jvm_route
   }
 }
+
+##──── *** ───────────────────────────────────────────────────────────────────────────────
+##──── *** ───────────────────────────────────────────────────────────────────────────────

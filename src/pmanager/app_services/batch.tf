@@ -25,7 +25,7 @@ module "batch" {
   app_settings = local.app_settings
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
-  
+
   # Add health check path
   health_check_path = "/pp-ejbBatch/healthcheck"
 
@@ -33,8 +33,8 @@ module "batch" {
     kind        = "app service",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
@@ -80,8 +80,8 @@ resource "azurerm_private_endpoint" "batch" {
     kind        = "network",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
@@ -171,8 +171,8 @@ resource "azurerm_private_endpoint" "batch-release" {
     kind        = "network",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 

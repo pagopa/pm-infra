@@ -39,10 +39,11 @@ runtime_name = "jbosseap"
 runtime_version = "7-java8"
 
 ##──── Hostname resolution variables ─────────────────────────────────────────────────────
-hostname = "https://api.dev.platform.pagopa.it/payment-manager"
-hostname_rtd = "https://api.dev.platform.pagopa.it/payment-manager"
-static_hostname = "https://api.dev.platform.pagopa.it/payment-manager/"
+hostname = "https://api.dev.platform.pagopa.it"
+hostname_rtd = "https://api.dev.platform.pagopa.it"
+static_hostname = "https://api.dev.platform.pagopa.it/"
 nodo_spc_hostname = "https://api.dev.platform.pagopa.it/nodo/nodo-per-pm/v1"
+apim_context_root = "payment-manager"
 
 ##──── Other variables ───────────────────────────────────────────────────────────────────
 cittadinanza_hostname = "https://portal.test.pagopa.gov.it/pmmockserviceapi/"

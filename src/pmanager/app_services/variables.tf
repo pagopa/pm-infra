@@ -22,9 +22,9 @@ variable "standard" {
 }
 
 variable "tsi" {
-  type = string
+  type        = string
   description = "Tecnical service."
-  default = ""
+  default     = ""
 }
 
 variable "location" {
@@ -153,6 +153,11 @@ variable "hostname_rtd" {
 variable "static_hostname" {
   type = string
 }
+
+variable "apim_context_root" {
+  type = string
+}
+
 variable "nodo_spc_hostname" {
   type = string
 }

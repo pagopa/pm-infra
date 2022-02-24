@@ -1,7 +1,7 @@
 module "payment-gateway" {
   source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=app-service-storage-mounts"
 
-  count               = var.environment == "sit" ? 1 : 0
+  count = var.environment == "sit" ? 1 : 0
 
   name = format("%s-%s", var.payment_gateway_name, var.environment)
 
@@ -32,13 +32,13 @@ module "payment-gateway" {
     kind        = "app service",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
 resource "azurerm_subnet" "payment-gateway" {
-  count               = var.environment == "sit" ? 1 : 0
+  count                = var.environment == "sit" ? 1 : 0
   name                 = format("pm-payment-gateway-subnet-%s", var.environment)
   resource_group_name  = data.azurerm_resource_group.rg_vnet.name
   virtual_network_name = data.azurerm_virtual_network.vnet_outgoing.name
@@ -56,7 +56,7 @@ resource "azurerm_subnet" "payment-gateway" {
 }
 
 resource "azurerm_app_service_virtual_network_swift_connection" "payment-gateway" {
-  count               = var.environment == "sit" ? 1 : 0
+  count          = var.environment == "sit" ? 1 : 0
   depends_on     = [module.payment-gateway, azurerm_subnet.payment-gateway]
   app_service_id = module.payment-gateway[count.index].id
   subnet_id      = azurerm_subnet.payment-gateway[count.index].id
@@ -81,8 +81,8 @@ resource "azurerm_private_endpoint" "payment-gateway" {
     kind        = "network",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
