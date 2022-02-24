@@ -38,10 +38,14 @@ http_log_retention_days = 7
 runtime_name = "jbosseap"
 runtime_version = "7-java8"
 
-hostname = ""
-hostname_rtd = ""
-static_hostname = ""
-nodo_spc_hostname = ""
+##──── Hostname resolution variables ─────────────────────────────────────────────────────
+hostname = "https://api.uat.platform.pagopa.it"
+hostname_rtd = "https://api.uat.platform.pagopa.it"
+static_hostname = "https://api.uat.platform.pagopa.it/"
+nodo_spc_hostname = "https://api.uat.platform.pagopa.it/nodo/nodo-per-pm/v1"
+apim_context_root = "payment-manager"
+
+##──── Other variables ───────────────────────────────────────────────────────────────────
 cittadinanza_hostname = ""
 jiffy_hostname = ""
 logging_white_list = ""
