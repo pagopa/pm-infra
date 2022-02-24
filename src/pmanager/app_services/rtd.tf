@@ -32,8 +32,8 @@ module "rtd" {
     kind        = "app service",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
@@ -79,8 +79,8 @@ resource "azurerm_private_endpoint" "rtd" {
     kind        = "network",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
@@ -169,8 +169,8 @@ resource "azurerm_private_endpoint" "rtd-release" {
     kind        = "network",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
