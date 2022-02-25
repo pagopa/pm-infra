@@ -3,6 +3,7 @@ rg = "U87-PM-AppServices-pci-uat"
 location = "westeurope"
 environment = "uat"
 standard = "pci"
+tsi = "TS00555"
 
 ##──── App service definition plan ───────────────────────────────────────────────────────
 plan_sku = "P1v3"
@@ -44,6 +45,11 @@ jiffy_hostname = ""
 logging_white_list = ""
 bancomat_keystore_location = ""
 cors_allowed_origins = ""
+spring_profile = ""
+secret_key_store_path = "/ope/jboss-as/jboss/pagopa/userData/userKeys/"
+crypto_private_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/privateKey.pem"
+crypto_public_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/publicKey.pem"
+jvm_route = "uat-agid01"
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
 appinsight_name = "U87-PagoPa-pci-uat-insight"
@@ -78,6 +84,15 @@ private_link_dns_zone = "privatelink.azurewebsites.net"
 # Private link dns zone resource group
 private_link_dns_zone_rg = "U87-NetworkResources-pci-uat"
 
+##──── Application Gateway variables ─────────────────────────────────────────────────────
+## APPGTW Resource group
+appgw_rg = "U87-PM-ApplicationGateway-pci-uat"
+appgw_name = "pm-appgw"
+backend_address_pool_name = "pm-jboss"
+backend_http_settings_host_name = "ddsappservices-pm.azurewebsites.net"
+appgw_subnet_name = "pm-appgtw"
+appgw_sku_size = "WAF_v2"
+appgw_sku_capacity = "1"
 
 ##──── Key vault variables ───────────────────────────────────────────────────────────────
 ## Key vault name
