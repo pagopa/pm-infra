@@ -34,25 +34,25 @@ pool:
 stages:
   - stage: set_app_routing
     jobs: 
-      - job: Bash@admin-panel-release-routing
+      - job: Bash@admin_panel_release_routing
         steps:
         - bash: az webapp traffic-routing set --distribution release=$[variable.TRAFFIC_ROUTING] --name pm-appsrv-admin-panel-uat --resource-group U87-PM-AppServices-pci-uat --subscription \"U87-PagoPa-PCI-uat\"
-      - job: Bash@batch-release-routing
+      - job: Bash@batch_release_routing
         steps:
         - bash: az webapp traffic-routing set --distribution release=$[variable.TRAFFIC_ROUTING] --name pm-appsrv-batch-uat --resource-group U87-PM-AppServices-pci-uat --subscription \"U87-PagoPa-PCI-uat\"
-      - job: Bash@logging-release-routing
+      - job: Bash@logging_release_routing
         steps:
         - bash: az webapp traffic-routing set --distribution release=$[variable.TRAFFIC_ROUTING] --name pm-appsrv-logging-uat --resource-group U87-PM-AppServices-pci-uat --subscription \"U87-PagoPa-PCI-uat\"
-      - job: Bash@restapi-io-release-routing
+      - job: Bash@restapi-io_release_routing
         steps:
         - bash: az webapp traffic-routing set --distribution release=$[variable.TRAFFIC_ROUTING] --name pm-appsrv-restapi-io-uat --resource-group U87-PM-AppServices-pci-uat --subscription \"U87-PagoPa-PCI-uat\"
-      - job: Bash@restapi-release-routing
+      - job: Bash@restapi_release_routing
         steps:
         - bash: az webapp traffic-routing set --distribution release=$[variable.TRAFFIC_ROUTING] --name pm-appsrv-restapi-uat --resource-group U87-PM-AppServices-pci-uat --subscription \"U87-PagoPa-PCI-uat\"
-      - job: Bash@rtd-release-routing
+      - job: Bash@rtd_release_routing
         steps:
         - bash: az webapp traffic-routing set --distribution release=$[variable.TRAFFIC_ROUTING] --name pm-appsrv-rtd-uat --resource-group U87-PM-AppServices-pci-uat --subscription \"U87-PagoPa-PCI-uat\"
-      - job: Bash@wisp-release-routing
+      - job: Bash@wisp_release_routing
         steps:
         - bash: az webapp traffic-routing set --distribution release=$[variable.TRAFFIC_ROUTING] --name pm-appsrv-wisp-uat --resource-group U87-PM-AppServices-pci-uat --subscription \"U87-PagoPa-PCI-uat\"
 
