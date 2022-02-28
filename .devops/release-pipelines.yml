@@ -20,7 +20,6 @@ parameters:
 
 variables:
   TIME_OUT: 5
-  APP_SERVICES: "pm-appsrv-admin-panel-uat pm-appsrv-batch-uat pm-appsrv-logging-uat pm-appsrv-restapi-io-uat pm-appsrv-restapi-uat pm-appsrv-rtd-uat pm-appsrv-wisp-uat"
 
 pool:
   vmImage: 'ubuntu-20.04'
