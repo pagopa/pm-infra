@@ -3,13 +3,6 @@ trigger: none
 pr: none
 
 parameters:
-  - name: 'DEV'
-    displayName: 'Run on DEV environment'
-    type: boolean
-    default: True
-    values:
-      - False
-      - True
   - name: 'UAT'
     displayName: 'Run on UAT environment'
     type: boolean
