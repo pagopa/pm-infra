@@ -31,7 +31,7 @@ stages:
         steps:
           - task: AzureCLI@2
             inputs:
-              azureSubscription: 'U87-PagoPa-PCI-uat'
+              azureSubscription: 'U87-PagoPa-PCI-uat(e7feb90c-fcc2-40a2-ba56-d68ec301c6c0)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: 'az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) --name pm-appsrv-admin-panel-uat --resource-group U87-PM-AppServices-pci-uat --subscription "U87-PagoPa-PCI-uat"'
@@ -39,7 +39,7 @@ stages:
         steps:
           - task: AzureCLI@2
             inputs:
-              azureSubscription: 'U87-PagoPa-PCI-uat'
+              azureSubscription: 'U87-PagoPa-PCI-uat(e7feb90c-fcc2-40a2-ba56-d68ec301c6c0)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: 'az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) --name pm-appsrv-batch-uat --resource-group U87-PM-AppServices-pci-uat --subscription "U87-PagoPa-PCI-uat"'
@@ -47,7 +47,7 @@ stages:
         steps:
           - task: AzureCLI@2
             inputs:
-              azureSubscription: 'U87-PagoPa-PCI-uat'
+              azureSubscription: 'U87-PagoPa-PCI-uat(e7feb90c-fcc2-40a2-ba56-d68ec301c6c0)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: 'az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) --name pm-appsrv-logging-uat --resource-group U87-PM-AppServices-pci-uat --subscription "U87-PagoPa-PCI-uat"'
@@ -55,7 +55,7 @@ stages:
         steps:
           - task: AzureCLI@2
             inputs:
-              azureSubscription: 'U87-PagoPa-PCI-uat'
+              azureSubscription: 'U87-PagoPa-PCI-uat(e7feb90c-fcc2-40a2-ba56-d68ec301c6c0)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: 'az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) --name pm-appsrv-restapi-io-uat --resource-group U87-PM-AppServices-pci-uat --subscription "U87-PagoPa-PCI-uat"'
@@ -63,7 +63,7 @@ stages:
         steps:
           - task: AzureCLI@2
             inputs:
-              azureSubscription: 'U87-PagoPa-PCI-uat'
+              azureSubscription: 'U87-PagoPa-PCI-uat(e7feb90c-fcc2-40a2-ba56-d68ec301c6c0)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: 'az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) --name pm-appsrv-restapi-uat --resource-group U87-PM-AppServices-pci-uat --subscription "U87-PagoPa-PCI-uat"'
@@ -71,7 +71,7 @@ stages:
         steps:
           - task: AzureCLI@2
             inputs:
-              azureSubscription: 'U87-PagoPa-PCI-uat'
+              azureSubscription: 'U87-PagoPa-PCI-uat(e7feb90c-fcc2-40a2-ba56-d68ec301c6c0)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: 'az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) --name pm-appsrv-rtd-uat --resource-group U87-PM-AppServices-pci-uat --subscription "U87-PagoPa-PCI-uat"'
@@ -79,7 +79,7 @@ stages:
         steps:
           - task: AzureCLI@2
             inputs:
-              azureSubscription: 'U87-PagoPa-PCI-uat'
+              azureSubscription: 'U87-PagoPa-PCI-uat(e7feb90c-fcc2-40a2-ba56-d68ec301c6c0)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: 'az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) --name pm-appsrv-wisp-uat --resource-group U87-PM-AppServices-pci-uat --subscription "U87-PagoPa-PCI-uat"'
