@@ -49,4 +49,12 @@ stages:
         steps:
         - bash: az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) --name pm-appsrv-wisp-uat --resource-group U87-PM-AppServices-pci-uat --subscription "U87-PagoPa-PCI-uat"
 
-
+  - stage: azu
+    displayName: Azure CLI
+    inputs:
+      azureSubscription: U87-PagoPa-PCI-uat
+      scriptType: ps
+      scriptLocation: inlineScript
+      inlineScript: |
+        az --version
+        az account show
