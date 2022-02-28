@@ -56,7 +56,7 @@ stages:
               inlineScript: | 
                 if [ $(SWAP) ]; then
                   for app in $(APP_SERVICES); do
-                    az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) \
+                    az webapp deployment slot swap -s release \
                       --name $app \
                       --resource-group U87-PM-AppServices-pci-uat \
                       --subscription "U87-PagoPa-PCI-uat"
