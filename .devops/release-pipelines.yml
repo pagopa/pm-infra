@@ -42,3 +42,23 @@ stages:
                     --subscription "U87-PagoPa-PCI-uat"
                 done
 
+
+  - stage: swap_app_services
+    dependsOn: [set_app_routing]
+    jobs: 
+      - job: release_swap
+        steps:
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: 'U87-PagoPa-PCI-uat(e7feb90c-fcc2-40a2-ba56-d68ec301c6c0)'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: | 
+                if [ $(SWAP) ]; then
+                  for app in $(APP_SERVICES); do
+                    az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) \
+                      --name $app \
+                      --resource-group U87-PM-AppServices-pci-uat \
+                      --subscription "U87-PagoPa-PCI-uat"
+                  done
+                fi
