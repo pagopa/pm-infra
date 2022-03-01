@@ -41,7 +41,7 @@ stages:
                     --name $app \
                     --resource-group U87-PM-AppServices-pci-uat \
                     --subscription "U87-PagoPa-PCI-uat"
-                  if $(( $? == 0 )); then
+                  if $[ $? == 0 ]; then
                     echo "ROUTED $app"
                   fi  
                 done
@@ -65,7 +65,7 @@ stages:
                       --name $app \
                       --resource-group U87-PM-AppServices-pci-uat \
                       --subscription "U87-PagoPa-PCI-uat"
-                    if $(( $? == 0 )); then
+                    if $[ $? == 0 ]; then
                       echo "SWAPPED $app"
                     fi                      
                   done
