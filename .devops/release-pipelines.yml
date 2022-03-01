@@ -36,10 +36,14 @@ stages:
               scriptLocation: 'inlineScript'
               inlineScript: | 
                 for app in $(APP_SERVICES); do
+                  echo "Set routing to -> $(TRAFFIC_ROUTING) of $app"
                   az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) \
                     --name $app \
                     --resource-group U87-PM-AppServices-pci-uat \
                     --subscription "U87-PagoPa-PCI-uat"
+                  if $(( $? == 0 )); then
+                    echo "ROUTED $app"
+                  fi  
                 done
 
 
@@ -56,9 +60,13 @@ stages:
               inlineScript: | 
                 if [ $(SWAP) ]; then
                   for app in $(APP_SERVICES); do
+                    echo "SWAPPING $app"
                     az webapp deployment slot swap -s release \
                       --name $app \
                       --resource-group U87-PM-AppServices-pci-uat \
                       --subscription "U87-PagoPa-PCI-uat"
+                    if $(( $? == 0 )); then
+                      echo "SWAPPED $app"
+                    fi                      
                   done
                 fi
