@@ -26,7 +26,7 @@ module "rtd" {
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
   # Add health check path
-  health_check_path = "/pp-restapi-rtd/healthcheck"
+  # health_check_path = "/pp-restapi-rtd/healthcheck"
 
   tags = {
     kind        = "app service",
@@ -123,23 +123,10 @@ resource "azurerm_app_service_slot" "rtd-release" {
 
   app_settings = local.app_settings_rtd
 
-  storage_account {
-    name         = "appconfig-release"
-    type         = "AzureFiles"
-    account_name = azurerm_storage_account.storage.name
-    share_name   = "pm-appconfig"
-    access_key   = azurerm_storage_account.storage.primary_access_key
-    mount_path   = "/storage/appconfig"
-  }
+  # Add health check path
+  # health_check_path = "/pp-restapi-rtd/healthcheck"
 
-  storage_account {
-    name         = "tools-release"
-    type         = "AzureFiles"
-    account_name = azurerm_storage_account.storage.name
-    share_name   = "pm-tools"
-    access_key   = azurerm_storage_account.storage.primary_access_key
-    mount_path   = "/storage/tools"
-  }
+
 
 }
 
