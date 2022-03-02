@@ -9,6 +9,13 @@ resource "azurerm_public_ip" "publicip" {
   location            = azurerm_resource_group.appgw_rg.location
   allocation_method   = "Static"
   sku                 = "Standard"
+  tags = {
+    kind        = "network",
+    environment = var.environment,
+    standard    = var.standard,
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
+  }
 }
 
 resource "azurerm_subnet" "appgw_subnet" {
@@ -26,11 +33,13 @@ resource "azurerm_application_gateway" "appgw" {
   resource_group_name = azurerm_resource_group.appgw_rg.name
 
   tags = {
-    kind        = "application gateway",
+    kind        = "network",
     environment = var.environment,
-    standard    = var.standard
+    standard    = var.standard,
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
-
+  
   backend_address_pool {
     fqdns = [
       format("%s.azurewebsites.net", module.admin-panel.name)
@@ -303,7 +312,8 @@ resource "azurerm_application_gateway" "appgw" {
     http_listener_name         = "pm-${var.environment}-private-listener"
     name                       = "pm-${var.environment}-routing-private"
     rewrite_rule_set_name      = "rewrite_private_context"
-    rule_type                  = "Basic"
+    rule_type                  = "PathBasedRouting"
+    url_path_map_name          = "routing_private_context"
   }
 
   url_path_map {
