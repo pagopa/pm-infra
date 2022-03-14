@@ -5,6 +5,7 @@
 ##========================================================================================
 
 locals {
+  tz                                 = "Europe/Rome"
   java_opts                          = var.java_opts
   lang                               = var.system_encoding
   saml_idp_spidregistry_metadata_url = "/home/site/appconfig/spid-entities-idps_local.xml"
@@ -127,6 +128,7 @@ locals {
 ##──── General config ────────────────────────────────────────────────────────────────────
 locals {
   app_settings = {
+    TZ                                                    = local.tz
     JAVA_OPTS                                             = local.java_opts
     LANG                                                  = local.lang
     ORACLE_CONNECTION_URL                                 = local.pp_oracle_connection_url
@@ -190,6 +192,7 @@ locals {
 ##──── RTD config ────────────────────────────────────────────────────────────────────────
 locals {
   app_settings_rtd = {
+    TZ                                                    = local.tz
     JAVA_OPTS                                             = local.java_opts
     LANG                                                  = local.lang
     ORACLE_CONNECTION_URL                                 = local.rtd_oracle_connection_url
@@ -253,6 +256,7 @@ locals {
 ##──── LOGGING config ────────────────────────────────────────────────────────────────────
 locals {
   app_settings_logging = {
+    TZ                                                    = local.tz
     JAVA_OPTS                                             = local.java_opts
     LANG                                                  = local.lang
     ORACLE_CONNECTION_URL                                 = local.event_reg_oracle_connection_url
@@ -318,6 +322,7 @@ locals {
 ##──── PAYMENT MANGER config ─────────────────────────────────────────────────────────────
 locals {
   app_settings_payment_manager = {
+    TZ                                                    = local.tz
     JAVA_OPTS                                             = local.java_opts
     LANG                                                  = local.lang
     ORACLE_CONNECTION_URL                                 = local.event_reg_oracle_connection_url
