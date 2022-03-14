@@ -193,6 +193,27 @@ variable "jvm_route" {
   type = string
 }
 
+variable "bancomatPay_client_group_code" {
+  type = string
+}
+
+variable "bancomatPay_client_institute_code" {
+  type = string
+}
+
+variable "bancomatPay_client_tag" {
+  type = string
+}
+
+variable "bancomatPay_client_token" {
+  type = string
+}
+
+variable "bancomatPay_client_url" {
+  type = string
+}
+
+
 ##──── APP Service runtime config ────────────────────────────────────────────────────────
 
 ## Name

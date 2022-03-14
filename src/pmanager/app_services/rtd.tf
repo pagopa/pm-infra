@@ -16,7 +16,7 @@ module "rtd" {
   resource_group_name = data.azurerm_resource_group.rg.name
 
   # Linux App Framework and version for the App Service.
-  linux_fx_version = "${var.runtime_name}|${var.runtime_version}"
+  linux_fx_version = "${var.runtime_name}|7.3-java8"
 
   # Disable enforcing https connection
   https_only = false

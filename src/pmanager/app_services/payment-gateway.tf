@@ -19,12 +19,12 @@ module "payment-gateway" {
 
   # Linux App Framework and version for the App Service.
   # this app service required java 11
-  linux_fx_version = "${var.runtime_name}|7-java11"
+  linux_fx_version = "${var.runtime_name}|7.3-java11"
 
   # Disable enforcing https connection
   https_only = false
 
-  app_settings = local.app_settings
+  app_settings = local.app_settings_payment_manager
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
@@ -125,7 +125,7 @@ resource "azurerm_app_service_slot" "payment-gateway-release" {
     linux_fx_version = "jbosseap|7-java8"
   }
 
-  app_settings = local.app_settings
+  app_settings = local.app_settings_payment_manager
 
   storage_account {
     name         = "appconfig-release"
