@@ -18,11 +18,51 @@ parameters:
     values:
       - TRAFFIC_ROUTING
       - SWAP
+  - name: "TRAFFIC_ROUTING_VALUE_PERCENT"
+    displayName: "TRAFFIC_ROUTING_VALUE_PERCENT" 
+    type: number
+    default: 10
   - name: "pm-appsrv-admin-panel"
     displayName: "admin-panel"
     type: boolean
     values:
       - pm-appsrv-admin-panel
+  - name: "pm-appsrv-batch"
+    displayName: "batch"
+    type: boolean
+    values:
+      - pm-appsrv-batch
+  - name: "pm-appsrv-logging"
+    displayName: "logging"
+    type: boolean
+    values:
+      - pm-appsrv-logging
+  - name: "pm-appsrv-payment-gateway"
+    displayName: "payment-gateway"
+    type: boolean
+    values:
+      - pm-appsrv-payment-gateway
+  - name: "pm-appsrv-restapi-io"
+    displayName: "restapi-io"
+    type: boolean
+    values:
+      - pm-appsrv-restapi-io
+  - name: "pm-appsrv-restapi"
+    displayName: "restapi"
+    type: boolean
+    values:
+      - pm-appsrv-restapi
+  - name: "pm-appsrv-rtd"
+    displayName: "rtd"
+    type: boolean
+    values:
+      - pm-appsrv-rtd
+  - name: "pm-appsrv-wisp"
+    displayName: "wisp"
+    type: boolean
+    values:
+      - pm-appsrv-wisp
+
 
 variables:
   TIME_OUT: 5
