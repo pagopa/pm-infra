@@ -6,9 +6,8 @@ parameters:
   - name: 'ENVIRONMENT'
     displayName: 'Run on selected environment'
     type: string
-    default: SIT
+    default: uat
     values:
-      - sit
       - uat
       - prod
   - name: "METHOD"
