@@ -17,6 +17,13 @@ parameters:
     values:
       - False
       - True
+  - name: "SWAP"
+    displayName: 'SWAP'
+    type: boolean
+    default: false
+    values:
+      - False
+      - True
 
 variables:
   TIME_OUT: 5
