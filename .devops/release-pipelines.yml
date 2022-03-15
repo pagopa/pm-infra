@@ -80,16 +80,7 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: | 
-                echo $(pm-appsrv-restapi-io); exit 0 \
-                for app in $(APP_SERVICES); do
-                  echo "Set routing to -> $(TRAFFIC_ROUTING) of $app"
-                  az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) \
-                    --name $app \
-                    --resource-group U87-PM-AppServices-pci-uat \
-                    --subscription "U87-PagoPa-PCI-uat"
-                  if $[ $? == 0 ]; then
-                    echo "ROUTED $app"
-                  fi  
-                done
+                echo $(pm-appsrv-restapi-io); exit 0;
+                
 
 
