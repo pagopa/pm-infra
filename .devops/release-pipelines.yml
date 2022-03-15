@@ -8,9 +8,9 @@ parameters:
     type: string
     default: SIT
     values:
-      - SIT
-      - UAT
-      - PROD
+      - sit
+      - uat
+      - prod
   - name: "METHOD"
     displayName: "METHOD"
     type: string
@@ -18,13 +18,11 @@ parameters:
     values:
       - TRAFFIC_ROUTING
       - SWAP
-  - name: "APP_SERVICES"
-    displayName: "APP_SERVICES"
-    type: string
+  - name: "pm-appsrv-admin-panel"
+    displayName: "admin-panel"
+    type: boolean
     values:
       - pm-appsrv-admin-panel
-      - pm-appsrv-batch
-      - pm-appsrv-logging
 
 variables:
   TIME_OUT: 5
