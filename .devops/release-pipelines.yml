@@ -24,43 +24,59 @@ parameters:
   - name: "pm-appsrv-admin-panel"
     displayName: "admin-panel"
     type: boolean
+    default: False
     values:
-      - pm-appsrv-admin-panel
+      - True
+      - False
   - name: "pm-appsrv-batch"
     displayName: "batch"
     type: boolean
+    default: False
     values:
-      - pm-appsrv-batch
+      - True
+      - False
   - name: "pm-appsrv-logging"
     displayName: "logging"
     type: boolean
+    default: False
     values:
-      - pm-appsrv-logging
+      - True
+      - False
   - name: "pm-appsrv-payment-gateway"
     displayName: "payment-gateway"
     type: boolean
+    default: False
     values:
-      - pm-appsrv-payment-gateway
+      - True
+      - False
   - name: "pm-appsrv-restapi-io"
     displayName: "restapi-io"
     type: boolean
+    default: False
     values:
-      - pm-appsrv-restapi-io
+      - True
+      - False
   - name: "pm-appsrv-restapi"
     displayName: "restapi"
     type: boolean
+    default: False
     values:
-      - pm-appsrv-restapi
+      - True
+      - False
   - name: "pm-appsrv-rtd"
     displayName: "rtd"
     type: boolean
+    default: False
     values:
-      - pm-appsrv-rtd
+      - True
+      - False
   - name: "pm-appsrv-wisp"
     displayName: "wisp"
     type: boolean
+    default: False
     values:
-      - pm-appsrv-wisp
+      - True
+      - False
 
 
 variables:
@@ -80,7 +96,7 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: | 
-                echo ${{ parameters.pm-appsrv-admin-panel }}; exit 0;
+                echo $(pm-appsrv-logging); exit 0;
                 
 
 
