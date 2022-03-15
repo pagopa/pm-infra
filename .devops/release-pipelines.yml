@@ -80,7 +80,7 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: | 
-                echo $(pm-appsrv-restapi-io); exit 0;
+                echo ${{ parameters.pm-appsrv-admin-panel }}; exit 0;
                 
 
 
