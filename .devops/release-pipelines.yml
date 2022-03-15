@@ -17,6 +17,13 @@ parameters:
     values:
       - False
       - True
+  - name: "METHOD"
+    displayName: "METHOD"
+    type: string
+    default: TRAFFIC_ROUTING
+    values:
+      - TRAFFIC_ROUTING
+      - SWAP
   - name: "SWAP"
     displayName: 'SWAP'
     type: boolean
