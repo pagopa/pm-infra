@@ -21,56 +21,56 @@ parameters:
     displayName: "TRAFFIC_ROUTING_VALUE_PERCENT" 
     type: number
     default: 10
-  - name: "pm-appsrv-admin-panel"
+  - name: "admin-panel"
     displayName: "admin-panel"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "pm-appsrv-batch"
+  - name: "batch"
     displayName: "batch"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "pm-appsrv-logging"
+  - name: "logging"
     displayName: "logging"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "pm-appsrv-payment-gateway"
+  - name: "payment-gateway"
     displayName: "payment-gateway"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "pm-appsrv-restapi-io"
+  - name: "restapi-io"
     displayName: "restapi-io"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "pm-appsrv-restapi"
+  - name: "restapi"
     displayName: "restapi"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "pm-appsrv-rtd"
+  - name: "rtd"
     displayName: "rtd"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "pm-appsrv-wisp"
+  - name: "wisp"
     displayName: "wisp"
     type: boolean
     default: False
@@ -96,10 +96,8 @@ stages:
               azureSubscription: 'U87-PagoPa-PCI-uat(e7feb90c-fcc2-40a2-ba56-d68ec301c6c0)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
-              arguments: |
-                $(METHOD) $(pm-appsrv-logging)
               inlineScript: | 
-                echo  "method: $1 - app: $2"; exit 0;
+                echo  "method: ${{ parameters.METHOD }} - app: ${{ parameters.restapi }}"; exit 0;
                 
 
 
