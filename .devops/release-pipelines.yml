@@ -21,56 +21,56 @@ parameters:
     displayName: "TRAFFIC_ROUTING_VALUE_PERCENT" 
     type: number
     default: 10
-  - name: "admin-panel"
+  - name: "ADMIN_PANEL"
     displayName: "admin-panel"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "batch"
+  - name: "BATCH"
     displayName: "batch"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "logging"
+  - name: "LOGGING"
     displayName: "logging"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "payment-gateway"
+  - name: "PAYMENT_GATEWAY"
     displayName: "payment-gateway"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "restapi-io"
+  - name: "RESTAPI_IO"
     displayName: "restapi-io"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "restapi"
+  - name: "RESTAPI"
     displayName: "restapi"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "rtd"
+  - name: "RTD"
     displayName: "rtd"
     type: boolean
     default: False
     values:
       - True
       - False
-  - name: "wisp"
+  - name: "WISP"
     displayName: "wisp"
     type: boolean
     default: False
@@ -97,7 +97,66 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: | 
-                echo  "method: ${{ parameters.METHOD }} - app: ${{ parameters.restapi }}"; exit 0;
-                
+                APP_SERVICES=()
+                if [ ${{ parameters.ENVIRONMENT }} == "uat" ]; then
+                    DEPLOY_SUBSCRIPTION="U87-PagoPa-PCI-uat"
+                    DEPLOY_RG="U87-PM-AppServices-pci-uat"
+                elif [ ${{ parameters.ENVIRONMENT }} == "prod" ]; then
+                    DEPLOY_SUBSCRIPTION="-none"
+                    DEPLOY_RG="-none"
+                else
+                    echo "BAD Environment!"
+                    exit 1
+                fi
+                if ${{ parameters.ADMIN_PANEL }}; then 
+                    APP_SERVICES+=("pm-appsrv-admin-panel-"${{ parameters.ENVIRONMENT }})
+                fi
+                if ${{ parameters.BATCH }}; then 
+                    APP_SERVICES+=("pm-appsrv-batch-"${{ parameters.ENVIRONMENT }})
+                fi
+                if ${{ parameters.LOGGING }}; then 
+                    APP_SERVICES+=("pm-appsrv-logging-"${{ parameters.ENVIRONMENT }})
+                fi
+                if ${{ parameters.PAYMENT_GATEWAY }}; then 
+                    APP_SERVICES+=("pm-appsrv-payment-gateway-"${{ parameters.ENVIRONMENT }})
+                fi
+                if ${{ parameters.RESTAPI_IO }}; then 
+                    APP_SERVICES+=("pm-appsrv-restapi-io-"${{ parameters.ENVIRONMENT }})
+                fi
+                if ${{ parameters.RESTAPI }}; then 
+                    APP_SERVICES+=("pm-appsrv-restapi-"${{ parameters.ENVIRONMENT }})
+                fi
+                if ${{ parameters.RTD }}; then 
+                    APP_SERVICES+=("pm-appsrv-rtd-"${{ parameters.ENVIRONMENT }})
+                fi
+                if ${{ parameters.WISP }}; then 
+                    APP_SERVICES+=("pm-appsrv-wisp-"${{ parameters.ENVIRONMENT }})
+                fi
+                if [ ${{ parameters.METHOD }} == "TRAFFIC_ROUTING" ]; then
+                    for app in $(APP_SERVICES); do
+                        echo "Set routing to -> $(TRAFFIC_ROUTING) of $app"
+                        az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) \
+                            --name $app \
+                            --resource-group $DEPLOY_RG \
+                            --subscription $DEPLOY_SUBSCRIPTION
+                        if $[ $? == 0 ]; then
+                            echo "ROUTED $app"
+                        fi  
+                    done
+                elif [ ${{ parameters.METHOD }} == "SWAP" ]; then
+                    for app in $(APP_SERVICES); do
+                        echo "SWAPPING $app"
+                        az webapp deployment slot swap -s release \
+                            --name $app \
+                            --resource-group $DEPLOY_RG \
+                            --subscription $DEPLOY_SUBSCRIPTION
+                        if $[ $? == 0 ]; then
+                            echo "SWAPPED $app"
+                        fi                      
+                    done
+                else
+                    "BAD Choice!"
+                    exit 1
+                fi
 
 
