@@ -97,8 +97,7 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               arguments: |
-                '$(METHOD)' |
-                '$(pm-appsrv-logging)'
+                '$(METHOD) $(pm-appsrv-logging)'
               inlineScript: | 
                 echo $1 $2; exit 0;
                 
