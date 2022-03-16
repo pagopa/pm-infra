@@ -91,12 +91,16 @@ stages:
       - job: release_routing
         steps:
           - task: AzureCLI@2
+            displayName: 'RELEASE APP SERVICE TASK'
             inputs:
               azureSubscription: 'U87-PagoPa-PCI-uat(e7feb90c-fcc2-40a2-ba56-d68ec301c6c0)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
+              arguments: |
+                '$(METHOD)' |
+                '$(pm-appsrv-logging)'
               inlineScript: | 
-                echo "$( parameters.pm-appsrv-logging )"; exit 0;
+                echo $1 $2; exit 0;
                 
 
 
