@@ -133,9 +133,9 @@ stages:
                     APP_SERVICES+=("pm-appsrv-wisp-"${{ parameters.ENVIRONMENT }})
                 fi
                 if [ ${{ parameters.METHOD }} == "TRAFFIC_ROUTING" ]; then
-                    for app in $(APP_SERVICES); do
-                        echo "Set routing to -> $(TRAFFIC_ROUTING) of $app"
-                        az webapp traffic-routing set --distribution release=$(TRAFFIC_ROUTING) \
+                    for app in ${APP_SERVICES[@]}; do
+                        echo "Set routing to -> ${{ parameters.TRAFFIC_ROUTING_VALUE_PERCENT }} of $app"
+                        az webapp traffic-routing set --distribution release=${{ parameters.TRAFFIC_ROUTING_VALUE_PERCENT }} \
                             --name $app \
                             --resource-group $DEPLOY_RG \
                             --subscription $DEPLOY_SUBSCRIPTION
@@ -144,7 +144,7 @@ stages:
                         fi  
                     done
                 elif [ ${{ parameters.METHOD }} == "SWAP" ]; then
-                    for app in $(APP_SERVICES); do
+                    for app in ${APP_SERVICES[@]}; do
                         echo "SWAPPING $app"
                         az webapp deployment slot swap -s release \
                             --name $app \
@@ -158,5 +158,3 @@ stages:
                     "BAD Choice!"
                     exit 1
                 fi
-
-
