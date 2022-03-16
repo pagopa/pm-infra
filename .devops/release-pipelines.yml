@@ -96,7 +96,7 @@ stages:
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               inlineScript: | 
-                echo $(parameters.pm-appsrv-logging); exit 0;
+                echo $[ parameters.pm-appsrv-logging ]; exit 0;
                 
 
 
