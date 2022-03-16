@@ -108,28 +108,28 @@ stages:
                     echo "BAD Environment!"
                     exit 1
                 fi
-                if ${{ parameters.ADMIN_PANEL }}; then 
+                if [ ${{ parameters.ADMIN_PANEL }} == "True" ]; then 
                     APP_SERVICES+=("pm-appsrv-admin-panel-"${{ parameters.ENVIRONMENT }})
                 fi
-                if ${{ parameters.BATCH }}; then 
+                if [ ${{ parameters.BATCH }} == "True" ]; then 
                     APP_SERVICES+=("pm-appsrv-batch-"${{ parameters.ENVIRONMENT }})
                 fi
-                if ${{ parameters.LOGGING }}; then 
+                if [ ${{ parameters.LOGGING }} == "True" ]; then 
                     APP_SERVICES+=("pm-appsrv-logging-"${{ parameters.ENVIRONMENT }})
                 fi
-                if ${{ parameters.PAYMENT_GATEWAY }}; then 
+                if [ ${{ parameters.PAYMENT_GATEWAY }} == "True" ]; then 
                     APP_SERVICES+=("pm-appsrv-payment-gateway-"${{ parameters.ENVIRONMENT }})
                 fi
-                if ${{ parameters.RESTAPI_IO }}; then 
+                if [ ${{ parameters.RESTAPI_IO }} == "True" ]; then 
                     APP_SERVICES+=("pm-appsrv-restapi-io-"${{ parameters.ENVIRONMENT }})
                 fi
-                if ${{ parameters.RESTAPI }}; then 
+                if [ ${{ parameters.RESTAPI }} == "True" ]; then 
                     APP_SERVICES+=("pm-appsrv-restapi-"${{ parameters.ENVIRONMENT }})
                 fi
-                if ${{ parameters.RTD }}; then 
+                if [ ${{ parameters.RTD }} == "True" ]; then 
                     APP_SERVICES+=("pm-appsrv-rtd-"${{ parameters.ENVIRONMENT }})
                 fi
-                if ${{ parameters.WISP }}; then 
+                if [ ${{ parameters.WISP }} == "True" ]; then 
                     APP_SERVICES+=("pm-appsrv-wisp-"${{ parameters.ENVIRONMENT }})
                 fi
                 if [ ${{ parameters.METHOD }} == "TRAFFIC_ROUTING" ]; then
