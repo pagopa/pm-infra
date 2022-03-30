@@ -152,6 +152,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_key_vault_secret.appgw-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.bancomat-keystore-password](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.batch-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault_secret.event-reg-oracle-connection-url](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.log-interceptor-pattern](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.logging-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.oracle-connection-url](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
@@ -196,6 +197,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | <a name="input_bancomatPay_client_group_code"></a> [bancomatPay\_client\_group\_code](#input\_bancomatPay\_client\_group\_code) | n/a | `string` | n/a | yes |
 | <a name="input_bancomatPay_client_institute_code"></a> [bancomatPay\_client\_institute\_code](#input\_bancomatPay\_client\_institute\_code) | n/a | `string` | n/a | yes |
 | <a name="input_bancomatPay_client_tag"></a> [bancomatPay\_client\_tag](#input\_bancomatPay\_client\_tag) | n/a | `string` | n/a | yes |
+| <a name="input_bancomatPay_client_timeout_ms"></a> [bancomatPay\_client\_timeout\_ms](#input\_bancomatPay\_client\_timeout\_ms) | n/a | `string` | n/a | yes |
 | <a name="input_bancomatPay_client_token"></a> [bancomatPay\_client\_token](#input\_bancomatPay\_client\_token) | n/a | `string` | n/a | yes |
 | <a name="input_bancomatPay_client_url"></a> [bancomatPay\_client\_url](#input\_bancomatPay\_client\_url) | n/a | `string` | n/a | yes |
 | <a name="input_bancomat_keystore_location"></a> [bancomat\_keystore\_location](#input\_bancomat\_keystore\_location) | n/a | `string` | n/a | yes |

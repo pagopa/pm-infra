@@ -32,6 +32,7 @@ if echo "init plan apply refresh import output state taint destroy" | grep -w $a
     terraform init -reconfigure -backend-config="./env/$env/backend.tfvars"
     terraform $action -var-file="./env/$env/terraform.tfvars" $other
   fi
+  terraform-docs markdown table --output-file README.md --output-mode inject .
 else
     echo "Action not allowed."
     exit 1
