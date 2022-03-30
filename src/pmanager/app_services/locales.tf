@@ -388,7 +388,7 @@ locals {
     BANCOMATPAY_CLIENT_TAG                                = local.bancomatPay_client_tag
     BANCOMATPAY_CLIENT_TOKEN                              = local.bancomatPay_client_token
     BANCOMATPAY_CLIENT_URL                                = local.bancomatPay_client_url
-    BANCOMATPAY_CLIENT_TIMEOUT_MS  = local.bancomatPay_client_timeout_ms
+    BANCOMATPAY_CLIENT_TIMEOUT_MS                         = local.bancomatPay_client_timeout_ms
   }
 }
 
