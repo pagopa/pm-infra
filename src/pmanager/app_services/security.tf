@@ -10,6 +10,11 @@ data "azurerm_key_vault_secret" "oracle-connection-url" {
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
+data "azurerm_key_vault_secret" "event-reg-oracle-connection-url" {
+  name         = format("%s-%s", "event-reg-oracle-connection-url", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
 # PP credential
 data "azurerm_key_vault_secret" "oracle-server-agid-user" {
   name         = format("%s-%s", "oracle-server-agid-user", var.environment)
