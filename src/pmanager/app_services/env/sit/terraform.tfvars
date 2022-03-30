@@ -63,6 +63,7 @@ bancomatPay_client_institute_code = "12928"
 bancomatPay_client_tag = "VB573BC"
 bancomatPay_client_token = "Pa8UiKAoWqdeqtjqJmaX7n1jKLMPwqsbAa4nkVCrupKU2yb0bq"
 bancomatPay_client_url = "https://app-te.vaservices.eu:446/p2b-enginectx/services/PagoPaServices"
+bancomatPay_client_timeout_ms = "5000"
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
 appinsight_name = ""

@@ -35,6 +35,7 @@ locals {
   bancomatPay_client_tag             = var.bancomatPay_client_tag
   bancomatPay_client_token           = var.bancomatPay_client_token
   bancomatPay_client_url             = var.bancomatPay_client_url
+  bancomatPay_client_timeout_ms      = var.bancomatPay_client_timeout_ms
 }
 
 ##──── connection parameters ─────────────────────────────────────────────────────────────
@@ -86,7 +87,7 @@ locals {
 
 ##──── # Oracle connection Evente Registry # ─────────────────────────────────────────────
 locals {
-  event_reg_oracle_connection_url         = data.azurerm_key_vault_secret.oracle-connection-url.value
+  event_reg_oracle_connection_url         = data.azurerm_key_vault_secret.event-reg-oracle-connection-url.value
   event_reg_oracle_server_admin_full_name = data.azurerm_key_vault_secret.oracle-server-event-reg-user.value
   event_reg_oracle_server_admin_password  = data.azurerm_key_vault_secret.oracle-server-event-reg-user-password.value
 }
@@ -320,7 +321,7 @@ locals {
   app_settings_payment_manager = {
     JAVA_OPTS                                             = local.java_opts
     LANG                                                  = local.lang
-    ORACLE_CONNECTION_URL                                 = local.event_reg_oracle_connection_url
+    ORACLE_CONNECTION_URL                                 = local.pp_oracle_connection_url
     EVENT_REG_ORACLE_SERVER_ADMIN_FULL_NAME               = local.event_reg_oracle_server_admin_full_name
     EVENT_REG_ORACLE_SERVER_ADMIN_PASSWORD                = local.event_reg_oracle_server_admin_password
     ORACLE_SERVER_ADMIN_FULL_NAME                         = local.pp_oracle_server_admin_full_name
@@ -382,6 +383,7 @@ locals {
     BANCOMATPAY_CLIENT_TAG                                = local.bancomatPay_client_tag
     BANCOMATPAY_CLIENT_TOKEN                              = local.bancomatPay_client_token
     BANCOMATPAY_CLIENT_URL                                = local.bancomatPay_client_url
+    BANCOMATPAY_CLIENT_TIMEOUT_MS  = local.bancomatPay_client_timeout_ms
   }
 }
 
