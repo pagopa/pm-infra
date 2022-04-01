@@ -153,11 +153,14 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_key_vault_secret.bancomat-keystore-password](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.batch-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.event-reg-oracle-connection-url](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault_secret.event-reg-remote-oracle-connection-url](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.log-interceptor-pattern](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.logging-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.oracle-connection-url](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.oracle-server-agid-user](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.oracle-server-agid-user-password](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault_secret.oracle-server-event-reg-remote-user](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault_secret.oracle-server-event-reg-remote-user-password](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.oracle-server-event-reg-user](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.oracle-server-event-reg-user-password](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.oracle-server-rtd-user](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
@@ -201,6 +204,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | <a name="input_bancomatPay_client_token"></a> [bancomatPay\_client\_token](#input\_bancomatPay\_client\_token) | n/a | `string` | n/a | yes |
 | <a name="input_bancomatPay_client_url"></a> [bancomatPay\_client\_url](#input\_bancomatPay\_client\_url) | n/a | `string` | n/a | yes |
 | <a name="input_bancomat_keystore_location"></a> [bancomat\_keystore\_location](#input\_bancomat\_keystore\_location) | n/a | `string` | n/a | yes |
+| <a name="input_bancomatpay_session_timeout_s"></a> [bancomatpay\_session\_timeout\_s](#input\_bancomatpay\_session\_timeout\_s) | n/a | `string` | n/a | yes |
 | <a name="input_batch_name"></a> [batch\_name](#input\_batch\_name) | Batch app service name | `string` | n/a | yes |
 | <a name="input_cittadinanza_hostname"></a> [cittadinanza\_hostname](#input\_cittadinanza\_hostname) | n/a | `string` | n/a | yes |
 | <a name="input_cors_allowed_origins"></a> [cors\_allowed\_origins](#input\_cors\_allowed\_origins) | n/a | `string` | n/a | yes |

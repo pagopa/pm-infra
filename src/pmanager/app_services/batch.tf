@@ -22,7 +22,7 @@ module "batch" {
   https_only = false
 
   # App service settings, take from locals
-  app_settings = local.app_settings
+  app_settings = local.app_settings_batch
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 

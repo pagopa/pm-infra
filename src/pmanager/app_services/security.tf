@@ -4,14 +4,21 @@ data "azurerm_key_vault" "keyvault" {
 }
 
 ##──── Oracle databases keys ─────────────────────────────────────────────────────────────
-
+## Oracle connection
+# PP-Core
 data "azurerm_key_vault_secret" "oracle-connection-url" {
   name         = format("%s-%s", "oracle-connection-url", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
-
+# Event registry
 data "azurerm_key_vault_secret" "event-reg-oracle-connection-url" {
   name         = format("%s-%s", "event-reg-oracle-connection-url", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+# Event registry remote
+data "azurerm_key_vault_secret" "event-reg-remote-oracle-connection-url" {
+  name         = format("%s-%s", "event-reg-remote-oracle-connection-url", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
@@ -45,6 +52,17 @@ data "azurerm_key_vault_secret" "oracle-server-event-reg-user" {
 
 data "azurerm_key_vault_secret" "oracle-server-event-reg-user-password" {
   name         = format("%s-%s", "oracle-server-event-reg-user-password", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+# EVENT REGISTRY REMOTE credential
+data "azurerm_key_vault_secret" "oracle-server-event-reg-remote-user" {
+  name         = format("%s-%s", "oracle-server-event-reg-remote-user", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+data "azurerm_key_vault_secret" "oracle-server-event-reg-remote-user-password" {
+  name         = format("%s-%s", "oracle-server-event-reg-remote-user-password", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 

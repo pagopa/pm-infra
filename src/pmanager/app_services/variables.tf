@@ -217,6 +217,10 @@ variable "bancomatPay_client_timeout_ms" {
   type = string
 }
 
+variable "bancomatpay_session_timeout_s" {
+  type = string
+}
+
 
 ##──── APP Service runtime config ────────────────────────────────────────────────────────
 
