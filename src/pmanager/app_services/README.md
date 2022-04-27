@@ -205,6 +205,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | <a name="input_bancomatPay_client_url"></a> [bancomatPay\_client\_url](#input\_bancomatPay\_client\_url) | n/a | `string` | n/a | yes |
 | <a name="input_bancomat_keystore_location"></a> [bancomat\_keystore\_location](#input\_bancomat\_keystore\_location) | n/a | `string` | n/a | yes |
 | <a name="input_bancomatpay_session_timeout_s"></a> [bancomatpay\_session\_timeout\_s](#input\_bancomatpay\_session\_timeout\_s) | n/a | `string` | n/a | yes |
+| <a name="input_base_path_payment_gateway"></a> [base\_path\_payment\_gateway](#input\_base\_path\_payment\_gateway) | n/a | `string` | n/a | yes |
 | <a name="input_batch_name"></a> [batch\_name](#input\_batch\_name) | Batch app service name | `string` | n/a | yes |
 | <a name="input_cittadinanza_hostname"></a> [cittadinanza\_hostname](#input\_cittadinanza\_hostname) | n/a | `string` | n/a | yes |
 | <a name="input_cors_allowed_origins"></a> [cors\_allowed\_origins](#input\_cors\_allowed\_origins) | n/a | `string` | n/a | yes |

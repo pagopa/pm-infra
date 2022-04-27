@@ -38,6 +38,7 @@ locals {
   bancomatPay_client_url             = var.bancomatPay_client_url
   bancomatPay_client_timeout_ms      = var.bancomatPay_client_timeout_ms
   bancomatpay_session_timeout_s      = var.bancomatpay_session_timeout_s
+  base_path_payment_gateway          = var.base_path_payment_gateway
 }
 
 ##──── connection parameters ─────────────────────────────────────────────────────────────
@@ -195,6 +196,7 @@ locals {
     HSM_ACTIVATION_FLAG                                   = local.hsm_activation_flag
     LOG_INTERCEPTOR_PATTERN                               = local.log_interceptor_pattern
     JVM_ROUTE                                             = local.jvm_route
+    BASE_PATH_PAYMENT_GATEWAY                             = local.base_path_payment_gateway
   }
 }
 
@@ -259,6 +261,7 @@ locals {
     HSM_ACTIVATION_FLAG                                   = local.hsm_activation_flag
     LOG_INTERCEPTOR_PATTERN                               = local.log_interceptor_pattern
     JVM_ROUTE                                             = local.jvm_route
+    BASE_PATH_PAYMENT_GATEWAY                             = local.base_path_payment_gateway
   }
 }
 
@@ -326,6 +329,7 @@ locals {
     HSM_ACTIVATION_FLAG                                   = local.hsm_activation_flag
     LOG_INTERCEPTOR_PATTERN                               = local.log_interceptor_pattern
     JVM_ROUTE                                             = local.jvm_route
+    BASE_PATH_PAYMENT_GATEWAY                             = local.base_path_payment_gateway
   }
 }
 
@@ -396,6 +400,7 @@ locals {
     HSM_ACTIVATION_FLAG                                   = local.hsm_activation_flag
     LOG_INTERCEPTOR_PATTERN                               = local.log_interceptor_pattern
     JVM_ROUTE                                             = local.jvm_route
+    BASE_PATH_PAYMENT_GATEWAY                             = local.base_path_payment_gateway
   }
 }
 

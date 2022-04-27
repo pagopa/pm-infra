@@ -57,6 +57,9 @@ crypto_private_server_key_path = "/home/site/appconfig/userKeys/privateKey.pem"
 crypto_public_server_key_path = "/home/site/appconfig/userKeys/publicKey.pem"
 jvm_route = "sit-agid01"
 
+##──── Payment gateway base path ─────────────────────────────────────────────────────────
+base_path_payment_gateway = "/payment-gateway/v1"
+
 ##──── Payment gateway vars ──────────────────────────────────────────────────────────────
 bancomatPay_client_group_code = "12928"
 bancomatPay_client_institute_code = "12928"

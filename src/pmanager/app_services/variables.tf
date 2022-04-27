@@ -221,6 +221,9 @@ variable "bancomatpay_session_timeout_s" {
   type = string
 }
 
+variable "base_path_payment_gateway" {
+  type = string
+}
 
 ##──── APP Service runtime config ────────────────────────────────────────────────────────
 

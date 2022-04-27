@@ -28,6 +28,9 @@ module "payment-gateway" {
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
+  # Add health check path
+  health_check_path = "/payment-gateway/healthcheck"
+
   tags = {
     kind        = "app service",
     environment = var.environment,
