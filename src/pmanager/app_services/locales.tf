@@ -271,9 +271,12 @@ locals {
     TZ                                                    = local.tz
     JAVA_OPTS                                             = local.java_opts
     LANG                                                  = local.lang
-    EVENT_ORACLE_CONNECTION_URL                           = local.event_reg_oracle_connection_url
+    EVENT_REG_ORACLE_CONNECTION_URL                       = local.event_reg_oracle_connection_url
     EVENT_REG_ORACLE_SERVER_ADMIN_FULL_NAME               = local.event_reg_oracle_server_admin_full_name
     EVENT_REG_ORACLE_SERVER_ADMIN_PASSWORD                = local.event_reg_oracle_server_admin_password
+    EVENT_REG_REMOTE_ORACLE_CONNECTION_URL                = local.event_reg_remote_oracle_connection_url
+    EVENT_REG_REMOTE_ORACLE_SERVER_ADMIN_FULL_NAME        = local.event_reg_remote_oracle_server_admin_full_name
+    EVENT_REG_REMOTE_ORACLE_SERVER_ADMIN_PASSWORD         = local.event_reg_remote_oracle_server_admin_password
     ORACLE_CONNECTION_URL                                 = local.pp_oracle_connection_url
     ORACLE_SERVER_ADMIN_FULL_NAME                         = local.pp_oracle_server_admin_full_name
     ORACLE_SERVER_ADMIN_PASSWORD                          = local.pp_oracle_server_admin_password

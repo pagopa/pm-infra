@@ -230,7 +230,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | <a name="input_plan_id"></a> [plan\_id](#input\_plan\_id) | (Optional) Specifies the external app service plan id. | `string` | `null` | no |
 | <a name="input_plan_kind"></a> [plan\_kind](#input\_plan\_kind) | The sku kind of app service plan to create. (ES. Linux, Windows) | `string` | n/a | yes |
 | <a name="input_plan_name"></a> [plan\_name](#input\_plan\_name) | app service plan name | `string` | n/a | yes |
-| <a name="input_plan_reserved"></a> [plan\_reserved](#input\_plan\_reserved) | (Optional) Is this App Service Plan Reserved. Defaults to false. | `string` | `"true"` | no |
+| <a name="input_plan_reserved"></a> [plan\_reserved](#input\_plan\_reserved) | (Optional) Is this App Service Plan Reserved. Defaults to false. | `string` | `"false"` | no |
 | <a name="input_plan_sku"></a> [plan\_sku](#input\_plan\_sku) | The sku of app service plan to create | `string` | n/a | yes |
 | <a name="input_plan_sku_tier"></a> [plan\_sku\_tier](#input\_plan\_sku\_tier) | The sku tier of app service plan to create | `string` | n/a | yes |
 | <a name="input_private_link_dns_zone"></a> [private\_link\_dns\_zone](#input\_private\_link\_dns\_zone) | n/a | `string` | n/a | yes |
@@ -248,6 +248,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | <a name="input_subnet_name"></a> [subnet\_name](#input\_subnet\_name) | # Subnet name | `string` | n/a | yes |
 | <a name="input_system_encoding"></a> [system\_encoding](#input\_system\_encoding) | Set LANG encoding UTF-8 | `string` | `"C.UTF-8"` | no |
 | <a name="input_tsi"></a> [tsi](#input\_tsi) | Tecnical service. | `string` | `""` | no |
+| <a name="input_unique_plan_name"></a> [unique\_plan\_name](#input\_unique\_plan\_name) | Unique app service plan name | `string` | n/a | yes |
 | <a name="input_vnet_inbound_name"></a> [vnet\_inbound\_name](#input\_vnet\_inbound\_name) | n/a | `string` | n/a | yes |
 | <a name="input_vnet_outgoing_name"></a> [vnet\_outgoing\_name](#input\_vnet\_outgoing\_name) | # VNET name | `string` | n/a | yes |
 | <a name="input_wisp_name"></a> [wisp\_name](#input\_wisp\_name) | wisp app service name | `string` | n/a | yes |

@@ -22,6 +22,7 @@ wisp_name = "pm-appsrv-wisp"
 
 # App service plan
 plan_name = "plan-pci"
+unique_plan_name = "pm-appservices-pci"
 
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 java_opts = "-Dfile.encoding=UTF-8 -Ddandelion.profile.active=prod -Dcom.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager=true"

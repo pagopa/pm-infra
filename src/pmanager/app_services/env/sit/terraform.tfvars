@@ -24,6 +24,7 @@ payment_gateway_name = "pm-appsrv-payment-gateway"
 
 # App service plan
 plan_name = "plan"
+unique_plan_name = "pm-unique"
 
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 java_opts = "-Dfile.encoding=UTF-8 -Ddandelion.profile.active=prod -Dcom.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager=true"

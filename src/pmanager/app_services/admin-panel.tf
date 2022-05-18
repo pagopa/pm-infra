@@ -5,13 +5,14 @@ module "admin-panel" {
 
   ftps_state = "AllAllowed"
 
-  plan_name     = format("%s-%s-%s", var.admin_panel_name, var.plan_name, var.environment)
+  plan_name     = format("%s-%s", var.unique_plan_name, var.environment)
   plan_type     = "internal"
   plan_sku_size = var.plan_sku
   plan_sku_tier = var.plan_sku_tier
   plan_kind     = var.plan_kind
   plan_reserved = var.plan_reserved
   always_on     = "true"
+  client_cert_enabled = "true"
 
   resource_group_name = data.azurerm_resource_group.rg.name
 

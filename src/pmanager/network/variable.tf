@@ -18,6 +18,12 @@ variable "standard" {
   description = "Standard pci/no-pci tags"
 }
 
+variable "tsi" {
+  type        = string
+  description = "Tecnical service."
+  default     = ""
+}
+
 ## Network configuration variables
 #########################################################
 # Network resource
@@ -35,6 +41,22 @@ variable "vnet_inbound_name" {
 }
 
 variable "vnet_database_name" {
+  type = string
+}
+
+variable "vnet_subnet1" {
+  type = string
+}
+
+variable "vnet_subnet1_address" {
+  type = string
+}
+
+variable "vnet_subnet2" {
+  type = string
+}
+
+variable "vnet_subnet2_address" {
   type = string
 }
 

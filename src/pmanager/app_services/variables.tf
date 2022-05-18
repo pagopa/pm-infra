@@ -56,7 +56,7 @@ variable "plan_kind" {
 variable "plan_reserved" {
   type        = string
   description = "(Optional) Is this App Service Plan Reserved. Defaults to false."
-  default     = "true"
+  default     = "false"
 }
 
 
@@ -108,6 +108,10 @@ variable "plan_name" {
   description = "app service plan name"
 }
 
+variable "unique_plan_name" {
+  type        = string
+  description = "Unique app service plan name"
+}
 
 variable "payment_gateway_name" {
   type        = string
