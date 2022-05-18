@@ -58,6 +58,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
   resource_group_name        = data.azurerm_resource_group.vmrg.name
   location                   = data.azurerm_resource_group.vmrg.location
   size                       = var.vm_size[count.index]
+  zone                       = count.index + 1
   admin_username             = data.azurerm_key_vault_secret.admin-user.value
   admin_password             = data.azurerm_key_vault_secret.admin-password.value
   encryption_at_host_enabled = true
@@ -99,8 +100,14 @@ resource "azurerm_linux_virtual_machine" "vm" {
     inline = [
       "sudo useradd ddsdbadmin",
       "sudo usermod -aG wheel ddsdbadmin",
+      "sudo echo 'ddsdbadmin:Password10!' | sudo chpasswd",
+      "sudo su - root -c \"echo 'ddsdbadmin ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/90-cloud-init-users\"",
       "sudo yum update -y"
     ]
+  }
+
+  boot_diagnostics {
+    storage_account_uri = "https://diagnosticvmdiskuat.blob.core.windows.net/"
   }
 
   tags = {
@@ -115,119 +122,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
 
 ##========================================================================================
 ##                                                                                      ##
-## ROOTVG                                                                               ##
-##                                                                                      ##
-##========================================================================================
-
-# resource "azurerm_managed_disk" "oracle_rootvg" {
-#   depends_on             = [azurerm_linux_virtual_machine.vm]
-#   count                  = local.vm_count
-#   name                   = format("oracle-rootvg-%s-%s", azurerm_linux_virtual_machine.vm[count.index].name, var.environment)
-#   location               = data.azurerm_resource_group.vmrg.location
-#   resource_group_name    = data.azurerm_resource_group.vmrg.name
-#   storage_account_type   = "Premium_LRS"
-#   create_option          = "Empty"
-#   disk_size_gb           = var.disk_oracle_rootvg["size"]
-#   tier                   = var.disk_oracle_rootvg["tier"]
-#   disk_encryption_set_id = data.azurerm_disk_encryption_set.encset.id
-# }
-
-# resource "azurerm_virtual_machine_data_disk_attachment" "oracle_rootvg" {
-#   depends_on         = [azurerm_linux_virtual_machine.vm]
-#   count              = local.vm_count
-#   managed_disk_id    = azurerm_managed_disk.oracle_rootvg[count.index].id
-#   virtual_machine_id = azurerm_linux_virtual_machine.vm[count.index].id
-#   lun                = "0"
-#   caching            = "ReadWrite"
-# }
-
-# ##========================================================================================
-# ##                                                                                      ##
-# ## VGDB                                                                                 ##
-# ##                                                                                      ##
-# ##========================================================================================
-
-# resource "azurerm_managed_disk" "oracle_vgdb" {
-#   depends_on             = [azurerm_linux_virtual_machine.vm]
-#   count                  = local.vm_count
-#   name                   = format("oracle-vgdb-%s-%s", azurerm_linux_virtual_machine.vm[count.index].name, var.environment)
-#   location               = data.azurerm_resource_group.vmrg.location
-#   resource_group_name    = data.azurerm_resource_group.vmrg.name
-#   storage_account_type   = "Premium_LRS"
-#   create_option          = "Empty"
-#   disk_size_gb           = var.disk_oracle_vgdb["size"]
-#   tier                   = var.disk_oracle_vgdb["tier"]
-#   disk_encryption_set_id = data.azurerm_disk_encryption_set.encset.id
-# }
-
-# resource "azurerm_virtual_machine_data_disk_attachment" "oracle_vgdb" {
-#   depends_on         = [azurerm_linux_virtual_machine.vm]
-#   count              = local.vm_count
-#   managed_disk_id    = azurerm_managed_disk.oracle_vgdb[count.index].id
-#   virtual_machine_id = azurerm_linux_virtual_machine.vm[count.index].id
-#   lun                = "1"
-#   caching            = "ReadWrite"
-# }
-
-# ##========================================================================================
-# ##                                                                                      ##
-# ## DBADMIN                                                                              ##
-# ##                                                                                      ##
-# ##========================================================================================
-
-# resource "azurerm_managed_disk" "oracle_dbadmin" {
-#   depends_on             = [azurerm_linux_virtual_machine.vm]
-#   count                  = local.vm_count
-#   name                   = format("oracle-dbadmin-%s-%s", azurerm_linux_virtual_machine.vm[count.index].name, var.environment)
-#   location               = data.azurerm_resource_group.vmrg.location
-#   resource_group_name    = data.azurerm_resource_group.vmrg.name
-#   storage_account_type   = "Premium_LRS"
-#   create_option          = "Empty"
-#   disk_size_gb           = var.disk_oracle_dbadmin["size"]
-#   tier                   = var.disk_oracle_dbadmin["tier"]
-#   disk_encryption_set_id = data.azurerm_disk_encryption_set.encset.id
-# }
-
-# resource "azurerm_virtual_machine_data_disk_attachment" "oracle_dbadmin" {
-#   depends_on         = [azurerm_linux_virtual_machine.vm]
-#   count              = local.vm_count
-#   managed_disk_id    = azurerm_managed_disk.oracle_dbadmin[count.index].id
-#   virtual_machine_id = azurerm_linux_virtual_machine.vm[count.index].id
-#   lun                = "2"
-#   caching            = "ReadWrite"
-# }
-
-# ##========================================================================================
-# ##                                                                                      ##
-# ## RECO                                                                                 ##
-# ##                                                                                      ##
-# ##========================================================================================
-
-# resource "azurerm_managed_disk" "oracle_reco" {
-#   depends_on             = [azurerm_linux_virtual_machine.vm]
-#   count                  = local.vm_count
-#   name                   = format("oracle-reco-%s-%s", azurerm_linux_virtual_machine.vm[count.index].name, var.environment)
-#   location               = data.azurerm_resource_group.vmrg.location
-#   resource_group_name    = data.azurerm_resource_group.vmrg.name
-#   storage_account_type   = "Premium_LRS"
-#   create_option          = "Empty"
-#   disk_size_gb           = var.disk_oracle_reco["size"]
-#   tier                   = var.disk_oracle_reco["tier"]
-#   disk_encryption_set_id = data.azurerm_disk_encryption_set.encset.id
-# }
-
-# resource "azurerm_virtual_machine_data_disk_attachment" "oracle_reco" {
-#   depends_on         = [azurerm_linux_virtual_machine.vm]
-#   count              = local.vm_count
-#   managed_disk_id    = azurerm_managed_disk.oracle_reco[count.index].id
-#   virtual_machine_id = azurerm_linux_virtual_machine.vm[count.index].id
-#   lun                = "3"
-#   caching            = "ReadWrite"
-# }
-
-##========================================================================================
-##                                                                                      ##
-## DATA                                                                                 ##
+## DATA DISKS                                                                           ##
 ##                                                                                      ##
 ##========================================================================================
 
@@ -242,6 +137,7 @@ locals {
         size          = d.size
         tier          = d.tier
         vmid          = vm
+        zone          = tostring(azurerm_linux_virtual_machine.vm[idx].zone)
       }
     ]
   ])
@@ -249,7 +145,7 @@ locals {
 
 ##──── Resource declaration ──────────────────────────────────────────────────────────────
 resource "azurerm_managed_disk" "oracle_data" {
-  depends_on             = [azurerm_linux_virtual_machine.vm, local.datadisk_lun_map]
+  depends_on             = [azurerm_linux_virtual_machine.vm]
   for_each               = { for i, v in local.datadisk_lun_map : i => v }
   name                   = each.value["datadisk_name"]
   location               = data.azurerm_resource_group.vmrg.location
@@ -258,6 +154,7 @@ resource "azurerm_managed_disk" "oracle_data" {
   create_option          = "Empty"
   disk_size_gb           = each.value["size"]
   tier                   = each.value["tier"]
+  zones                  = [each.value["zone"]]
   disk_encryption_set_id = data.azurerm_disk_encryption_set.encset.id
 }
 
@@ -267,7 +164,7 @@ resource "azurerm_virtual_machine_data_disk_attachment" "oracle_data" {
   managed_disk_id    = azurerm_managed_disk.oracle_data[each.value].id
   virtual_machine_id = local.datadisk_lun_map[each.value].vmid
   lun                = local.datadisk_lun_map[each.value].lun
-  caching            = tonumber(local.datadisk_lun_map[each.value].size) < 4095 ? "ReadWrite" : "None"
+  caching            = "None"
 }
 
 ##──── -- ────────────────────────────────────────────────────────────────────────────────
