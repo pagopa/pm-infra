@@ -5,18 +5,19 @@ module "logging" {
 
   ftps_state = "AllAllowed"
 
-  plan_name     = format("%s-%s-%s", var.logging_name, var.plan_name, var.environment)
+  plan_name     = format("%s-%s", var.unique_plan_name, var.environment)
   plan_type     = "internal"
   plan_sku_size = var.plan_sku
   plan_sku_tier = var.plan_sku_tier
   plan_kind     = var.plan_kind
   plan_reserved = var.plan_reserved
   always_on     = "true"
+  client_cert_enabled = "true"
 
   resource_group_name = data.azurerm_resource_group.rg.name
 
   # Linux App Framework and version for the App Service.
-  linux_fx_version = "${var.runtime_name}|${var.runtime_version}"
+  linux_fx_version = "${var.runtime_name}|7.3-java8"
 
   # Disable enforcing https connection
   https_only = false
@@ -26,7 +27,7 @@ module "logging" {
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
   # Add health check path
-  # health_check_path = "/db-logging/healthcheck"
+  health_check_path = "/db-logging/healthcheck"
 
   tags = {
     kind        = "app service",

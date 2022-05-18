@@ -56,7 +56,7 @@ variable "plan_kind" {
 variable "plan_reserved" {
   type        = string
   description = "(Optional) Is this App Service Plan Reserved. Defaults to false."
-  default     = "true"
+  default     = "false"
 }
 
 
@@ -108,6 +108,10 @@ variable "plan_name" {
   description = "app service plan name"
 }
 
+variable "unique_plan_name" {
+  type        = string
+  description = "Unique app service plan name"
+}
 
 variable "payment_gateway_name" {
   type        = string
@@ -190,6 +194,38 @@ variable "crypto_public_server_key_path" {
 }
 
 variable "jvm_route" {
+  type = string
+}
+
+variable "bancomatPay_client_group_code" {
+  type = string
+}
+
+variable "bancomatPay_client_institute_code" {
+  type = string
+}
+
+variable "bancomatPay_client_tag" {
+  type = string
+}
+
+variable "bancomatPay_client_token" {
+  type = string
+}
+
+variable "bancomatPay_client_url" {
+  type = string
+}
+
+variable "bancomatPay_client_timeout_ms" {
+  type = string
+}
+
+variable "bancomatpay_session_timeout_s" {
+  type = string
+}
+
+variable "base_path_payment_gateway" {
   type = string
 }
 

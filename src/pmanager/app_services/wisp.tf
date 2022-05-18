@@ -26,7 +26,7 @@ module "wisp" {
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
   # Add health check path
-  # health_check_path = "/wallet/healthcheck"
+  health_check_path = "/wallet/healthcheck"
 
   tags = {
     kind        = "app service",

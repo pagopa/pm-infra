@@ -24,6 +24,7 @@ payment_gateway_name = "pm-appsrv-payment-gateway"
 
 # App service plan
 plan_name = "plan"
+unique_plan_name = "pm-unique"
 
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 java_opts = "-Dfile.encoding=UTF-8 -Ddandelion.profile.active=prod -Dcom.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager=true"
@@ -50,12 +51,24 @@ cittadinanza_hostname = "https://portal.test.pagopa.gov.it/pmmockserviceapi/"
 jiffy_hostname = "https://app-te.vaservices.eu/p2penginectx/F1/services/ConsultazioneCrossServices"
 logging_white_list = "permitAll"
 bancomat_keystore_location = "/home/site/appconfig/Bancomat/certificati/keyBancomat.jks"
-cors_allowed_origins = "https://checkout.pagopa.gov.it"
+cors_allowed_origins = "https://dev.checkout.pagopa.it"
 spring_profile = "sit-azure"
 secret_key_store_path = "/home/site/appconfig/userKeys/"
 crypto_private_server_key_path = "/home/site/appconfig/userKeys/privateKey.pem"
 crypto_public_server_key_path = "/home/site/appconfig/userKeys/publicKey.pem"
 jvm_route = "sit-agid01"
+
+##──── Payment gateway base path ─────────────────────────────────────────────────────────
+base_path_payment_gateway = "/payment-gateway/v1"
+
+##──── Payment gateway vars ──────────────────────────────────────────────────────────────
+bancomatPay_client_group_code = "12928"
+bancomatPay_client_institute_code = "12928"
+bancomatPay_client_tag = "VB573BC"
+bancomatPay_client_token = "Pa8UiKAoWqdeqtjqJmaX7n1jKLMPwqsbAa4nkVCrupKU2yb0bq"
+bancomatPay_client_url = "https://api.dev.platform.pagopa.it/mock-psp/api/bpay"
+bancomatPay_client_timeout_ms = "5000"
+bancomatpay_session_timeout_s = "60"
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
 appinsight_name = ""

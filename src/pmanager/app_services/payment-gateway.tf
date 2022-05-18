@@ -19,14 +19,17 @@ module "payment-gateway" {
 
   # Linux App Framework and version for the App Service.
   # this app service required java 11
-  linux_fx_version = "${var.runtime_name}|7-java11"
+  linux_fx_version = "${var.runtime_name}|7.3-java11"
 
   # Disable enforcing https connection
   https_only = false
 
-  app_settings = local.app_settings
+  app_settings = local.app_settings_payment_manager
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
+
+  # Add health check path
+  health_check_path = "/payment-gateway/healthcheck"
 
   tags = {
     kind        = "app service",
