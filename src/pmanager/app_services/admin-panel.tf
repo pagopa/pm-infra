@@ -1,12 +1,17 @@
 module "admin-panel" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=app-service-storage-mounts"
+  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=v2.15.1"
+
+  depends_on = [
+    azurerm_subnet.unique
+  ]
 
   name = format("%s-%s", var.admin_panel_name, var.environment)
 
   ftps_state = "AllAllowed"
 
   plan_name     = format("%s-%s", var.unique_plan_name, var.environment)
-  plan_type     = "internal"
+  plan_type     = "external"
+  plan_id       = azurerm_app_service_plan.unique.id
   plan_sku_size = var.plan_sku
   plan_sku_tier = var.plan_sku_tier
   plan_kind     = var.plan_kind
@@ -20,7 +25,7 @@ module "admin-panel" {
   linux_fx_version = "${var.runtime_name}|${var.runtime_version}"
 
   # Disable enforcing https connection
-  https_only = false
+  #https_only = false
 
   # App service settings, take from locals
   app_settings = local.app_settings
@@ -39,31 +44,14 @@ module "admin-panel" {
   }
 }
 
-resource "azurerm_subnet" "admin-panel" {
-  name                 = format("pm-admin-panel-subnet-%s", var.environment)
-  resource_group_name  = data.azurerm_resource_group.rg_vnet.name
-  virtual_network_name = data.azurerm_virtual_network.vnet_outgoing.name
-  address_prefixes     = [data.azurerm_key_vault_secret.admin-panel-outgoing-subnet-address-space.value]
-  delegation {
-    name = "Microsoft.Web.serverFarms"
-
-    service_delegation {
-      actions = [
-        "Microsoft.Network/virtualNetworks/subnets/action",
-      ]
-      name = "Microsoft.Web/serverFarms"
-    }
-  }
-}
-
 resource "azurerm_app_service_virtual_network_swift_connection" "admin-panel" {
-  depends_on     = [module.admin-panel, azurerm_subnet.admin-panel]
+  depends_on     = [module.admin-panel, azurerm_subnet.unique]
   app_service_id = module.admin-panel.id
-  subnet_id      = azurerm_subnet.admin-panel.id
+  subnet_id      = azurerm_subnet.unique.id
 }
 
 resource "azurerm_private_endpoint" "admin-panel" {
-  depends_on          = [module.admin-panel]
+  depends_on          = [module.admin-panel,azurerm_subnet.unique]
   name                = format("%s-inbound-endpt", module.admin-panel.name)
   location            = data.azurerm_resource_group.rg_vnet.location
   resource_group_name = data.azurerm_resource_group.rg_vnet.name
@@ -136,7 +124,7 @@ resource "azurerm_app_service_slot_virtual_network_swift_connection" "admin-pane
   count          = var.environment != "sit" ? 1 : 0
   slot_name      = azurerm_app_service_slot.admin-panel-release[0].name
   app_service_id = module.admin-panel.id
-  subnet_id      = azurerm_subnet.admin-panel.id
+  subnet_id      = azurerm_subnet.unique.id
 }
 
 resource "azurerm_private_endpoint" "admin-panel-release" {

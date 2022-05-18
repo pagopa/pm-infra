@@ -58,6 +58,18 @@ crypto_private_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys
 crypto_public_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/publicKey.pem"
 jvm_route = "uat-agid01"
 
+##──── Payment gateway base path ─────────────────────────────────────────────────────────
+base_path_payment_gateway = "/payment-gateway/v1"
+
+##──── Payment gateway vars ──────────────────────────────────────────────────────────────
+bancomatPay_client_group_code = ""
+bancomatPay_client_institute_code = ""
+bancomatPay_client_tag = ""
+bancomatPay_client_token = ""
+bancomatPay_client_url = ""
+bancomatPay_client_timeout_ms = ""
+bancomatpay_session_timeout_s = ""
+
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
 appinsight_name = "U87-PagoPa-pci-uat-insight"
 

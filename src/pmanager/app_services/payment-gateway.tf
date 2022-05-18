@@ -1,5 +1,9 @@
 module "payment-gateway" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=app-service-storage-mounts"
+  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=v2.15.1"
+
+  depends_on = [
+    azurerm_subnet.payment-gateway
+  ]
 
   count = var.environment == "sit" ? 1 : 0
 
@@ -22,7 +26,7 @@ module "payment-gateway" {
   linux_fx_version = "${var.runtime_name}|7.3-java11"
 
   # Disable enforcing https connection
-  https_only = false
+  #https_only = false
 
   app_settings = local.app_settings_payment_manager
 
@@ -67,7 +71,7 @@ resource "azurerm_app_service_virtual_network_swift_connection" "payment-gateway
 
 resource "azurerm_private_endpoint" "payment-gateway" {
   count               = var.environment == "sit" ? 1 : 0
-  depends_on          = [module.payment-gateway]
+  depends_on          = [module.payment-gateway,azurerm_subnet.payment-gateway]
   name                = format("%s-inbound-endpt", module.payment-gateway[count.index].name)
   location            = data.azurerm_resource_group.rg_vnet.location
   resource_group_name = data.azurerm_resource_group.rg_vnet.name

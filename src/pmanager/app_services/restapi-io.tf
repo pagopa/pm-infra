@@ -1,5 +1,9 @@
 module "restapi-io" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=app-service-storage-mounts"
+  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=v2.15.1"
+
+  depends_on = [
+    azurerm_subnet.restapi-io
+  ]
 
   name = format("%s-%s", var.restapi_io_name, var.environment)
 
@@ -19,7 +23,7 @@ module "restapi-io" {
   linux_fx_version = "${var.runtime_name}|${var.runtime_version}"
 
   # Disable enforcing https connection
-  https_only = false
+  #https_only = false
 
   app_settings = local.app_settings
 
@@ -61,7 +65,7 @@ resource "azurerm_app_service_virtual_network_swift_connection" "restapi-io" {
 }
 
 resource "azurerm_private_endpoint" "restapi-io" {
-  depends_on          = [module.restapi-io]
+  depends_on          = [module.restapi-io,azurerm_subnet.restapi-io]
   name                = format("%s-inbound-endpt", module.restapi-io.name)
   location            = data.azurerm_resource_group.rg_vnet.location
   resource_group_name = data.azurerm_resource_group.rg_vnet.name

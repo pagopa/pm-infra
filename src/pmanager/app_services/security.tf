@@ -87,6 +87,11 @@ data "azurerm_key_vault_secret" "bancomat-keystore-password" {
 
 ##──── App service keys ──────────────────────────────────────────────────────────────────
 
+data "azurerm_key_vault_secret" "unique-outgoing-subnet-address-space" {
+  name         = format("%s-%s", "unique-outgoing-subnet-address-space", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
 data "azurerm_key_vault_secret" "admin-panel-outgoing-subnet-address-space" {
   name         = format("%s-%s", "admin-panel-outgoing-subnet-address-space", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
