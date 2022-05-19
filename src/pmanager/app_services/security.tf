@@ -4,9 +4,21 @@ data "azurerm_key_vault" "keyvault" {
 }
 
 ##──── Oracle databases keys ─────────────────────────────────────────────────────────────
-
+## Oracle connection
+# PP-Core
 data "azurerm_key_vault_secret" "oracle-connection-url" {
   name         = format("%s-%s", "oracle-connection-url", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+# Event registry
+data "azurerm_key_vault_secret" "event-reg-oracle-connection-url" {
+  name         = format("%s-%s", "event-reg-oracle-connection-url", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+# Event registry remote
+data "azurerm_key_vault_secret" "event-reg-remote-oracle-connection-url" {
+  name         = format("%s-%s", "event-reg-remote-oracle-connection-url", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
@@ -43,6 +55,17 @@ data "azurerm_key_vault_secret" "oracle-server-event-reg-user-password" {
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
+# EVENT REGISTRY REMOTE credential
+data "azurerm_key_vault_secret" "oracle-server-event-reg-remote-user" {
+  name         = format("%s-%s", "oracle-server-event-reg-remote-user", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+data "azurerm_key_vault_secret" "oracle-server-event-reg-remote-user-password" {
+  name         = format("%s-%s", "oracle-server-event-reg-remote-user-password", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
 ##──── PM api key ────────────────────────────────────────────────────────────────────────
 data "azurerm_key_vault_secret" "pm-api-key" {
   name         = format("%s-%s", "pm-api-key", var.environment)
@@ -63,6 +86,11 @@ data "azurerm_key_vault_secret" "bancomat-keystore-password" {
 
 
 ##──── App service keys ──────────────────────────────────────────────────────────────────
+
+data "azurerm_key_vault_secret" "unique-outgoing-subnet-address-space" {
+  name         = format("%s-%s", "unique-outgoing-subnet-address-space", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
 
 data "azurerm_key_vault_secret" "admin-panel-outgoing-subnet-address-space" {
   name         = format("%s-%s", "admin-panel-outgoing-subnet-address-space", var.environment)
@@ -100,6 +128,7 @@ data "azurerm_key_vault_secret" "restapi-io-outgoing-subnet-address-space" {
 }
 
 data "azurerm_key_vault_secret" "payment-gateway-outgoing-subnet-address-space" {
+  count = var.environment == "sit" ? 1 : 0
   name         = format("%s-%s", "payment-gateway-outgoing-subnet-address-space", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
