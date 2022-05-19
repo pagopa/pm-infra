@@ -10,6 +10,7 @@ variable "iac" {
     pipeline = {
       enable_code_review = true
       enable_deploy      = true
+      enable_release     = true
     }
   }
 }
@@ -39,6 +40,14 @@ locals {
   }
   # deploy secrets
   iac-variables_secret_deploy = {
+
+  }
+  # release vars
+  iac-variables_release = {
+
+  }
+  # release secrets
+  iac-variables_secret_release = {
 
   }
 }
@@ -95,5 +104,34 @@ module "iac_deploy" {
   ]
 }
 
-    #azuredevops_serviceendpoint_azurerm.DEV-PM.id,
-    #azuredevops_serviceendpoint_azurerm.PROD-PM.id,
+#azuredevops_serviceendpoint_azurerm.DEV-PM.id,
+#azuredevops_serviceendpoint_azurerm.PROD-PM.id,
+
+module "iac_release" {
+  source = "git::https://github.com/fabio-felici-sia/azuredevops-tf-modules.git//azuredevops_build_definition_release?ref=release-pipeline"
+  count  = var.iac.pipeline.enable_release == true ? 1 : 0
+
+  project_id                   = azuredevops_project.project.id
+  repository                   = var.iac.repository
+  github_service_connection_id = azuredevops_serviceendpoint_github.pipeline-deploy-token-rw.id
+
+  ci_trigger_use_yaml = true
+
+  variables = {
+    "SWAP"            = "false",
+    "TRAFFIC_ROUTING" = "10",
+    "APP_SERVICES"    = "pm-appsrv-admin-panel-uat pm-appsrv-batch-uat pm-appsrv-logging-uat pm-appsrv-restapi-io-uat pm-appsrv-restapi-uat pm-appsrv-rtd-uat pm-appsrv-wisp-uat"
+  }
+
+
+  variables_secret = merge(
+    local.iac-variables_secret,
+    local.iac-variables_secret_release,
+  )
+
+
+  service_connection_ids_authorization = [
+    azuredevops_serviceendpoint_github.pipeline-deploy-token-ro.id,
+    azuredevops_serviceendpoint_azurerm.UAT-PM.id,
+  ]
+}
