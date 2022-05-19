@@ -1,5 +1,9 @@
 module "restapi-io" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=app-service-storage-mounts"
+  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=v2.15.1"
+
+  depends_on = [
+    azurerm_subnet.restapi-io
+  ]
 
   name = format("%s-%s", var.restapi_io_name, var.environment)
 
@@ -19,18 +23,21 @@ module "restapi-io" {
   linux_fx_version = "${var.runtime_name}|${var.runtime_version}"
 
   # Disable enforcing https connection
-  https_only = false
+  #https_only = false
 
   app_settings = local.app_settings
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
+  # Add health check path
+  health_check_path = "/pp-restapi-CD/healthcheck"
+
   tags = {
     kind        = "app service",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
@@ -58,7 +65,7 @@ resource "azurerm_app_service_virtual_network_swift_connection" "restapi-io" {
 }
 
 resource "azurerm_private_endpoint" "restapi-io" {
-  depends_on          = [module.restapi-io]
+  depends_on          = [module.restapi-io,azurerm_subnet.restapi-io]
   name                = format("%s-inbound-endpt", module.restapi-io.name)
   location            = data.azurerm_resource_group.rg_vnet.location
   resource_group_name = data.azurerm_resource_group.rg_vnet.name
@@ -75,8 +82,8 @@ resource "azurerm_private_endpoint" "restapi-io" {
     kind        = "network",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
@@ -119,23 +126,9 @@ resource "azurerm_app_service_slot" "restapi-io-release" {
 
   app_settings = local.app_settings
 
-  storage_account {
-    name         = "appconfig-release"
-    type         = "AzureFiles"
-    account_name = azurerm_storage_account.storage.name
-    share_name   = "pm-appconfig"
-    access_key   = azurerm_storage_account.storage.primary_access_key
-    mount_path   = "/storage/appconfig"
-  }
+  # Add health check path
+  # health_check_path = "/pp-restapi-CD/healthcheck"
 
-  storage_account {
-    name         = "tools-release"
-    type         = "AzureFiles"
-    account_name = azurerm_storage_account.storage.name
-    share_name   = "pm-tools"
-    access_key   = azurerm_storage_account.storage.primary_access_key
-    mount_path   = "/storage/tools"
-  }
 
 }
 
@@ -165,8 +158,8 @@ resource "azurerm_private_endpoint" "restapi-io-release" {
     kind        = "network",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 

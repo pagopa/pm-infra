@@ -19,9 +19,12 @@ restapi_io_name = "pm-appsrv-restapi-io"
 restapi_name = "pm-appsrv-restapi"
 rtd_name = "pm-appsrv-rtd"
 wisp_name = "pm-appsrv-wisp"
+payment_gateway_name = "pm-appsrv-payment-gateway"
+
 
 # App service plan
 plan_name = "plan-pci"
+unique_plan_name = "pm-appservices-pci"
 
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 java_opts = "-Dfile.encoding=UTF-8 -Ddandelion.profile.active=prod -Dcom.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager=true"
@@ -36,10 +39,14 @@ http_log_retention_days = 7
 runtime_name = "jbosseap"
 runtime_version = "7-java8"
 
-hostname = ""
-hostname_rtd = ""
-static_hostname = ""
-nodo_spc_hostname = ""
+##──── Hostname resolution variables ─────────────────────────────────────────────────────
+hostname = "https://api.uat.platform.pagopa.it"
+hostname_rtd = "https://api.uat.platform.pagopa.it"
+static_hostname = "https://api.uat.platform.pagopa.it/"
+nodo_spc_hostname = "https://api.uat.platform.pagopa.it/nodo/nodo-per-pm/v1"
+apim_context_root = "payment-manager"
+
+##──── Other variables ───────────────────────────────────────────────────────────────────
 cittadinanza_hostname = ""
 jiffy_hostname = ""
 logging_white_list = ""
@@ -50,6 +57,18 @@ secret_key_store_path = "/ope/jboss-as/jboss/pagopa/userData/userKeys/"
 crypto_private_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/privateKey.pem"
 crypto_public_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/publicKey.pem"
 jvm_route = "uat-agid01"
+
+##──── Payment gateway base path ─────────────────────────────────────────────────────────
+base_path_payment_gateway = "/payment-gateway/v1"
+
+##──── Payment gateway vars ──────────────────────────────────────────────────────────────
+bancomatPay_client_group_code = ""
+bancomatPay_client_institute_code = ""
+bancomatPay_client_tag = ""
+bancomatPay_client_token = ""
+bancomatPay_client_url = ""
+bancomatPay_client_timeout_ms = ""
+bancomatpay_session_timeout_s = ""
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
 appinsight_name = "U87-PagoPa-pci-uat-insight"

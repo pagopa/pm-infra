@@ -6,7 +6,7 @@ Terraform template repository for infrastructures projects
 
 [![Platform](https://img.shields.io/badge/Microsoft_Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://img.shields.io/badge/Microsoft_Azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white)
 
-[![Release](https://badgen.net/badge/release/v1.1.0/green?icon=azurepipelines)](https://badgen.net/badge/:subject/:status/:color?icon=github)
+[![Release](https://badgen.net/badge/release/v1.3.0/green?icon=azurepipelines)](https://badgen.net/badge/:subject/:status/:color?icon=github)
 
 ## Requirements
 

@@ -1,65 +1,56 @@
 module "logging" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=app-service-storage-mounts"
+  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=v2.15.1"
+
+  depends_on = [
+    azurerm_subnet.unique
+  ]
 
   name = format("%s-%s", var.logging_name, var.environment)
 
   ftps_state = "AllAllowed"
 
-  plan_name     = format("%s-%s-%s", var.logging_name, var.plan_name, var.environment)
-  plan_type     = "internal"
+  plan_name     = format("%s-%s", var.unique_plan_name, var.environment)
+  plan_type     = "external"
+  plan_id       = azurerm_app_service_plan.unique.id
   plan_sku_size = var.plan_sku
   plan_sku_tier = var.plan_sku_tier
   plan_kind     = var.plan_kind
   plan_reserved = var.plan_reserved
   always_on     = "true"
+  client_cert_enabled = "true"
 
   resource_group_name = data.azurerm_resource_group.rg.name
 
   # Linux App Framework and version for the App Service.
-  linux_fx_version = "${var.runtime_name}|${var.runtime_version}"
+  linux_fx_version = "${var.runtime_name}|7.3-java8"
 
   # Disable enforcing https connection
-  https_only = false
+  #https_only = false
 
   app_settings = local.app_settings_logging
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
+  # Add health check path
+  health_check_path = "/db-logging/healthcheck"
 
   tags = {
     kind        = "app service",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
-  }
-}
-
-resource "azurerm_subnet" "logging" {
-  name                 = format("pm-logging-subnet-%s", var.environment)
-  resource_group_name  = data.azurerm_resource_group.rg_vnet.name
-  virtual_network_name = data.azurerm_virtual_network.vnet_outgoing.name
-  address_prefixes     = [data.azurerm_key_vault_secret.logging-outgoing-subnet-address-space.value]
-  delegation {
-    name = "Microsoft.Web.serverFarms"
-
-    service_delegation {
-      actions = [
-        "Microsoft.Network/virtualNetworks/subnets/action",
-      ]
-      name = "Microsoft.Web/serverFarms"
-    }
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
 resource "azurerm_app_service_virtual_network_swift_connection" "logging" {
-  depends_on     = [module.logging, azurerm_subnet.logging]
+  depends_on     = [module.logging, azurerm_subnet.unique]
   app_service_id = module.logging.id
-  subnet_id      = azurerm_subnet.logging.id
+  subnet_id      = azurerm_subnet.unique.id
 }
 
 resource "azurerm_private_endpoint" "logging" {
-  depends_on          = [module.logging]
+  depends_on          = [module.logging,azurerm_subnet.unique]
   name                = format("%s-inbound-endpt", module.logging.name)
   location            = data.azurerm_resource_group.rg_vnet.location
   resource_group_name = data.azurerm_resource_group.rg_vnet.name
@@ -76,8 +67,8 @@ resource "azurerm_private_endpoint" "logging" {
     kind        = "network",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
@@ -120,23 +111,9 @@ resource "azurerm_app_service_slot" "logging-release" {
 
   app_settings = local.app_settings_logging
 
-  storage_account {
-    name         = "appconfig-release"
-    type         = "AzureFiles"
-    account_name = azurerm_storage_account.storage.name
-    share_name   = "pm-appconfig"
-    access_key   = azurerm_storage_account.storage.primary_access_key
-    mount_path   = "/storage/appconfig"
-  }
+  # Add health check path
+  # health_check_path = "/db-logging/healthcheck"
 
-  storage_account {
-    name         = "tools-release"
-    type         = "AzureFiles"
-    account_name = azurerm_storage_account.storage.name
-    share_name   = "pm-tools"
-    access_key   = azurerm_storage_account.storage.primary_access_key
-    mount_path   = "/storage/tools"
-  }
 
 }
 
@@ -144,7 +121,7 @@ resource "azurerm_app_service_slot_virtual_network_swift_connection" "logging-re
   count          = var.environment != "sit" ? 1 : 0
   slot_name      = azurerm_app_service_slot.logging-release[0].name
   app_service_id = module.logging.id
-  subnet_id      = azurerm_subnet.logging.id
+  subnet_id      = azurerm_subnet.unique.id
 }
 
 resource "azurerm_private_endpoint" "logging-release" {
@@ -166,8 +143,8 @@ resource "azurerm_private_endpoint" "logging-release" {
     kind        = "network",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 

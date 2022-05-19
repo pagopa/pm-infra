@@ -9,14 +9,21 @@ terraform {
   required_providers {
     azuredevops = {
       source  = "microsoft/azuredevops"
-      version = "= 0.1.4"
+      version = ">=0.1.0"
     }
     azurerm = {
+      source  = "hashicorp/azurerm"
       version = "~> 2.52.0"
     }
   }
 }
 
+
 provider "azurerm" {
   features {}
+}
+
+provider "azuredevops" {
+  org_service_url       = "https://dev.azure.com/sia-dds"
+  personal_access_token = "64q3wfgx34yya7ggxzo47s2mp3np7qu2bclbh5rtsqtzxgyv7vfa"
 }

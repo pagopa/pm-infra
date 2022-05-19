@@ -1,5 +1,9 @@
 module "wisp" {
-  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=app-service-storage-mounts"
+  source = "git::https://github.com/pagopa/azurerm.git//app_service?ref=v2.15.1"
+
+  depends_on = [
+    azurerm_subnet.wisp
+  ]
 
   name = format("%s-%s", var.wisp_name, var.environment)
 
@@ -19,19 +23,21 @@ module "wisp" {
   linux_fx_version = "${var.runtime_name}|${var.runtime_version}"
 
   # Disable enforcing https connection
-  https_only = false
+  #https_only = false
 
   app_settings = local.app_settings
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 
+  # Add health check path
+  health_check_path = "/wallet/healthcheck"
 
   tags = {
     kind        = "app service",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
@@ -60,7 +66,7 @@ resource "azurerm_app_service_virtual_network_swift_connection" "wisp" {
 }
 
 resource "azurerm_private_endpoint" "wisp" {
-  depends_on          = [module.wisp]
+  depends_on          = [module.wisp, azurerm_subnet.wisp]
   name                = format("%s-inbound-endpt", module.wisp.name)
   location            = data.azurerm_resource_group.rg_vnet.location
   resource_group_name = data.azurerm_resource_group.rg_vnet.name
@@ -77,8 +83,8 @@ resource "azurerm_private_endpoint" "wisp" {
     kind        = "app service",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
@@ -121,23 +127,9 @@ resource "azurerm_app_service_slot" "wisp-release" {
 
   app_settings = local.app_settings
 
-  storage_account {
-    name         = "appconfig-release"
-    type         = "AzureFiles"
-    account_name = azurerm_storage_account.storage.name
-    share_name   = "pm-appconfig"
-    access_key   = azurerm_storage_account.storage.primary_access_key
-    mount_path   = "/storage/appconfig"
-  }
+  # Add health check path
+  # health_check_path = "/wallet/healthcheck"
 
-  storage_account {
-    name         = "tools-release"
-    type         = "AzureFiles"
-    account_name = azurerm_storage_account.storage.name
-    share_name   = "pm-tools"
-    access_key   = azurerm_storage_account.storage.primary_access_key
-    mount_path   = "/storage/tools"
-  }
 
 }
 
@@ -167,8 +159,8 @@ resource "azurerm_private_endpoint" "wisp-release" {
     kind        = "network",
     environment = var.environment,
     standard    = var.standard,
-    TS_Code    = var.tsi,
-    CreatedBy = "Terraform"
+    TS_Code     = var.tsi,
+    CreatedBy   = "Terraform"
   }
 }
 
