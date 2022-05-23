@@ -1,12 +1,11 @@
-resource "azurerm_resource_group" "appgw_rg" {
+data "azurerm_resource_group" "appgw_rg" {
   name     = var.appgw_rg
-  location = var.location
 }
 
 resource "azurerm_public_ip" "publicip" {
   name                = format("pm-appsrv-%s-public-ip", var.environment)
-  resource_group_name = azurerm_resource_group.appgw_rg.name
-  location            = azurerm_resource_group.appgw_rg.location
+  resource_group_name = data.azurerm_resource_group.appgw_rg.name
+  location            = data.azurerm_resource_group.appgw_rg.location
   allocation_method   = "Static"
   sku                 = "Standard"
   tags = {
@@ -19,18 +18,22 @@ resource "azurerm_public_ip" "publicip" {
 }
 
 resource "azurerm_subnet" "appgw_subnet" {
-  name                 = format("%s-%s", var.appgw_subnet_name, var.environment)
+  name                 = format("%s-subnet-%s", var.appgw_subnet_name, var.environment)
   resource_group_name  = data.azurerm_resource_group.rg_vnet.name
   virtual_network_name = var.vnet_outgoing_name
   address_prefixes     = [data.azurerm_key_vault_secret.appgw-subnet-address-space.value]
 }
 
+locals {
+  s4s_address = split(",", data.azurerm_key_vault_secret.s4s-address.value)
+}
+
 resource "azurerm_application_gateway" "appgw" {
   # depends_on          = [module.web_app, azurerm_private_endpoint.inbound-endpt]
   enable_http2        = false
-  location            = azurerm_resource_group.appgw_rg.location
-  name                = "${var.appgw_name}-${var.environment}"
-  resource_group_name = azurerm_resource_group.appgw_rg.name
+  location            = data.azurerm_resource_group.appgw_rg.location
+  name                = format("%s-PM-AppGateway-%s-%s", var.prefix, var.standard, var.environment)
+  resource_group_name = data.azurerm_resource_group.appgw_rg.name
 
   tags = {
     kind        = "network",
@@ -96,6 +99,18 @@ resource "azurerm_application_gateway" "appgw" {
     name = module.wisp.name
   }
 
+    backend_address_pool {
+    fqdns = [
+      format("%s.azurewebsites.net", "pm-appsrv-payment-gateway-${var.environment}")
+    ]    
+    name  = "pm-appsrv-payment-gateway-${var.environment}"
+  }
+
+  backend_address_pool {
+    ip_addresses = local.s4s_address
+    name         = "s4sonprem"
+  }
+
   backend_http_settings {
     affinity_cookie_name  = "ApplicationGatewayAffinity"
     cookie_based_affinity = "Enabled"
@@ -106,6 +121,16 @@ resource "azurerm_application_gateway" "appgw" {
     protocol                            = "Http"
     request_timeout                     = 20
     trusted_root_certificate_names      = []
+  }
+
+  backend_http_settings {
+    cookie_based_affinity               = "Disabled"
+    name                                = "s4shttp"
+    pick_host_name_from_backend_address = "false"
+    port                                = "8240"
+    probe_name                          = "s4sprobe"
+    protocol                            = "Http"
+    request_timeout                     = "120"
   }
 
   frontend_ip_configuration {
@@ -134,9 +159,13 @@ resource "azurerm_application_gateway" "appgw" {
     port = 8181
   }
   frontend_port {
-    name = "port_8282"
-    port = 8282
+    name = "port_8240"
+    port = "8240"
   }
+  # frontend_port {
+  #   name = "port_8282"
+  #   port = 8282
+  # }
 
   gateway_ip_configuration {
     name      = "appGatewayIpConfig"
@@ -144,7 +173,7 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   http_listener {
-    frontend_ip_configuration_name = azurerm_public_ip.publicip.name
+    frontend_ip_configuration_name = "pm-${var.environment}-feip"
     frontend_port_name             = "port_80"
     name                           = "pm-${var.environment}-listener"
     protocol                       = "Http"
@@ -153,18 +182,40 @@ resource "azurerm_application_gateway" "appgw" {
   http_listener {
     frontend_ip_configuration_name = "pm-${var.environment}-feip"
     frontend_port_name             = "port_8080"
-    name                           = "pm-${var.environment}-private-listener"
+    name                           = "listener_private_context"
     protocol                       = "Http"
     require_sni                    = false
   }
+
+  http_listener {
+    frontend_ip_configuration_name = "pm-${var.environment}-feip"
+    frontend_port_name             = "port_8240"
+    name                           = "s4s_gateway"
+    protocol                       = "Http"
+    require_sni                    = "false"
+  }
+
   # http_listener {
   #   frontend_ip_configuration_name = "pm-${var.environment}-feip"
   #   frontend_port_name             = "port_8282"
   #   name                           = "pm-${var.environment}-private-listener"
   #   protocol                       = "Http"
-  #   require_sni                    = false
+  #   require_sni                    = "false"
   # }
 
+  # S4S Probe
+  probe {
+    host                                      = "127.0.0.1"
+    interval                                  = "30"
+    minimum_servers                           = "0"
+    name                                      = "s4sprobe"
+    path                                      = "/"
+    pick_host_name_from_backend_http_settings = "false"
+    #port                                      = "0"
+    protocol                                  = "Http"
+    timeout                                   = "30"
+    unhealthy_threshold                       = "3"
+  }
 
   probe {
     #host                                      = var.backend_http_settings_host_name
@@ -185,135 +236,145 @@ resource "azurerm_application_gateway" "appgw" {
     }
   }
 
-  rewrite_rule_set {
-    name = "rewrite_location"
-
-    rewrite_rule {
-      name          = "NewRewrite"
-      rule_sequence = 100
-
-      condition {
-        ignore_case = true
-        negate      = false
-        pattern     = "(https?):\\/\\/.*azurewebsites\\.net/(.*)$"
-        variable    = "http_resp_Location"
-      }
-
-      response_header_configuration {
-        header_name  = "Location"
-        header_value = "{http_resp_Location_1}://api.dev.platform.pagopa.it/{http_resp_Location_2}"
-      }
-    }
-    rewrite_rule {
-      name          = "NewRewrite"
-      rule_sequence = 100
-
-      condition {
-        ignore_case = true
-        negate      = false
-        pattern     = "(https?):\\/\\/.*:80/(.*)$"
-        variable    = "http_resp_Location"
-      }
-
-      response_header_configuration {
-        header_name  = "Location"
-        header_value = "https://api.dev.platform.pagopa.it/{http_resp_Location_2}"
-      }
-    }
-    rewrite_rule {
-      name          = "NewRewrite"
-      rule_sequence = 100
-
-      condition {
-        ignore_case = true
-        negate      = false
-        pattern     = "(.*)Domain=pm-appsrv-admin-panel-sit.azurewebsites.net"
-        variable    = "http_resp_Set-Cookie"
-      }
-
-      response_header_configuration {
-        header_name  = "Set-Cookie"
-        header_value = "{http_resp_Set-Cookie_1};Domain=api.dev.platform.pagopa.it"
-      }
-    }
-  }
-  rewrite_rule_set {
-    name = "rewrite_private_context"
-
-    rewrite_rule {
-      name          = "Riscrivi Dominio"
-      rule_sequence = 100
-
-      condition {
-        ignore_case = true
-        negate      = false
-        pattern     = "(https?):\\/\\/.*azurewebsites\\.net/(.*)$"
-        variable    = "http_resp_Location"
-      }
-
-      response_header_configuration {
-        header_name  = "Location"
-        header_value = "https://${data.azurerm_key_vault_secret.apim-public-ip.value}/{http_resp_Location_2}"
-      }
-    }
-    rewrite_rule {
-      name          = "Elimina Porta 80"
-      rule_sequence = 100
-
-      condition {
-        ignore_case = true
-        negate      = false
-        pattern     = "(https?):\\/\\/.*:80/(.*)$"
-        variable    = "http_resp_Location"
-      }
-
-      response_header_configuration {
-        header_name  = "Location"
-        header_value = "https://${data.azurerm_key_vault_secret.apim-public-ip.value}/{http_resp_Location_2}"
-      }
-    }
-  }
-  # request_routing_rule { TODO: REVISIONE
-  #   http_listener_name = "listener_private_context"
-  #   name               = "routing_private_context"
-  #   priority           = 0
-  #   rule_type          = "PathBasedRouting"
-  #   url_path_map_name  = "routing_private_context"
-  # }
-  # request_routing_rule {
-  #   backend_address_pool_name  = "pm-jboss-sit"
-  #   backend_http_settings_name = "pm-sit-http-setting"
-  #   http_listener_name         = "pm-sit-listener"
-  #   name                       = "pm-sit-routing"
-  #   priority                   = 0
-  #   rule_type                  = "Basic"
-  # }
-  # request_routing_rule {
-  #   backend_address_pool_name  = "pm-jboss-sit"
-  #   backend_http_settings_name = "pm-sit-http-setting"
-  #   http_listener_name         = "pm-sit-private-listener"
-  #   name                       = "pm-sit-routing-private"
-  #   priority                   = 0
-  #   rewrite_rule_set_name      = "rewrite_private"
-  #   rule_type                  = "Basic"
-  # }
-
   request_routing_rule {
     backend_address_pool_name  = "${var.backend_address_pool_name}-${var.environment}"
     backend_http_settings_name = "pm-${var.environment}-http-setting"
     http_listener_name         = "pm-${var.environment}-listener"
     name                       = "pm-${var.environment}-routing"
-    rewrite_rule_set_name      = "rewrite_location"
+    rewrite_rule_set_name      = "rewrite_private"
+    rule_type                  = "Basic"
+    priority                   = "3"
+  }
+
+  # request_routing_rule {
+  #   backend_address_pool_name  = "${var.backend_address_pool_name}-${var.environment}"
+  #   backend_http_settings_name = "pm-${var.environment}-http-setting"
+  #   http_listener_name         = "pm-${var.environment}-private-listener"
+  #   name                       = "pm-${var.environment}-routing-private"
+  #   rewrite_rule_set_name      = "rewrite_private_context"
+  #   rule_type                  = "PathBasedRouting"
+  #   url_path_map_name          = "routing_private_context"
+  #   priority                   = "2"
+  # }
+
+  request_routing_rule {
+    backend_address_pool_name  = "s4sonprem"
+    backend_http_settings_name = "s4shttp"
+    http_listener_name         = "s4s_gateway"
+    name                       = "s4srouting"
+    priority                   = "5"
     rule_type                  = "Basic"
   }
+
   request_routing_rule {
-    backend_address_pool_name  = "${var.backend_address_pool_name}-${var.environment}"
-    backend_http_settings_name = "pm-${var.environment}-http-setting"
-    http_listener_name         = "pm-${var.environment}-private-listener"
-    name                       = "pm-${var.environment}-routing-private"
-    rewrite_rule_set_name      = "rewrite_private_context"
-    rule_type                  = "PathBasedRouting"
-    url_path_map_name          = "routing_private_context"
+    http_listener_name = "listener_private_context"
+    name               = "routing_private_context"
+    priority           = "1"
+    rule_type          = "PathBasedRouting"
+    url_path_map_name  = "routing_private_context"
+  }
+
+  rewrite_rule_set {
+    name = "rewrite_private"
+
+    rewrite_rule {
+      condition {
+        ignore_case = "true"
+        negate      = "false"
+        pattern     = "(.*)Domain=pm-appsrv-admin-panel-sit.azurewebsites.net"
+        variable    = "http_resp_Set-Cookie"
+      }
+
+      name = "NewRewrite"
+
+      response_header_configuration {
+        header_name  = "Set-Cookie"
+        header_value = "{http_resp_Set-Cookie_1};Domain=api.dev.platform.pagopa.it"
+      }
+
+      rule_sequence = "100"
+    }
+
+    rewrite_rule {
+      condition {
+        ignore_case = "true"
+        negate      = "false"
+        pattern     = "(https?):\\/\\/.*:80/(.*)$"
+        variable    = "http_resp_Location"
+      }
+
+      name = "NewRewrite"
+
+      response_header_configuration {
+        header_name  = "Location"
+        header_value = "https://api.dev.platform.pagopa.it/{http_resp_Location_2}"
+      }
+
+      rule_sequence = "100"
+    }
+
+    rewrite_rule {
+      condition {
+        ignore_case = "true"
+        negate      = "false"
+        pattern     = "(https?):\\/\\/.*azurewebsites\\.net/(.*)$"
+        variable    = "http_resp_Location"
+      }
+
+      name = "NewRewrite"
+
+      response_header_configuration {
+        header_name  = "Location"
+        header_value = "https://api.dev.platform.pagopa.it/{http_resp_Location_2}"
+      }
+
+      rule_sequence = "100"
+    }
+  }
+
+  rewrite_rule_set {
+    name = "rewrite_private_context"
+
+    rewrite_rule {
+      condition {
+        ignore_case = "true"
+        negate      = "false"
+        pattern     = "(https?):\\/\\/.*:80/(.*)$"
+        variable    = "http_resp_Location"
+      }
+
+      name = "NewRewrite"
+
+      response_header_configuration {
+        header_name  = "Location"
+        header_value = "https://api.dev.platform.pagopa.it/{http_resp_Location_2}"
+      }
+
+      rule_sequence = "100"
+    }
+
+    rewrite_rule {
+      condition {
+        ignore_case = "true"
+        negate      = "false"
+        pattern     = "(https?):\\/\\/.*azurewebsites\\.net/(.*)$"
+        variable    = "http_resp_Location"
+      }
+
+      name = "NewRewrite"
+
+      response_header_configuration {
+        header_name  = "Location"
+        header_value = "https://api.dev.platform.pagopa.it/{http_resp_Location_2}"
+      }
+
+      rule_sequence = "100"
+    }
+  }
+
+  ssl_policy {
+    policy_name = "AppGwSslPolicy20150501"
+    policy_type = "Predefined"
   }
 
   url_path_map {
@@ -331,8 +392,8 @@ resource "azurerm_application_gateway" "appgw" {
       ]
       rewrite_rule_set_name = "rewrite_private_context"
     }
-    path_rule { # TODO: Da verificare
-      backend_address_pool_name  = format("pm-jboss-%s", var.environment)
+    path_rule {
+      backend_address_pool_name  = module.admin-panel.name
       backend_http_settings_name = "pm-${var.environment}-http-setting"
       name                       = "admin-panel"
       paths = [
@@ -394,13 +455,20 @@ resource "azurerm_application_gateway" "appgw" {
       ]
       rewrite_rule_set_name = "rewrite_private_context"
     }
+    path_rule {
+      backend_address_pool_name  = "pm-appsrv-payment-gateway-${var.environment}"
+      backend_http_settings_name = "pm-${var.environment}-http-setting"
+      name                       = "payment-gateway"
+      paths                      = ["/payment-gateway/*"]
+      rewrite_rule_set_name      = "rewrite_private_context"
+    }
   }
 
 
   sku {
     capacity = var.appgw_sku_capacity
-    name     = var.appgw_sku_size
-    tier     = var.appgw_sku_size
+    name     = "WAF_v2"
+    tier     = "WAF_v2"
   }
 
   timeouts {}

@@ -1,0 +1,160 @@
+# only manual
+trigger: none
+pr: none
+
+parameters:
+  - name: 'ENVIRONMENT'
+    displayName: 'Run on selected environment'
+    type: string
+    default: uat
+    values:
+      - uat
+      - prod
+  - name: "METHOD"
+    displayName: "METHOD"
+    type: string
+    default: TRAFFIC_ROUTING
+    values:
+      - TRAFFIC_ROUTING
+      - SWAP
+  - name: "TRAFFIC_ROUTING_VALUE_PERCENT"
+    displayName: "TRAFFIC_ROUTING_VALUE_PERCENT" 
+    type: number
+    default: 10
+  - name: "ADMIN_PANEL"
+    displayName: "admin-panel"
+    type: boolean
+    default: False
+    values:
+      - True
+      - False
+  - name: "BATCH"
+    displayName: "batch"
+    type: boolean
+    default: False
+    values:
+      - True
+      - False
+  - name: "LOGGING"
+    displayName: "logging"
+    type: boolean
+    default: False
+    values:
+      - True
+      - False
+  - name: "PAYMENT_GATEWAY"
+    displayName: "payment-gateway"
+    type: boolean
+    default: False
+    values:
+      - True
+      - False
+  - name: "RESTAPI_IO"
+    displayName: "restapi-io"
+    type: boolean
+    default: False
+    values:
+      - True
+      - False
+  - name: "RESTAPI"
+    displayName: "restapi"
+    type: boolean
+    default: False
+    values:
+      - True
+      - False
+  - name: "RTD"
+    displayName: "rtd"
+    type: boolean
+    default: False
+    values:
+      - True
+      - False
+  - name: "WISP"
+    displayName: "wisp"
+    type: boolean
+    default: False
+    values:
+      - True
+      - False
+
+
+variables:
+  TIME_OUT: 5
+
+pool:
+  vmImage: 'ubuntu-20.04'
+
+stages:
+  - stage: set_app_routing
+    jobs: 
+      - job: release_routing
+        steps:
+          - task: AzureCLI@2
+            displayName: 'RELEASE APP SERVICE TASK'
+            inputs:
+              azureSubscription: 'U87-PagoPa-PCI-uat(e7feb90c-fcc2-40a2-ba56-d68ec301c6c0)'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: | 
+                APP_SERVICES=()
+                if [ ${{ parameters.ENVIRONMENT }} == "uat" ]; then
+                    DEPLOY_SUBSCRIPTION="U87-PagoPa-PCI-uat"
+                    DEPLOY_RG="U87-PM-AppServices-pci-uat"
+                elif [ ${{ parameters.ENVIRONMENT }} == "prod" ]; then
+                    DEPLOY_SUBSCRIPTION="-none"
+                    DEPLOY_RG="-none"
+                else
+                    echo "BAD Environment!"
+                    exit 1
+                fi
+                if [ ${{ parameters.ADMIN_PANEL }} == "True" ]; then 
+                    APP_SERVICES+=("pm-appsrv-admin-panel-"${{ parameters.ENVIRONMENT }})
+                fi
+                if [ ${{ parameters.BATCH }} == "True" ]; then 
+                    APP_SERVICES+=("pm-appsrv-batch-"${{ parameters.ENVIRONMENT }})
+                fi
+                if [ ${{ parameters.LOGGING }} == "True" ]; then 
+                    APP_SERVICES+=("pm-appsrv-logging-"${{ parameters.ENVIRONMENT }})
+                fi
+                if [ ${{ parameters.PAYMENT_GATEWAY }} == "True" ]; then 
+                    APP_SERVICES+=("pm-appsrv-payment-gateway-"${{ parameters.ENVIRONMENT }})
+                fi
+                if [ ${{ parameters.RESTAPI_IO }} == "True" ]; then 
+                    APP_SERVICES+=("pm-appsrv-restapi-io-"${{ parameters.ENVIRONMENT }})
+                fi
+                if [ ${{ parameters.RESTAPI }} == "True" ]; then 
+                    APP_SERVICES+=("pm-appsrv-restapi-"${{ parameters.ENVIRONMENT }})
+                fi
+                if [ ${{ parameters.RTD }} == "True" ]; then 
+                    APP_SERVICES+=("pm-appsrv-rtd-"${{ parameters.ENVIRONMENT }})
+                fi
+                if [ ${{ parameters.WISP }} == "True" ]; then 
+                    APP_SERVICES+=("pm-appsrv-wisp-"${{ parameters.ENVIRONMENT }})
+                fi
+                if [ ${{ parameters.METHOD }} == "TRAFFIC_ROUTING" ]; then
+                    for app in ${APP_SERVICES[@]}; do
+                        echo "Set routing to -> ${{ parameters.TRAFFIC_ROUTING_VALUE_PERCENT }} of $app"
+                        az webapp traffic-routing set --distribution release=${{ parameters.TRAFFIC_ROUTING_VALUE_PERCENT }} \
+                            --name $app \
+                            --resource-group $DEPLOY_RG \
+                            --subscription $DEPLOY_SUBSCRIPTION
+                        if $[ "$?" == "0" ]; then
+                            echo "ROUTED $app"
+                        fi  
+                    done
+                elif [ ${{ parameters.METHOD }} == "SWAP" ]; then
+                    for app in ${APP_SERVICES[@]}; do
+                        echo "SWAPPING $app"
+                        az webapp deployment slot swap -s release \
+                            --name $app \
+                            --resource-group $DEPLOY_RG \
+                            --subscription $DEPLOY_SUBSCRIPTION
+                        if $[ "$?" == "0" ]; then
+                            echo "SWAPPED $app"
+                        fi                      
+                    done
+                else
+                    "BAD Choice!"
+                    exit 1
+                fi

@@ -154,3 +154,8 @@ data "azurerm_key_vault_secret" "apim-public-ip" {
   name         = format("%s-%s", "apim-public-ip", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
+
+data "azurerm_key_vault_secret" "s4s-address" {
+  name         = format("%s-%s", "s4s-address", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}

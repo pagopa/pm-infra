@@ -4,6 +4,7 @@ location = "westeurope"
 environment = "uat"
 standard = "pci"
 tsi = "TS00555"
+prefix = "U87"
 
 ##──── App service definition plan ───────────────────────────────────────────────────────
 plan_sku = "P1v3"
@@ -105,12 +106,12 @@ private_link_dns_zone_rg = "U87-NetworkResources-pci-uat"
 
 ##──── Application Gateway variables ─────────────────────────────────────────────────────
 ## APPGTW Resource group
-appgw_rg = "U87-PM-ApplicationGateway-pci-uat"
+appgw_rg = "U87-AppGateway-pci-uat"
 appgw_name = "pm-appgw"
 backend_address_pool_name = "pm-jboss"
 backend_http_settings_host_name = "ddsappservices-pm.azurewebsites.net"
-appgw_subnet_name = "pm-appgtw"
-appgw_sku_size = "WAF_v2"
+appgw_subnet_name = "pm-appgw"
+appgw_sku_size = "WAF_Medium"
 appgw_sku_capacity = "1"
 
 ##──── Key vault variables ───────────────────────────────────────────────────────────────
