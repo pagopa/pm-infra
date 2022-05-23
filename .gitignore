@@ -37,3 +37,6 @@ __TMP
 __azurite_*
 
 .terraform.lock*
+
+# Exsclude terraformer
+**/generated

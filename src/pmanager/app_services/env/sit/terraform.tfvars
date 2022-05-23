@@ -4,6 +4,7 @@ location = "westeurope"
 environment = "sit"
 standard = "no-pci"
 tsi = "TS00555"
+prefix = "DDS"
 
 ##──── App service definition plan ───────────────────────────────────────────────────────
 #name = ["pm-appsrv-wisp", "pm-appsrv-restapi", "pm-appsrv-restapi-io", "pm-appsrv-admin-panel", "pm-appsrv-batch", "pm-appsrv-logging", "pm-appsrv-rtd"]

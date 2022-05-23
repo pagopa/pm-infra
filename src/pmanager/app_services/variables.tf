@@ -27,6 +27,10 @@ variable "tsi" {
   default     = ""
 }
 
+variable "prefix" {
+  type    = string
+}
+
 variable "location" {
   type        = string
   description = "Location to deploy the resoruce group"

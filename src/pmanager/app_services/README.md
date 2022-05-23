@@ -101,7 +101,6 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_private_endpoint.wisp](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.wisp-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
 | [azurerm_public_ip.publicip](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/public_ip) | resource |
-| [azurerm_resource_group.appgw_rg](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/resource_group) | resource |
 | [azurerm_subnet.appgw_subnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.payment-gateway](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.restapi](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
@@ -134,9 +133,11 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_key_vault_secret.restapi-io-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.restapi-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.rtd-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault_secret.s4s-address](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.unique-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.wisp-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_private_dns_zone.zone](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/private_dns_zone) | data source |
+| [azurerm_resource_group.appgw_rg](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.rg_vnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.rg_zone](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/resource_group) | data source |
@@ -198,6 +199,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | <a name="input_plan_reserved"></a> [plan\_reserved](#input\_plan\_reserved) | (Optional) Is this App Service Plan Reserved. Defaults to false. | `string` | `"false"` | no |
 | <a name="input_plan_sku"></a> [plan\_sku](#input\_plan\_sku) | The sku of app service plan to create | `string` | n/a | yes |
 | <a name="input_plan_sku_tier"></a> [plan\_sku\_tier](#input\_plan\_sku\_tier) | The sku tier of app service plan to create | `string` | n/a | yes |
+| <a name="input_prefix"></a> [prefix](#input\_prefix) | n/a | `string` | n/a | yes |
 | <a name="input_private_link_dns_zone"></a> [private\_link\_dns\_zone](#input\_private\_link\_dns\_zone) | n/a | `string` | n/a | yes |
 | <a name="input_private_link_dns_zone_rg"></a> [private\_link\_dns\_zone\_rg](#input\_private\_link\_dns\_zone\_rg) | n/a | `string` | n/a | yes |
 | <a name="input_restapi_io_name"></a> [restapi\_io\_name](#input\_restapi\_io\_name) | Admin Panel app service name | `string` | n/a | yes |
