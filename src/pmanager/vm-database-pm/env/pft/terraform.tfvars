@@ -21,7 +21,7 @@ key_vault_rg = "U87-KMN-VaultResources-uat-pci"
 vmrg = "U87-Databases-pci-uat"
 
 ## Virtual machine name
-vm_name = "ldbpmst"
+vm_name = "ldbpmspt"
 
 ## Virtual machine count
 vm_count = "2"
