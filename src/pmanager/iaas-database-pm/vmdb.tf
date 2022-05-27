@@ -26,6 +26,7 @@ resource "azurerm_network_interface" "vm_nic" {
   name                = format("%s0%s-nic-%s", var.vm_name, count.index + 1, var.environment)
   location            = data.azurerm_resource_group.rg_vnet.location
   resource_group_name = data.azurerm_resource_group.rg_vnet.name
+  enable_accelerated_networking = true
 
   ip_configuration {
     name                          = "internal"

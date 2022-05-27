@@ -109,16 +109,13 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_subnet.wisp](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
 | [azurerm_application_insights.appinsight](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/application_insights) | data source |
 | [azurerm_key_vault.keyvault](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault) | data source |
-| [azurerm_key_vault_secret.admin-panel-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.apim-public-ip](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.appgw-private-ip-address](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.appgw-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.bancomat-keystore-password](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
-| [azurerm_key_vault_secret.batch-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.event-reg-oracle-connection-url](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.event-reg-remote-oracle-connection-url](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.log-interceptor-pattern](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
-| [azurerm_key_vault_secret.logging-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.oracle-connection-url](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.oracle-server-agid-user](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.oracle-server-agid-user-password](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
@@ -132,7 +129,6 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_key_vault_secret.pm-api-key](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.restapi-io-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.restapi-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
-| [azurerm_key_vault_secret.rtd-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.s4s-address](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.unique-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.wisp-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
@@ -152,6 +148,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | <a name="input_admin_panel_name"></a> [admin\_panel\_name](#input\_admin\_panel\_name) | Admin Panel app service name | `string` | n/a | yes |
 | <a name="input_apim_context_root"></a> [apim\_context\_root](#input\_apim\_context\_root) | n/a | `string` | n/a | yes |
 | <a name="input_app_command_line"></a> [app\_command\_line](#input\_app\_command\_line) | Provide an optional startup command that will be run as part of container startup. | `string` | `""` | no |
+| <a name="input_appgw_context"></a> [appgw\_context](#input\_appgw\_context) | Application gateway dynamic context | `list(string)` | <pre>[<br>  ""<br>]</pre> | no |
 | <a name="input_appgw_name"></a> [appgw\_name](#input\_appgw\_name) | Application gateway name | `string` | n/a | yes |
 | <a name="input_appgw_rg"></a> [appgw\_rg](#input\_appgw\_rg) | Application gateway reource group | `string` | n/a | yes |
 | <a name="input_appgw_sku_capacity"></a> [appgw\_sku\_capacity](#input\_appgw\_sku\_capacity) | # Sku capacity | `string` | n/a | yes |
