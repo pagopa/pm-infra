@@ -28,7 +28,7 @@ variable "tsi" {
 }
 
 variable "prefix" {
-  type    = string
+  type = string
 }
 
 variable "location" {
@@ -305,6 +305,14 @@ variable "appgw_rg" {
   type        = string
   description = "Application gateway reource group"
 }
+
+## APPGTW Context dynamic
+variable "appgw_context" {
+  type        = list(string)
+  description = "Application gateway dynamic context"
+  default     = [""]
+}
+
 ## APPGTW name
 variable "appgw_name" {
   type        = string

@@ -65,7 +65,7 @@ resource "azurerm_app_service_virtual_network_swift_connection" "restapi-io" {
 }
 
 resource "azurerm_private_endpoint" "restapi-io" {
-  depends_on          = [module.restapi-io,azurerm_subnet.restapi-io]
+  depends_on          = [module.restapi-io, azurerm_subnet.restapi-io]
   name                = format("%s-inbound-endpt", module.restapi-io.name)
   location            = data.azurerm_resource_group.rg_vnet.location
   resource_group_name = data.azurerm_resource_group.rg_vnet.name

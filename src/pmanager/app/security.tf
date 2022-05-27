@@ -92,30 +92,30 @@ data "azurerm_key_vault_secret" "unique-outgoing-subnet-address-space" {
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
-data "azurerm_key_vault_secret" "admin-panel-outgoing-subnet-address-space" {
-  name         = format("%s-%s", "admin-panel-outgoing-subnet-address-space", var.environment)
-  key_vault_id = data.azurerm_key_vault.keyvault.id
-}
+# data "azurerm_key_vault_secret" "admin-panel-outgoing-subnet-address-space" {
+#   name         = format("%s-%s", "admin-panel-outgoing-subnet-address-space", var.environment)
+#   key_vault_id = data.azurerm_key_vault.keyvault.id
+# }
 
 data "azurerm_key_vault_secret" "wisp-outgoing-subnet-address-space" {
   name         = format("%s-%s", "wisp-outgoing-subnet-address-space", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
-data "azurerm_key_vault_secret" "rtd-outgoing-subnet-address-space" {
-  name         = format("%s-%s", "rtd-outgoing-subnet-address-space", var.environment)
-  key_vault_id = data.azurerm_key_vault.keyvault.id
-}
+# data "azurerm_key_vault_secret" "rtd-outgoing-subnet-address-space" {
+#   name         = format("%s-%s", "rtd-outgoing-subnet-address-space", var.environment)
+#   key_vault_id = data.azurerm_key_vault.keyvault.id
+# }
 
-data "azurerm_key_vault_secret" "logging-outgoing-subnet-address-space" {
-  name         = format("%s-%s", "logging-outgoing-subnet-address-space", var.environment)
-  key_vault_id = data.azurerm_key_vault.keyvault.id
-}
+# data "azurerm_key_vault_secret" "logging-outgoing-subnet-address-space" {
+#   name         = format("%s-%s", "logging-outgoing-subnet-address-space", var.environment)
+#   key_vault_id = data.azurerm_key_vault.keyvault.id
+# }
 
-data "azurerm_key_vault_secret" "batch-outgoing-subnet-address-space" {
-  name         = format("%s-%s", "batch-outgoing-subnet-address-space", var.environment)
-  key_vault_id = data.azurerm_key_vault.keyvault.id
-}
+# data "azurerm_key_vault_secret" "batch-outgoing-subnet-address-space" {
+#   name         = format("%s-%s", "batch-outgoing-subnet-address-space", var.environment)
+#   key_vault_id = data.azurerm_key_vault.keyvault.id
+# }
 
 data "azurerm_key_vault_secret" "restapi-outgoing-subnet-address-space" {
   name         = format("%s-%s", "restapi-outgoing-subnet-address-space", var.environment)
@@ -128,7 +128,7 @@ data "azurerm_key_vault_secret" "restapi-io-outgoing-subnet-address-space" {
 }
 
 data "azurerm_key_vault_secret" "payment-gateway-outgoing-subnet-address-space" {
-  count = var.environment == "sit" ? 1 : 0
+  count        = var.environment == "sit" ? 1 : 0
   name         = format("%s-%s", "payment-gateway-outgoing-subnet-address-space", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }

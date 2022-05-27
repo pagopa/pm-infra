@@ -9,14 +9,14 @@ module "batch" {
 
   ftps_state = "AllAllowed"
 
-  plan_name     = format("%s-%s", var.unique_plan_name, var.environment)
-  plan_type     = "external"
-  plan_id       = azurerm_app_service_plan.unique.id
-  plan_sku_size = var.plan_sku
-  plan_sku_tier = var.plan_sku_tier
-  plan_kind     = var.plan_kind
-  plan_reserved = var.plan_reserved
-  always_on     = "true"
+  plan_name           = format("%s-%s", var.unique_plan_name, var.environment)
+  plan_type           = "external"
+  plan_id             = azurerm_app_service_plan.unique.id
+  plan_sku_size       = var.plan_sku
+  plan_sku_tier       = var.plan_sku_tier
+  plan_kind           = var.plan_kind
+  plan_reserved       = var.plan_reserved
+  always_on           = "true"
   client_cert_enabled = "true"
 
   resource_group_name = data.azurerm_resource_group.rg.name
@@ -52,7 +52,7 @@ resource "azurerm_app_service_virtual_network_swift_connection" "batch" {
 
 
 resource "azurerm_private_endpoint" "batch" {
-  depends_on          = [module.batch,azurerm_subnet.unique]
+  depends_on          = [module.batch, azurerm_subnet.unique]
   name                = format("%s-inbound-endpt", module.batch.name)
   location            = data.azurerm_resource_group.rg_vnet.location
   resource_group_name = data.azurerm_resource_group.rg_vnet.name

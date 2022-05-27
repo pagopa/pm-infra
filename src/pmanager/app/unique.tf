@@ -1,5 +1,5 @@
 resource "azurerm_app_service_plan" "unique" {
-  name     = format("%s-%s", var.unique_plan_name, var.environment)
+  name                = format("%s-%s", var.unique_plan_name, var.environment)
   location            = var.location
   resource_group_name = data.azurerm_resource_group.rg.name
   kind                = "Linux"

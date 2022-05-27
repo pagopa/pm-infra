@@ -43,33 +43,33 @@ runtime_version = "7-java8"
 ##──── Hostname resolution variables ─────────────────────────────────────────────────────
 hostname = "https://api.uat.platform.pagopa.it"
 hostname_rtd = "https://api.uat.platform.pagopa.it"
-static_hostname = "https://api.uat.platform.pagopa.it/"
+static_hostname = "https://acardste.vaservices.eu/"
 nodo_spc_hostname = "https://api.uat.platform.pagopa.it/nodo/nodo-per-pm/v1"
 apim_context_root = "payment-manager"
 
 ##──── Other variables ───────────────────────────────────────────────────────────────────
-cittadinanza_hostname = ""
-jiffy_hostname = ""
-logging_white_list = ""
-bancomat_keystore_location = ""
-cors_allowed_origins = ""
-spring_profile = ""
-secret_key_store_path = "/ope/jboss-as/jboss/pagopa/userData/userKeys/"
-crypto_private_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/privateKey.pem"
-crypto_public_server_key_path = "/ope/jboss-as/jboss/pagopa/userData/serverKeys/publicKey.pem"
+cittadinanza_hostname = "https://app-backend.io.italia.it/"
+jiffy_hostname = "https://app-te.vaservices.eu/p2penginectx/F1/services/ConsultazioneCrossServices"
+logging_white_list = "permitAll"
+bancomat_keystore_location = "/home/site/appconfig/Bancomat/certificati/keyBancomat.jks"
+cors_allowed_origins = "https://uat.checkout.pagopa.it"
+spring_profile = "uat-azure"
+secret_key_store_path = "/home/site/appconfig/userData/userKeys/"
+crypto_private_server_key_path = "/home/site/appconfig/userData/serverKeys/privateKey.pem"
+crypto_public_server_key_path = "/home/site/appconfig/userData/serverKeys/publicKey.pem"
 jvm_route = "uat-agid01"
 
 ##──── Payment gateway base path ─────────────────────────────────────────────────────────
 base_path_payment_gateway = "/payment-gateway/v1"
 
 ##──── Payment gateway vars ──────────────────────────────────────────────────────────────
-bancomatPay_client_group_code = ""
-bancomatPay_client_institute_code = ""
-bancomatPay_client_tag = ""
-bancomatPay_client_token = ""
-bancomatPay_client_url = ""
-bancomatPay_client_timeout_ms = ""
-bancomatpay_session_timeout_s = ""
+bancomatPay_client_group_code = "12928"
+bancomatPay_client_institute_code = "12928"
+bancomatPay_client_tag = "VB573BC"
+bancomatPay_client_token = "Pa8UiKAoWqdeqtjqJmaX7n1jKLMPwqsbAa4nkVCrupKU2yb0bq"
+bancomatPay_client_url = "https://app-te.vaservices.eu:446/p2b-enginectx/services/PagoPaServices"
+bancomatPay_client_timeout_ms = "5000"
+bancomatpay_session_timeout_s = "60"
 
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
 appinsight_name = "U87-PagoPa-pci-uat-insight"
@@ -107,6 +107,7 @@ private_link_dns_zone_rg = "U87-NetworkResources-pci-uat"
 ##──── Application Gateway variables ─────────────────────────────────────────────────────
 ## APPGTW Resource group
 appgw_rg = "U87-AppGateway-pci-uat"
+appgw_context = ["uat", "pft"]
 appgw_name = "pm-appgw"
 backend_address_pool_name = "pm-jboss"
 backend_http_settings_host_name = "ddsappservices-pm.azurewebsites.net"
