@@ -28,7 +28,7 @@ module "payment-gateway" {
   # Disable enforcing https connection
   #https_only = false
 
-  app_settings = local.app_settings_payment_manager
+  app_settings = local.app_settings_payment_gateway
 
   app_command_line = "/home/site/deployments/tools/startup_script.sh"
 

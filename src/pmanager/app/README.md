@@ -54,7 +54,6 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_app_service_virtual_network_swift_connection.restapi-io](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_virtual_network_swift_connection) | resource |
 | [azurerm_app_service_virtual_network_swift_connection.rtd](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_virtual_network_swift_connection) | resource |
 | [azurerm_app_service_virtual_network_swift_connection.wisp](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_virtual_network_swift_connection) | resource |
-| [azurerm_application_gateway.appgw](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/application_gateway) | resource |
 | [azurerm_private_dns_a_record.admin-panel](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
 | [azurerm_private_dns_a_record.admin-panel-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
 | [azurerm_private_dns_a_record.admin-panel-scm](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
@@ -100,8 +99,6 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_private_endpoint.rtd-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.wisp](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.wisp-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
-| [azurerm_public_ip.publicip](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/public_ip) | resource |
-| [azurerm_subnet.appgw_subnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.payment-gateway](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.restapi](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.restapi-io](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
@@ -112,6 +109,10 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_key_vault_secret.apim-public-ip](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.appgw-private-ip-address](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.appgw-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault_secret.azureAuth_client_postepay_client_id](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault_secret.azureAuth_client_postepay_client_secret](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault_secret.azureAuth_client_postepay_scope](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
+| [azurerm_key_vault_secret.azureAuth_client_postepay_url](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.bancomat-keystore-password](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.event-reg-oracle-connection-url](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.event-reg-remote-oracle-connection-url](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
@@ -133,7 +134,6 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_key_vault_secret.unique-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.wisp-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_private_dns_zone.zone](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/private_dns_zone) | data source |
-| [azurerm_resource_group.appgw_rg](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.rg_vnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.rg_zone](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/resource_group) | data source |
@@ -158,6 +158,10 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | <a name="input_appinsight_instrumentation_key"></a> [appinsight\_instrumentation\_key](#input\_appinsight\_instrumentation\_key) | Instrumentation key var for manual connection | `string` | n/a | yes |
 | <a name="input_appinsight_name"></a> [appinsight\_name](#input\_appinsight\_name) | Application insight name | `string` | n/a | yes |
 | <a name="input_appinsight_rg"></a> [appinsight\_rg](#input\_appinsight\_rg) | Application insight resource group | `string` | n/a | yes |
+| <a name="input_azureAuth_client_maxPerRoute"></a> [azureAuth\_client\_maxPerRoute](#input\_azureAuth\_client\_maxPerRoute) | n/a | `string` | n/a | yes |
+| <a name="input_azureAuth_client_maxTotal"></a> [azureAuth\_client\_maxTotal](#input\_azureAuth\_client\_maxTotal) | n/a | `string` | n/a | yes |
+| <a name="input_azureAuth_client_postepay_enabled"></a> [azureAuth\_client\_postepay\_enabled](#input\_azureAuth\_client\_postepay\_enabled) | #──── application gateway postpay ─────────────────────────────────────────────────────── | `string` | n/a | yes |
+| <a name="input_azureAuth_client_timeout_ms"></a> [azureAuth\_client\_timeout\_ms](#input\_azureAuth\_client\_timeout\_ms) | n/a | `string` | n/a | yes |
 | <a name="input_backend_address_pool_name"></a> [backend\_address\_pool\_name](#input\_backend\_address\_pool\_name) | #  Backend address pool NAME | `string` | n/a | yes |
 | <a name="input_backend_http_settings_host_name"></a> [backend\_http\_settings\_host\_name](#input\_backend\_http\_settings\_host\_name) | # backend HTTP settings host name | `string` | n/a | yes |
 | <a name="input_bancomatPay_client_group_code"></a> [bancomatPay\_client\_group\_code](#input\_bancomatPay\_client\_group\_code) | n/a | `string` | n/a | yes |
@@ -196,6 +200,12 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | <a name="input_plan_reserved"></a> [plan\_reserved](#input\_plan\_reserved) | (Optional) Is this App Service Plan Reserved. Defaults to false. | `string` | `"false"` | no |
 | <a name="input_plan_sku"></a> [plan\_sku](#input\_plan\_sku) | The sku of app service plan to create | `string` | n/a | yes |
 | <a name="input_plan_sku_tier"></a> [plan\_sku\_tier](#input\_plan\_sku\_tier) | The sku tier of app service plan to create | `string` | n/a | yes |
+| <a name="input_postepay_clientId_APP_config"></a> [postepay\_clientId\_APP\_config](#input\_postepay\_clientId\_APP\_config) | n/a | `string` | n/a | yes |
+| <a name="input_postepay_clientId_WEB_config"></a> [postepay\_clientId\_WEB\_config](#input\_postepay\_clientId\_WEB\_config) | n/a | `string` | n/a | yes |
+| <a name="input_postepay_client_timeout_ms"></a> [postepay\_client\_timeout\_ms](#input\_postepay\_client\_timeout\_ms) | n/a | `string` | n/a | yes |
+| <a name="input_postepay_client_url"></a> [postepay\_client\_url](#input\_postepay\_client\_url) | n/a | `string` | n/a | yes |
+| <a name="input_postepay_notificationURL"></a> [postepay\_notificationURL](#input\_postepay\_notificationURL) | n/a | `string` | n/a | yes |
+| <a name="input_postepay_pgs_response_urlredirect"></a> [postepay\_pgs\_response\_urlredirect](#input\_postepay\_pgs\_response\_urlredirect) | n/a | `string` | n/a | yes |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | n/a | `string` | n/a | yes |
 | <a name="input_private_link_dns_zone"></a> [private\_link\_dns\_zone](#input\_private\_link\_dns\_zone) | n/a | `string` | n/a | yes |
 | <a name="input_private_link_dns_zone_rg"></a> [private\_link\_dns\_zone\_rg](#input\_private\_link\_dns\_zone\_rg) | n/a | `string` | n/a | yes |

@@ -233,6 +233,48 @@ variable "base_path_payment_gateway" {
   type = string
 }
 
+##──── application gateway postpay ───────────────────────────────────────────────────────
+variable "azureAuth_client_postepay_enabled" {
+  type = string
+}
+
+variable "azureAuth_client_maxTotal" {
+  type = string
+}
+
+variable "azureAuth_client_maxPerRoute" {
+  type = string
+}
+
+variable "azureAuth_client_timeout_ms" {
+  type = string
+}
+
+variable "postepay_client_url" {
+  type = string
+}
+
+variable "postepay_client_timeout_ms" {
+  type = string
+}
+
+variable "postepay_notificationURL" {
+  type = string
+}
+
+variable "postepay_clientId_APP_config" {
+  type = string
+}
+
+variable "postepay_clientId_WEB_config" {
+  type = string
+}
+
+
+variable "postepay_pgs_response_urlredirect" {
+  type = string
+}
+
 ##──── APP Service runtime config ────────────────────────────────────────────────────────
 
 ## Name

@@ -5,40 +5,54 @@
 ##========================================================================================
 
 locals {
-  tz                                 = "Europe/Rome"
-  java_opts                          = var.java_opts
-  lang                               = var.system_encoding
-  saml_idp_spidregistry_metadata_url = "/home/site/appconfig/spid-entities-idps_local.xml"
-  saml_keystore_location             = "file:/home/site/appconfig/saml_spid_sit.jks"
-  saml_metadata_sp_filepath          = "/home/site/appconfig/sp_metadata.xml"
-  saml_sp_metadata                   = "/home/site/appconfig/sp_metadata.xml"
-  spring_profiles_active             = var.spring_profile
-  hostname_pm                        = var.hostname
-  hostname_rtd                       = var.hostname_rtd
-  static_hostname                    = var.static_hostname
-  apim_context_root                  = var.apim_context_root
-  nodo_spc_hostname                  = var.nodo_spc_hostname
-  cittadinanza_hostname              = var.cittadinanza_hostname
-  jiffy_hostname                     = var.jiffy_hostname
-  logging_white_list                 = var.logging_white_list
-  bancomat_keystore_location         = var.bancomat_keystore_location
-  bancomat_keystore_password         = data.azurerm_key_vault_secret.bancomat-keystore-password.value
-  cors_allowed_origins               = var.cors_allowed_origins
-  hsm_activation_flag                = true
-  log_interceptor_pattern            = data.azurerm_key_vault_secret.log-interceptor-pattern.value
-  secret_key_store_path              = var.secret_key_store_path
-  crypto_private_server_key_path     = var.crypto_private_server_key_path
-  crypto_public_server_key_path      = var.crypto_public_server_key_path
-  com_sun_mamangement_jmxremote_ssl  = false
-  jvm_route                          = var.jvm_route
-  bancomatPay_client_group_code      = var.bancomatPay_client_group_code
-  bancomatPay_client_institute_code  = var.bancomatPay_client_institute_code
-  bancomatPay_client_tag             = var.bancomatPay_client_tag
-  bancomatPay_client_token           = var.bancomatPay_client_token
-  bancomatPay_client_url             = var.bancomatPay_client_url
-  bancomatPay_client_timeout_ms      = var.bancomatPay_client_timeout_ms
-  bancomatpay_session_timeout_s      = var.bancomatpay_session_timeout_s
-  base_path_payment_gateway          = var.base_path_payment_gateway
+  tz                                      = "Europe/Rome"
+  java_opts                               = var.java_opts
+  lang                                    = var.system_encoding
+  saml_idp_spidregistry_metadata_url      = "/home/site/appconfig/spid-entities-idps_local.xml"
+  saml_keystore_location                  = "file:/home/site/appconfig/saml_spid_sit.jks"
+  saml_metadata_sp_filepath               = "/home/site/appconfig/sp_metadata.xml"
+  saml_sp_metadata                        = "/home/site/appconfig/sp_metadata.xml"
+  spring_profiles_active                  = var.spring_profile
+  hostname_pm                             = var.hostname
+  hostname_rtd                            = var.hostname_rtd
+  static_hostname                         = var.static_hostname
+  apim_context_root                       = var.apim_context_root
+  nodo_spc_hostname                       = var.nodo_spc_hostname
+  cittadinanza_hostname                   = var.cittadinanza_hostname
+  jiffy_hostname                          = var.jiffy_hostname
+  logging_white_list                      = var.logging_white_list
+  bancomat_keystore_location              = var.bancomat_keystore_location
+  bancomat_keystore_password              = data.azurerm_key_vault_secret.bancomat-keystore-password.value
+  cors_allowed_origins                    = var.cors_allowed_origins
+  hsm_activation_flag                     = true
+  log_interceptor_pattern                 = data.azurerm_key_vault_secret.log-interceptor-pattern.value
+  secret_key_store_path                   = var.secret_key_store_path
+  crypto_private_server_key_path          = var.crypto_private_server_key_path
+  crypto_public_server_key_path           = var.crypto_public_server_key_path
+  com_sun_mamangement_jmxremote_ssl       = false
+  jvm_route                               = var.jvm_route
+  bancomatPay_client_group_code           = var.bancomatPay_client_group_code
+  bancomatPay_client_institute_code       = var.bancomatPay_client_institute_code
+  bancomatPay_client_tag                  = var.bancomatPay_client_tag
+  bancomatPay_client_token                = var.bancomatPay_client_token
+  bancomatPay_client_url                  = var.bancomatPay_client_url
+  bancomatPay_client_timeout_ms           = var.bancomatPay_client_timeout_ms
+  bancomatpay_session_timeout_s           = var.bancomatpay_session_timeout_s
+  base_path_payment_gateway               = var.base_path_payment_gateway
+  azureAuth_client_postepay_enabled       = var.azureAuth_client_postepay_enabled
+  azureAuth_client_postepay_url           = data.azurerm_key_vault_secret.azureAuth_client_postepay_url.value
+  azureAuth_client_postepay_scope         = data.azurerm_key_vault_secret.azureAuth_client_postepay_scope.value
+  azureAuth_client_postepay_client_id     = data.azurerm_key_vault_secret.azureAuth_client_postepay_client_id.value
+  azureAuth_client_postepay_client_secret = data.azurerm_key_vault_secret.azureAuth_client_postepay_client_secret.value
+  azureAuth_client_maxTotal               = var.azureAuth_client_maxTotal
+  azureAuth_client_maxPerRoute            = var.azureAuth_client_maxPerRoute
+  azureAuth_client_timeout_ms             = var.azureAuth_client_timeout_ms
+  postepay_client_url                     = var.postepay_client_url
+  postepay_client_timeout_ms              = var.postepay_client_timeout_ms
+  postepay_notificationURL                = var.postepay_notificationURL
+  postepay_clientId_APP_config            = var.postepay_clientId_APP_config
+  postepay_clientId_WEB_config            = var.postepay_clientId_WEB_config
+  postepay_pgs_response_urlredirect       = var.postepay_pgs_response_urlredirect
 }
 
 ##──── connection parameters ─────────────────────────────────────────────────────────────
@@ -407,9 +421,9 @@ locals {
   }
 }
 
-##──── PAYMENT MANGER config ─────────────────────────────────────────────────────────────
+##──── PAYMENT GATEWAY config ─────────────────────────────────────────────────────────────
 locals {
-  app_settings_payment_manager = {
+  app_settings_payment_gateway = {
     TZ                                                    = local.tz
     JAVA_OPTS                                             = local.java_opts
     LANG                                                  = local.lang
@@ -477,6 +491,20 @@ locals {
     BANCOMATPAY_CLIENT_URL                                = local.bancomatPay_client_url
     BANCOMATPAY_CLIENT_TIMEOUT_MS                         = local.bancomatPay_client_timeout_ms
     BANCOMATPAY_SESSION_TIMEOUT_S                         = local.bancomatpay_session_timeout_s
+    AZUREAUTH_CLIENT_POSTEPAY_ENABLED                     = local.azureAuth_client_postepay_enabled
+    AZUREAUTH_CLIENT_POSTEPAY_URL                         = local.azureAuth_client_postepay_url
+    AZUREAUTH_CLIENT_POSTEPAY_SCOPE                       = local.azureAuth_client_postepay_scope
+    AZUREAUTH_CLIENT_POSTEPAY_CLIENT_ID                   = local.azureAuth_client_postepay_client_id
+    AZUREAUTH_CLIENT_POSTEPAY_CLIENT_SECRET               = local.azureAuth_client_postepay_client_secret
+    AZUREAUTH_CLIENT_MAXTOTAL                             = local.azureAuth_client_maxTotal
+    AZUREAUTH_CLIENT_MAXPERROUTE                          = local.azureAuth_client_maxPerRoute
+    AZUREAUTH_CLIENT_TIMEOUT_MS                           = local.azureAuth_client_timeout_ms
+    POSTEPAY_CLIENT_URL                                   = local.postepay_client_url
+    POSTEPAY_CLIENT_TIMEOUT_MS                            = local.postepay_client_timeout_ms
+    POSTEPAY_NOTIFICATIONURL                              = local.postepay_notificationURL
+    POSTEPAY_CLIENTID_APP_CONFIG                          = local.postepay_clientId_APP_config
+    POSTEPAY_CLIENTID_WEB_CONFIG                          = local.postepay_clientId_WEB_config
+    POSTEPAY_PGS_RESPONSE_URLREDIRECT                     = local.postepay_pgs_response_urlredirect
   }
 }
 

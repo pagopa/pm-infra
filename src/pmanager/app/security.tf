@@ -159,3 +159,27 @@ data "azurerm_key_vault_secret" "s4s-address" {
   name         = format("%s-%s", "s4s-address", var.environment)
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
+
+data "azurerm_key_vault_secret" "azureAuth_client_postepay_url" {
+  name         = format("%s-%s", "azureAuth-client-postepay-url", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+data "azurerm_key_vault_secret" "azureAuth_client_postepay_scope" {
+  name         = format("%s-%s", "azureAuth-client-postepay-scope", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+data "azurerm_key_vault_secret" "azureAuth_client_postepay_client_id" {
+  name         = format("%s-%s", "azureAuth-client-postepay-client-id", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+data "azurerm_key_vault_secret" "azureAuth_client_postepay_client_secret" {
+  name         = format("%s-%s", "azureAuth-client-postepay-client-secret", var.environment)
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+
+
+
+

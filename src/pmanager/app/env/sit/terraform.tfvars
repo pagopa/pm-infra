@@ -71,6 +71,18 @@ bancomatPay_client_url = "https://api.dev.platform.pagopa.it/mock-psp/api/bpay"
 bancomatPay_client_timeout_ms = "5000"
 bancomatpay_session_timeout_s = "60"
 
+##──── application gateway postpay ───────────────────────────────────────────────────────
+azureAuth_client_postepay_enabled = "true"
+azureAuth_client_maxTotal = "1000"
+azureAuth_client_maxPerRoute = "1000"
+azureAuth_client_timeout_ms = "5000"
+postepay_client_url = "https://api.dev.platform.pagopa.it/mock-psp/api/postepay"
+postepay_client_timeout_ms = "5000"
+postepay_notificationURL = "https://api.dev.platform.pagopa.it/payment-manager/payment-gateway/v1/request-payments/postepay"
+postepay_clientId_APP_config = "shopIdTmp_APP|APP|IMMEDIATA|"
+postepay_clientId_WEB_config = "shopIdTmp_WEB|WEB|IMMEDIATA|https://portal.test.pagopa.gov.it/pmmockserviceapi/home"
+postepay_pgs_response_urlredirect = "https://api.dev.platform.pagopa.it/payment-transactions-gateway/v1/webview/authRequest?requestId="
+
 ##──── Application Insight Variable ──────────────────────────────────────────────────────
 appinsight_name = ""
 
