@@ -3,66 +3,93 @@ data "azurerm_key_vault" "keyvault" {
   resource_group_name = var.key_vault_rg
 }
 
-##──── Oracle databases keys ─────────────────────────────────────────────────────────────
-## Oracle connection
-# PP-Core
-data "azurerm_key_vault_secret" "oracle-connection-url" {
-  name         = format("%s-%s", "oracle-connection-url", var.environment)
+##========================================================================================
+##                                                                                      ##
+## Oracle databases secrets                                                             ##
+##                                                                                      ##
+##========================================================================================
+
+##──── # Oracle connection Event Registry # ─────────────────────────────────────────────
+data "azurerm_key_vault_secret" "db-event-registry-url-simple" {
+  name         = format("%s-%s", var.environment, "db-event-registry-url-simple")
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
-# Event registry
-data "azurerm_key_vault_secret" "event-reg-oracle-connection-url" {
-  name         = format("%s-%s", "event-reg-oracle-connection-url", var.environment)
+data "azurerm_key_vault_secret" "db-event-registry-username" {
+  name         = format("%s-%s", var.environment, "db-event-registry-username")
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+data "azurerm_key_vault_secret" "db-event-registry-password" {
+  name         = format("%s-%s", var.environment, "db-event-registry-password")
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
-# Event registry remote
-data "azurerm_key_vault_secret" "event-reg-remote-oracle-connection-url" {
-  name         = format("%s-%s", "event-reg-remote-oracle-connection-url", var.environment)
+ ##──── # Oracle connection AGID # ────────────────────────────────────────────────────────
+data "azurerm_key_vault_secret" "db-agid-url-simple" {
+  name         = format("%s-%s", var.environment, "db-agid-url-simple")
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+data "azurerm_key_vault_secret" "db-agid-username" {
+  name         = format("%s-%s", var.environment, "db-agid-username")
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+data "azurerm_key_vault_secret" "db-agid-password" {
+  name         = format("%s-%s", var.environment, "db-agid-password")
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
-# PP credential
-data "azurerm_key_vault_secret" "oracle-server-agid-user" {
-  name         = format("%s-%s", "oracle-server-agid-user", var.environment)
+##──── # Oracle connection NODO # ────────────────────────────────────────────────────────
+data "azurerm_key_vault_secret" "db-re-nodo-url-simple" {
+  name         = format("%s-%s", var.environment, "db-re-nodo-url-simple")
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+data "azurerm_key_vault_secret" "db-re-nodo-username" {
+  name         = format("%s-%s", var.environment, "db-re-nodo-username")
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+data "azurerm_key_vault_secret" "db-re-nodo-password" {
+  name         = format("%s-%s", var.environment, "db-re-nodo-password")
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
-data "azurerm_key_vault_secret" "oracle-server-agid-user-password" {
-  name         = format("%s-%s", "oracle-server-agid-user-password", var.environment)
+ ##──── # Oracle connection NODO STORICO # ────────────────────────────────────────────────
+data "azurerm_key_vault_secret" "db-re-nodo-storico-url-simple" {
+  name         = format("%s-%s", var.environment, "db-re-nodo-storico-url-simple")
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+data "azurerm_key_vault_secret" "db-re-nodo-storico-username" {
+  name         = format("%s-%s", var.environment, "db-re-nodo-storico-username")
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+data "azurerm_key_vault_secret" "db-re-nodo-storico-password" {
+  name         = format("%s-%s", var.environment, "db-re-nodo-storico-password")
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
-# RTD credential
-data "azurerm_key_vault_secret" "oracle-server-rtd-user" {
-  name         = format("%s-%s", "oracle-server-rtd-user", var.environment)
+##──── # Oracle connection RTD # ─────────────────────────────────────────────────────────
+data "azurerm_key_vault_secret" "db-rtd-url-simple" {
+  name         = format("%s-%s", var.environment, "db-rtd-url-simple")
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+data "azurerm_key_vault_secret" "db-rtd-username" {
+  name         = format("%s-%s", var.environment, "db-rtd-username")
+  key_vault_id = data.azurerm_key_vault.keyvault.id
+}
+data "azurerm_key_vault_secret" "db-rtd-password" {
+  name         = format("%s-%s", var.environment, "db-rtd-password")
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
-data "azurerm_key_vault_secret" "oracle-server-rtd-user-password" {
-  name         = format("%s-%s", "oracle-server-rtd-user-password", var.environment)
+##──── # Oracle connection PGS # ─────────────────────────────────────────────────────────
+data "azurerm_key_vault_secret" "db-pgs-url-simple" {
+  name         = format("%s-%s", var.environment, "db-pgs-url-simple")
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
-
-# EVENT REGISTRY credential
-data "azurerm_key_vault_secret" "oracle-server-event-reg-user" {
-  name         = format("%s-%s", "oracle-server-event-reg-user", var.environment)
+data "azurerm_key_vault_secret" "db-pgs-username" {
+  name         = format("%s-%s", var.environment, "db-pgs-username")
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
-
-data "azurerm_key_vault_secret" "oracle-server-event-reg-user-password" {
-  name         = format("%s-%s", "oracle-server-event-reg-user-password", var.environment)
-  key_vault_id = data.azurerm_key_vault.keyvault.id
-}
-
-# EVENT REGISTRY REMOTE credential
-data "azurerm_key_vault_secret" "oracle-server-event-reg-remote-user" {
-  name         = format("%s-%s", "oracle-server-event-reg-remote-user", var.environment)
-  key_vault_id = data.azurerm_key_vault.keyvault.id
-}
-
-data "azurerm_key_vault_secret" "oracle-server-event-reg-remote-user-password" {
-  name         = format("%s-%s", "oracle-server-event-reg-remote-user-password", var.environment)
+data "azurerm_key_vault_secret" "db-pgs-password" {
+  name         = format("%s-%s", var.environment, "db-pgs-password")
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
