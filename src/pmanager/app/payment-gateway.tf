@@ -24,7 +24,7 @@ module "payment-gateway" {
 
   # Linux App Framework and version for the App Service.
   # this app service required java 11
-  linux_fx_version = "${var.runtime_name}|7.3-java11"
+  linux_fx_version = "${var.runtime_name}|7.3.9-java11"
 
   # Disable enforcing https connection
   #https_only = false
@@ -127,7 +127,7 @@ resource "azurerm_app_service_slot" "payment-gateway-release" {
     # Add health check path
     health_check_path = "/payment-gateway/healthcheck"
     always_on         = "true"
-    linux_fx_version  = "${var.runtime_name}|7.3-java11"
+    linux_fx_version  = "${var.runtime_name}|7.3.9-java11"
   }
 
   app_settings = local.app_settings_payment_gateway

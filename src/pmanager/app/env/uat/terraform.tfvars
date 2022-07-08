@@ -25,7 +25,7 @@ payment_gateway_name = "pm-appsrv-payment-gateway"
 
 # App service plan
 plan_name = "plan-pci"
-unique_plan_name = "pm-appservices-pci"
+unique_plan_name = "pm-appsrv-plan-pci"
 
 ##──── JAVA OPTS ─────────────────────────────────────────────────────────────────────────
 java_opts = "-Dfile.encoding=UTF-8 -Ddandelion.profile.active=prod -Dcom.sun.jersey.server.impl.cdi.lookupExtensionInBeanManager=true"
@@ -38,7 +38,7 @@ http_log_retention_days = 7
 
 ##──── APP Service runtime config ────────────────────────────────────────────────────────
 runtime_name = "jbosseap"
-runtime_version = "7-java8"
+runtime_version = "7.3.9-java8"
 
 ##──── Hostname resolution variables ─────────────────────────────────────────────────────
 hostname = "https://api.uat.platform.pagopa.it"

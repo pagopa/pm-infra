@@ -22,7 +22,7 @@ module "rtd" {
   resource_group_name = data.azurerm_resource_group.rg.name
 
   # Linux App Framework and version for the App Service.
-  linux_fx_version = "${var.runtime_name}|7.3-java8"
+  linux_fx_version = "${var.runtime_name}|${var.runtime_version}"
 
   # Disable enforcing https connection
   #https_only = false
@@ -104,9 +104,10 @@ resource "azurerm_app_service_slot" "rtd-release" {
   app_service_plan_id = module.rtd.plan_id
 
   site_config {
-    app_command_line = format("/storage/tools/%s-release/startup_script.sh", var.rtd_name)
+    app_command_line = "/home/site/deployments/tools/startup_script.sh"
     always_on        = "true"
-    linux_fx_version = "jbosseap|7-java8"
+    # Linux App Framework and version for the App Service.
+    linux_fx_version = "${var.runtime_name}|${var.runtime_version}"
   }
 
   app_settings = local.app_settings_rtd
