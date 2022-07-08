@@ -35,6 +35,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_app_service_slot.admin-panel-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot) | resource |
 | [azurerm_app_service_slot.batch-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot) | resource |
 | [azurerm_app_service_slot.logging-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot) | resource |
+| [azurerm_app_service_slot.payment-gateway-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot) | resource |
 | [azurerm_app_service_slot.restapi-io-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot) | resource |
 | [azurerm_app_service_slot.restapi-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot) | resource |
 | [azurerm_app_service_slot.rtd-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot) | resource |
@@ -42,6 +43,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_app_service_slot_virtual_network_swift_connection.admin-panel-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot_virtual_network_swift_connection) | resource |
 | [azurerm_app_service_slot_virtual_network_swift_connection.batch-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot_virtual_network_swift_connection) | resource |
 | [azurerm_app_service_slot_virtual_network_swift_connection.logging-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot_virtual_network_swift_connection) | resource |
+| [azurerm_app_service_slot_virtual_network_swift_connection.payment-gateway-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot_virtual_network_swift_connection) | resource |
 | [azurerm_app_service_slot_virtual_network_swift_connection.restapi-io-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot_virtual_network_swift_connection) | resource |
 | [azurerm_app_service_slot_virtual_network_swift_connection.restapi-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot_virtual_network_swift_connection) | resource |
 | [azurerm_app_service_slot_virtual_network_swift_connection.rtd-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_slot_virtual_network_swift_connection) | resource |
@@ -54,6 +56,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_app_service_virtual_network_swift_connection.restapi-io](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_virtual_network_swift_connection) | resource |
 | [azurerm_app_service_virtual_network_swift_connection.rtd](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_virtual_network_swift_connection) | resource |
 | [azurerm_app_service_virtual_network_swift_connection.wisp](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/app_service_virtual_network_swift_connection) | resource |
+| [azurerm_application_gateway.appgw](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/application_gateway) | resource |
 | [azurerm_private_dns_a_record.admin-panel](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
 | [azurerm_private_dns_a_record.admin-panel-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
 | [azurerm_private_dns_a_record.admin-panel-scm](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
@@ -67,7 +70,9 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_private_dns_a_record.logging-scm](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
 | [azurerm_private_dns_a_record.logging-scm-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
 | [azurerm_private_dns_a_record.payment-gateway](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
+| [azurerm_private_dns_a_record.payment-gateway-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
 | [azurerm_private_dns_a_record.payment-gateway-scm](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
+| [azurerm_private_dns_a_record.payment-gateway-scm-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
 | [azurerm_private_dns_a_record.restapi](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
 | [azurerm_private_dns_a_record.restapi-io](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
 | [azurerm_private_dns_a_record.restapi-io-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_dns_a_record) | resource |
@@ -91,6 +96,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_private_endpoint.logging](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.logging-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.payment-gateway](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
+| [azurerm_private_endpoint.payment-gateway-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.restapi](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.restapi-io](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.restapi-io-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
@@ -99,7 +105,8 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_private_endpoint.rtd-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.wisp](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
 | [azurerm_private_endpoint.wisp-release](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/private_endpoint) | resource |
-| [azurerm_subnet.payment-gateway](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
+| [azurerm_public_ip.publicip](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/public_ip) | resource |
+| [azurerm_subnet.appgw_subnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.restapi](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.restapi-io](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
 | [azurerm_subnet.unique](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/resources/subnet) | resource |
@@ -126,7 +133,6 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_key_vault_secret.oracle-server-event-reg-user-password](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.oracle-server-rtd-user](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.oracle-server-rtd-user-password](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
-| [azurerm_key_vault_secret.payment-gateway-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.pm-api-key](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.restapi-io-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.restapi-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
@@ -134,6 +140,7 @@ Terraform payment manager provisiong repository for Big Data & Cloud Development
 | [azurerm_key_vault_secret.unique-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_key_vault_secret.wisp-outgoing-subnet-address-space](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/key_vault_secret) | data source |
 | [azurerm_private_dns_zone.zone](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/private_dns_zone) | data source |
+| [azurerm_resource_group.appgw_rg](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.rg](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.rg_vnet](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/resource_group) | data source |
 | [azurerm_resource_group.rg_zone](https://registry.terraform.io/providers/hashicorp/azurerm/2.94.0/docs/data-sources/resource_group) | data source |

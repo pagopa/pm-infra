@@ -127,11 +127,10 @@ data "azurerm_key_vault_secret" "restapi-io-outgoing-subnet-address-space" {
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
-data "azurerm_key_vault_secret" "payment-gateway-outgoing-subnet-address-space" {
-  count        = var.environment == "sit" ? 1 : 0
-  name         = format("%s-%s", "payment-gateway-outgoing-subnet-address-space", var.environment)
-  key_vault_id = data.azurerm_key_vault.keyvault.id
-}
+# data "azurerm_key_vault_secret" "payment-gateway-outgoing-subnet-address-space" {
+#   name         = format("%s-%s", "payment-gateway-outgoing-subnet-address-space", var.environment)
+#   key_vault_id = data.azurerm_key_vault.keyvault.id
+# }
 
 #data "azurerm_key_vault_secret" "inbound-subnet-address-space" {
 #  name         = format("%s-%s", "inbound-subnet-address-space", var.environment)
