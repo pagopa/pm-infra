@@ -44,7 +44,7 @@ resources:
     - repository: terraform
       type: github
       name: pagopa/azure-pipeline-templates
-      ref: refs/tags/v17
+      ref: refs/tags/v19
       endpoint: 'pipeline-deploy-token-ro'
 
 stages:
