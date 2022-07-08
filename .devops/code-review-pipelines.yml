@@ -2,6 +2,7 @@ pr:
   branches:
     include:
       - main
+      - stable
   paths:
     include:
       - 'src/*'
@@ -79,17 +80,6 @@ stages:
         steps:
           # 1. Install terraform and terragrunt
           - template: templates/terraform-setup/template.yaml@terraform
-      - job: terraform_plan_network
-        dependsOn: terraform_install
-        timeoutInMinutes: $[variables.TIME_OUT]
-        steps:
-          - checkout: self
-          # 2. Run terragrunt plan
-          - template: templates/terraform-plan/template.yaml@terraform
-            parameters:
-              SUBSCRIPTION: UAT-PM-SERVICE-CONN
-              ENVIRONMENT: uat
-              WORKINGDIR: 'src/pmanager/network'
       - job: terraform_plan_appservices
         dependsOn: terraform_install
         timeoutInMinutes: $[variables.TIME_OUT]
@@ -100,29 +90,8 @@ stages:
             parameters:
               SUBSCRIPTION: UAT-PM-SERVICE-CONN
               ENVIRONMENT: uat
-              WORKINGDIR: 'src/pmanager/app_services'
-      - job: terraform_plan_appgateway
-        dependsOn: terraform_install
-        timeoutInMinutes: $[variables.TIME_OUT]
-        steps:
-          - checkout: self
-          # 2. Run terragrunt plan
-          - template: templates/terraform-plan/template.yaml@terraform
-            parameters:
-              SUBSCRIPTION: UAT-PM-SERVICE-CONN
-              ENVIRONMENT: uat
-              WORKINGDIR: 'src/pmanager/appgw'              
-      - job: terraform_plan_vmdb
-        dependsOn: terraform_install
-        timeoutInMinutes: $[variables.TIME_OUT]
-        steps:
-          - checkout: self
-          # 2. Run terragrunt plan
-          - template: templates/terraform-plan/template.yaml@terraform
-            parameters:
-              SUBSCRIPTION: UAT-PM-SERVICE-CONN
-              ENVIRONMENT: uat
-              WORKINGDIR: 'src/pmanager/vm-database'                            
+              WORKINGDIR: 'src/pmanager/app'
+                        
 
  #- stage: PROD
  #  dependsOn: []
