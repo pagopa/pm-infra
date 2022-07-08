@@ -2,6 +2,7 @@ pr:
   branches:
     include:
       - main
+      - stable
   paths:
     include:
       - 'src/*'
@@ -89,7 +90,7 @@ stages:
             parameters:
               SUBSCRIPTION: UAT-PM-SERVICE-CONN
               ENVIRONMENT: uat
-              WORKINGDIR: 'src/pmanager/app_services'
+              WORKINGDIR: 'src/pmanager/app'
                         
 
  #- stage: PROD
