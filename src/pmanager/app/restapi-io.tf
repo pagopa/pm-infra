@@ -119,9 +119,10 @@ resource "azurerm_app_service_slot" "restapi-io-release" {
   app_service_plan_id = module.restapi-io.plan_id
 
   site_config {
-    app_command_line = format("/storage/tools/%s-release/startup_script.sh", var.restapi_io_name)
+    app_command_line = "/home/site/deployments/tools/startup_script.sh"
     always_on        = "true"
-    linux_fx_version = "jbosseap|7-java8"
+    # Linux App Framework and version for the App Service.
+    linux_fx_version = "${var.runtime_name}|${var.runtime_version}"
   }
 
   app_settings = local.app_settings
