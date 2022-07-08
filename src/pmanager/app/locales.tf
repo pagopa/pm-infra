@@ -92,43 +92,43 @@ locals {
 ##──── # Oracle connection Event Registry # ─────────────────────────────────────────────
 locals {
   db-event-registry-url-simple = data.azurerm_key_vault_secret.db-event-registry-url-simple.value
-  db-event-registry-username = data.azurerm_key_vault_secret.db-event-registry-username.value
-  db-event-registry-password = data.azurerm_key_vault_secret.db-event-registry-password.value
+  db-event-registry-username   = data.azurerm_key_vault_secret.db-event-registry-username.value
+  db-event-registry-password   = data.azurerm_key_vault_secret.db-event-registry-password.value
 }
 
- ##──── # Oracle connection AGID # ────────────────────────────────────────────────────────
+##──── # Oracle connection AGID # ────────────────────────────────────────────────────────
 locals {
   db-agid-url-simple = data.azurerm_key_vault_secret.db-agid-url-simple.value
-  db-agid-username = data.azurerm_key_vault_secret.db-agid-username.value
-  db-agid-password = data.azurerm_key_vault_secret.db-agid-password.value
+  db-agid-username   = data.azurerm_key_vault_secret.db-agid-username.value
+  db-agid-password   = data.azurerm_key_vault_secret.db-agid-password.value
 }
 
 ##──── # Oracle connection NODO # ────────────────────────────────────────────────────────
 locals {
   db-re-nodo-url-simple = data.azurerm_key_vault_secret.db-re-nodo-url-simple.value
-  db-re-nodo-username = data.azurerm_key_vault_secret.db-re-nodo-username.value
-  db-re-nodo-password = data.azurerm_key_vault_secret.db-re-nodo-password.value
+  db-re-nodo-username   = data.azurerm_key_vault_secret.db-re-nodo-username.value
+  db-re-nodo-password   = data.azurerm_key_vault_secret.db-re-nodo-password.value
 }
 
- ##──── # Oracle connection NODO STORICO # ────────────────────────────────────────────────
+##──── # Oracle connection NODO STORICO # ────────────────────────────────────────────────
 locals {
   db-re-nodo-storico-url-simple = data.azurerm_key_vault_secret.db-re-nodo-storico-url-simple.value
-  db-re-nodo-storico-username = data.azurerm_key_vault_secret.db-re-nodo-storico-username.value
-  db-re-nodo-storico-password = data.azurerm_key_vault_secret.db-re-nodo-storico-password.value
+  db-re-nodo-storico-username   = data.azurerm_key_vault_secret.db-re-nodo-storico-username.value
+  db-re-nodo-storico-password   = data.azurerm_key_vault_secret.db-re-nodo-storico-password.value
 }
 
 ##──── # Oracle connection RTD # ─────────────────────────────────────────────────────────
 locals {
   db-rtd-url-simple = data.azurerm_key_vault_secret.db-rtd-url-simple.value
-  db-rtd-username = data.azurerm_key_vault_secret.db-rtd-username.value
-  db-rtd-password = data.azurerm_key_vault_secret.db-rtd-password.value
+  db-rtd-username   = data.azurerm_key_vault_secret.db-rtd-username.value
+  db-rtd-password   = data.azurerm_key_vault_secret.db-rtd-password.value
 }
 
 ##──── # Oracle connection PGS # ─────────────────────────────────────────────────────────
 locals {
   db-pgs-url-simple = data.azurerm_key_vault_secret.db-pgs-url-simple.value
-  db-pgs-username = data.azurerm_key_vault_secret.db-pgs-username.value
-  db-pgs-password = data.azurerm_key_vault_secret.db-pgs-password.value
+  db-pgs-username   = data.azurerm_key_vault_secret.db-pgs-username.value
+  db-pgs-password   = data.azurerm_key_vault_secret.db-pgs-password.value
 }
 
 ##──── *** ───────────────────────────────────────────────────────────────────────────────
@@ -170,9 +170,24 @@ locals {
     TZ                                                    = local.tz
     JAVA_OPTS                                             = local.java_opts
     LANG                                                  = local.lang
-    ORACLE_CONNECTION_URL                                 = local.db-agid-url-simple
-    ORACLE_SERVER_ADMIN_FULL_NAME                         = local.db-agid-username
-    ORACLE_SERVER_ADMIN_PASSWORD                          = local.db-agid-password
+    DB_EVENT_REGISTRY_URL_SIMPLE                          = local.db-event-registry-url-simple
+    DB_EVENT_REGISTRY_USERNAME                            = local.db-event-registry-username
+    DB_EVENT_REGISTRY_PASSWORD                            = local.db-event-registry-password
+    DB_AGID_URL_SIMPLE                                    = local.db-agid-url-simple
+    DB_AGID_USERNAME                                      = local.db-agid-username
+    DB_AGID_PASSWORD                                      = local.db-agid-password
+    DB_RE_NODO_URL_SIMPLE                                 = local.db-re-nodo-url-simple
+    DB_RE_NODO_USERNAME                                   = local.db-re-nodo-username
+    DB_RE_NODO_PASSWORD                                   = local.db-re-nodo-password
+    DB_RE_NODO_STORICO_URL_SIMPLE                         = local.db-re-nodo-storico-url-simple
+    DB_RE_NODO_STORICO_USERNAME                           = local.db-re-nodo-storico-username
+    DB_RE_NODO_STORICO_PASSWORD                           = local.db-re-nodo-storico-password
+    DB_RTD_URL_SIMPLE                                     = local.db-rtd-url-simple
+    DB_RTD_USERNAME                                       = local.db-rtd-username
+    DB_RTD_PASSWORD                                       = local.db-rtd-password
+    DB_PGS_URL_SIMPLE                                     = local.db-pgs-url-simple
+    DB_PGS_USERNAME                                       = local.db-pgs-username
+    DB_PGS_PASSWORD                                       = local.db-pgs-password
     APPINSIGHTS_INSTRUMENTATIONKEY                        = local.appinsights_instrumentationkey
     APPINSIGHTS_PROFILERFEATURE_VERSION                   = local.appinsights_profilerfeature_version
     APPINSIGHTS_SNAPSHOTFEATURE_VERSION                   = local.appinsights_snapshotfeature_version
@@ -235,9 +250,24 @@ locals {
     TZ                                                    = local.tz
     JAVA_OPTS                                             = local.java_opts
     LANG                                                  = local.lang
-    RTD_ORACLE_CONNECTION_URL                             = local.db-rtd-url-simple
-    RTD_ORACLE_SERVER_ADMIN_FULL_NAME                     = local.db-rtd-username
-    RTD_ORACLE_SERVER_ADMIN_PASSWORD                      = local.db-rtd-password
+    DB_EVENT_REGISTRY_URL_SIMPLE                          = local.db-event-registry-url-simple
+    DB_EVENT_REGISTRY_USERNAME                            = local.db-event-registry-username
+    DB_EVENT_REGISTRY_PASSWORD                            = local.db-event-registry-password
+    DB_AGID_URL_SIMPLE                                    = local.db-agid-url-simple
+    DB_AGID_USERNAME                                      = local.db-agid-username
+    DB_AGID_PASSWORD                                      = local.db-agid-password
+    DB_RE_NODO_URL_SIMPLE                                 = local.db-re-nodo-url-simple
+    DB_RE_NODO_USERNAME                                   = local.db-re-nodo-username
+    DB_RE_NODO_PASSWORD                                   = local.db-re-nodo-password
+    DB_RE_NODO_STORICO_URL_SIMPLE                         = local.db-re-nodo-storico-url-simple
+    DB_RE_NODO_STORICO_USERNAME                           = local.db-re-nodo-storico-username
+    DB_RE_NODO_STORICO_PASSWORD                           = local.db-re-nodo-storico-password
+    DB_RTD_URL_SIMPLE                                     = local.db-rtd-url-simple
+    DB_RTD_USERNAME                                       = local.db-rtd-username
+    DB_RTD_PASSWORD                                       = local.db-rtd-password
+    DB_PGS_URL_SIMPLE                                     = local.db-pgs-url-simple
+    DB_PGS_USERNAME                                       = local.db-pgs-username
+    DB_PGS_PASSWORD                                       = local.db-pgs-password
     APPINSIGHTS_INSTRUMENTATIONKEY                        = local.appinsights_instrumentationkey
     APPINSIGHTS_PROFILERFEATURE_VERSION                   = local.appinsights_profilerfeature_version
     APPINSIGHTS_SNAPSHOTFEATURE_VERSION                   = local.appinsights_snapshotfeature_version
@@ -300,15 +330,24 @@ locals {
     TZ                                                    = local.tz
     JAVA_OPTS                                             = local.java_opts
     LANG                                                  = local.lang
-    EVENT_REG_ORACLE_CONNECTION_URL                       = local.event_reg_oracle_connection_url
-    EVENT_REG_ORACLE_SERVER_ADMIN_FULL_NAME               = local.event_reg_oracle_server_admin_full_name
-    EVENT_REG_ORACLE_SERVER_ADMIN_PASSWORD                = local.event_reg_oracle_server_admin_password
-    EVENT_REG_REMOTE_ORACLE_CONNECTION_URL                = local.event_reg_remote_oracle_connection_url
-    EVENT_REG_REMOTE_ORACLE_SERVER_ADMIN_FULL_NAME        = local.event_reg_remote_oracle_server_admin_full_name
-    EVENT_REG_REMOTE_ORACLE_SERVER_ADMIN_PASSWORD         = local.event_reg_remote_oracle_server_admin_password
-    ORACLE_CONNECTION_URL                                 = local.pp_oracle_connection_url
-    ORACLE_SERVER_ADMIN_FULL_NAME                         = local.pp_oracle_server_admin_full_name
-    ORACLE_SERVER_ADMIN_PASSWORD                          = local.pp_oracle_server_admin_password
+    DB_EVENT_REGISTRY_URL_SIMPLE                          = local.db-event-registry-url-simple
+    DB_EVENT_REGISTRY_USERNAME                            = local.db-event-registry-username
+    DB_EVENT_REGISTRY_PASSWORD                            = local.db-event-registry-password
+    DB_AGID_URL_SIMPLE                                    = local.db-agid-url-simple
+    DB_AGID_USERNAME                                      = local.db-agid-username
+    DB_AGID_PASSWORD                                      = local.db-agid-password
+    DB_RE_NODO_URL_SIMPLE                                 = local.db-re-nodo-url-simple
+    DB_RE_NODO_USERNAME                                   = local.db-re-nodo-username
+    DB_RE_NODO_PASSWORD                                   = local.db-re-nodo-password
+    DB_RE_NODO_STORICO_URL_SIMPLE                         = local.db-re-nodo-storico-url-simple
+    DB_RE_NODO_STORICO_USERNAME                           = local.db-re-nodo-storico-username
+    DB_RE_NODO_STORICO_PASSWORD                           = local.db-re-nodo-storico-password
+    DB_RTD_URL_SIMPLE                                     = local.db-rtd-url-simple
+    DB_RTD_USERNAME                                       = local.db-rtd-username
+    DB_RTD_PASSWORD                                       = local.db-rtd-password
+    DB_PGS_URL_SIMPLE                                     = local.db-pgs-url-simple
+    DB_PGS_USERNAME                                       = local.db-pgs-username
+    DB_PGS_PASSWORD                                       = local.db-pgs-password
     APPINSIGHTS_INSTRUMENTATIONKEY                        = local.appinsights_instrumentationkey
     APPINSIGHTS_PROFILERFEATURE_VERSION                   = local.appinsights_profilerfeature_version
     APPINSIGHTS_SNAPSHOTFEATURE_VERSION                   = local.appinsights_snapshotfeature_version
@@ -371,15 +410,24 @@ locals {
     TZ                                                    = local.tz
     JAVA_OPTS                                             = local.java_opts
     LANG                                                  = local.lang
-    ORACLE_CONNECTION_URL                                 = local.pp_oracle_connection_url
-    ORACLE_SERVER_ADMIN_FULL_NAME                         = local.pp_oracle_server_admin_full_name
-    ORACLE_SERVER_ADMIN_PASSWORD                          = local.pp_oracle_server_admin_password
-    EVENT_REG_ORACLE_CONNECTION_URL                       = local.event_reg_oracle_connection_url
-    EVENT_REG_ORACLE_SERVER_ADMIN_FULL_NAME               = local.event_reg_oracle_server_admin_full_name
-    EVENT_REG_ORACLE_SERVER_ADMIN_PASSWORD                = local.event_reg_oracle_server_admin_password
-    EVENT_REG_REMOTE_ORACLE_CONNECTION_URL                = local.event_reg_remote_oracle_connection_url
-    EVENT_REG_REMOTE_ORACLE_SERVER_ADMIN_FULL_NAME        = local.event_reg_remote_oracle_server_admin_full_name
-    EVENT_REG_REMOTE_ORACLE_SERVER_ADMIN_PASSWORD         = local.event_reg_remote_oracle_server_admin_password
+    DB_EVENT_REGISTRY_URL_SIMPLE                          = local.db-event-registry-url-simple
+    DB_EVENT_REGISTRY_USERNAME                            = local.db-event-registry-username
+    DB_EVENT_REGISTRY_PASSWORD                            = local.db-event-registry-password
+    DB_AGID_URL_SIMPLE                                    = local.db-agid-url-simple
+    DB_AGID_USERNAME                                      = local.db-agid-username
+    DB_AGID_PASSWORD                                      = local.db-agid-password
+    DB_RE_NODO_URL_SIMPLE                                 = local.db-re-nodo-url-simple
+    DB_RE_NODO_USERNAME                                   = local.db-re-nodo-username
+    DB_RE_NODO_PASSWORD                                   = local.db-re-nodo-password
+    DB_RE_NODO_STORICO_URL_SIMPLE                         = local.db-re-nodo-storico-url-simple
+    DB_RE_NODO_STORICO_USERNAME                           = local.db-re-nodo-storico-username
+    DB_RE_NODO_STORICO_PASSWORD                           = local.db-re-nodo-storico-password
+    DB_RTD_URL_SIMPLE                                     = local.db-rtd-url-simple
+    DB_RTD_USERNAME                                       = local.db-rtd-username
+    DB_RTD_PASSWORD                                       = local.db-rtd-password
+    DB_PGS_URL_SIMPLE                                     = local.db-pgs-url-simple
+    DB_PGS_USERNAME                                       = local.db-pgs-username
+    DB_PGS_PASSWORD                                       = local.db-pgs-password
     APPINSIGHTS_INSTRUMENTATIONKEY                        = local.appinsights_instrumentationkey
     APPINSIGHTS_PROFILERFEATURE_VERSION                   = local.appinsights_profilerfeature_version
     APPINSIGHTS_SNAPSHOTFEATURE_VERSION                   = local.appinsights_snapshotfeature_version
@@ -442,11 +490,24 @@ locals {
     TZ                                                    = local.tz
     JAVA_OPTS                                             = local.java_opts
     LANG                                                  = local.lang
-    ORACLE_CONNECTION_URL                                 = local.pp_oracle_connection_url
-    EVENT_REG_ORACLE_SERVER_ADMIN_FULL_NAME               = local.event_reg_oracle_server_admin_full_name
-    EVENT_REG_ORACLE_SERVER_ADMIN_PASSWORD                = local.event_reg_oracle_server_admin_password
-    ORACLE_SERVER_ADMIN_FULL_NAME                         = local.pp_oracle_server_admin_full_name
-    ORACLE_SERVER_ADMIN_PASSWORD                          = local.pp_oracle_server_admin_password
+    DB_EVENT_REGISTRY_URL_SIMPLE                          = local.db-event-registry-url-simple
+    DB_EVENT_REGISTRY_USERNAME                            = local.db-event-registry-username
+    DB_EVENT_REGISTRY_PASSWORD                            = local.db-event-registry-password
+    DB_AGID_URL_SIMPLE                                    = local.db-agid-url-simple
+    DB_AGID_USERNAME                                      = local.db-agid-username
+    DB_AGID_PASSWORD                                      = local.db-agid-password
+    DB_RE_NODO_URL_SIMPLE                                 = local.db-re-nodo-url-simple
+    DB_RE_NODO_USERNAME                                   = local.db-re-nodo-username
+    DB_RE_NODO_PASSWORD                                   = local.db-re-nodo-password
+    DB_RE_NODO_STORICO_URL_SIMPLE                         = local.db-re-nodo-storico-url-simple
+    DB_RE_NODO_STORICO_USERNAME                           = local.db-re-nodo-storico-username
+    DB_RE_NODO_STORICO_PASSWORD                           = local.db-re-nodo-storico-password
+    DB_RTD_URL_SIMPLE                                     = local.db-rtd-url-simple
+    DB_RTD_USERNAME                                       = local.db-rtd-username
+    DB_RTD_PASSWORD                                       = local.db-rtd-password
+    DB_PGS_URL_SIMPLE                                     = local.db-pgs-url-simple
+    DB_PGS_USERNAME                                       = local.db-pgs-username
+    DB_PGS_PASSWORD                                       = local.db-pgs-password
     APPINSIGHTS_INSTRUMENTATIONKEY                        = local.appinsights_instrumentationkey
     APPINSIGHTS_PROFILERFEATURE_VERSION                   = local.appinsights_profilerfeature_version
     APPINSIGHTS_SNAPSHOTFEATURE_VERSION                   = local.appinsights_snapshotfeature_version

@@ -23,7 +23,7 @@ data "azurerm_key_vault_secret" "db-event-registry-password" {
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
- ##──── # Oracle connection AGID # ────────────────────────────────────────────────────────
+##──── # Oracle connection AGID # ────────────────────────────────────────────────────────
 data "azurerm_key_vault_secret" "db-agid-url-simple" {
   name         = format("%s-%s", var.environment, "db-agid-url-simple")
   key_vault_id = data.azurerm_key_vault.keyvault.id
@@ -51,7 +51,7 @@ data "azurerm_key_vault_secret" "db-re-nodo-password" {
   key_vault_id = data.azurerm_key_vault.keyvault.id
 }
 
- ##──── # Oracle connection NODO STORICO # ────────────────────────────────────────────────
+##──── # Oracle connection NODO STORICO # ────────────────────────────────────────────────
 data "azurerm_key_vault_secret" "db-re-nodo-storico-url-simple" {
   name         = format("%s-%s", var.environment, "db-re-nodo-storico-url-simple")
   key_vault_id = data.azurerm_key_vault.keyvault.id
